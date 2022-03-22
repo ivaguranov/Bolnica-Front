@@ -1,0 +1,7 @@
+.loginLink {
+	text-decoration: none;
+}
+
+.loginLink:hover {
+	text-decoration: underline;
+}
