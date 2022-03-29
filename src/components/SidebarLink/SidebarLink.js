@@ -12,7 +12,7 @@ const prop = ({ id, text, path, icon, isActive }) => (
 );
 
 const SidebarLink = ({ props }) => {
-  return <div>{props.map(prop)}</div>;
+  return <ul>{props.map(prop)}</ul>;
 };
 
 export default SidebarLink;
