@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import SidebarLink from "../SidebarLink/SidebarLink";
 import GeneralStats from "../GeneralStats/GeneralStats.js";
 
 const DemoPage = () => {
@@ -91,6 +92,29 @@ const DemoPage = () => {
           </div>
         </div>
       </nav>
+      <SidebarLink
+        props={[
+          {
+            id: 1,
+            text: "Pocetna",
+            path: "/",
+            icon: "fa-solid fa-chart-pie",
+            isActive: true
+          },
+          {
+            id: 2,
+            text: "Pacijenti",
+            path: "/pacijenti",
+            icon: "fa-solid fa-wheelchair",
+          },
+          {
+            id: 3,
+            text: "Profil",
+            path: "/profil",
+            icon: "fa-solid fa-user-doctor",
+          },
+        ]}
+      />
       <div className="components">
         <GeneralStats
           image={"fa-solid fa-briefcase-medical"}
