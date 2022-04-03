@@ -38,27 +38,28 @@ const DemoPage = () => {
 			<div className="sidebar-link-container">
 				<Sidebar links={links} />
 			</div>
-
-			<Header
-				avatarUrl={"nikolaSlika 1.jpg"}
-				welcomeMsg={"Dobro jutro"}
-				userName={"Dr. Paun"}
-				userTitle={"Kardiolog"}
-				day={format(new Date(), "d")}
-				date={format(new Date(), "d MMMM, yyyy")}
-			/>
-
-			<div className="components">
-				<GeneralStats
-					image={"fa-solid fa-briefcase-medical"}
-					text="Zakazani pregledi"
-					number="34"
+			<div style={{ marginLeft: "15%" }}>
+				<Header
+					avatarUrl={"nikolaSlika 1.jpg"}
+					welcomeMsg={"Dobro jutro"}
+					userName={"Dr. Paun"}
+					userTitle={"Kardiolog"}
+					day={format(new Date(), "d")}
+					date={format(new Date(), "d MMMM, yyyy")}
 				/>
-				<GeneralStats
-					image={"fa-solid fa-person-cane"}
-					text="Broj pacijenata"
-					number="10"
-				/>
+
+				<div className="components">
+					<GeneralStats
+						image={"fa-solid fa-briefcase-medical"}
+						text="Zakazani pregledi"
+						number="34"
+					/>
+					<GeneralStats
+						image={"fa-solid fa-person-cane"}
+						text="Broj pacijenata"
+						number="10"
+					/>
+				</div>
 			</div>
 		</>
 	);
