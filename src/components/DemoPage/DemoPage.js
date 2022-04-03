@@ -4,7 +4,7 @@ import "./styles.css";
 import SidebarLink from "../SidebarLink/SidebarLink";
 import GeneralStats from "../GeneralStats/GeneralStats.js";
 import Header from "../Header/Header";
-import {format} from 'date-fns';
+import { format } from "date-fns";
 
 const DemoPage = () => {
   const handleSubmit = (event) => {
@@ -15,38 +15,37 @@ const DemoPage = () => {
     <>
       <div className="sidebar-link-container">
         <SidebarLink
-            props={[
-              {
-                id: 1,
-                text: "Pocetna",
-                path: "/",
-                icon: "fa-solid fa-chart-pie",
-                isActive: true
-              },
-              {
-                id: 2,
-                text: "Pacijenti",
-                path: "/pacijenti",
-                icon: "fa-solid fa-wheelchair",
-              },
-              {
-                id: 3,
-                text: "Profil",
-                path: "/profil",
-                icon: "fa-solid fa-user-doctor",
-              },
-            ]}
+          props={[
+            {
+              id: 1,
+              text: "Pocetna",
+              path: "/",
+              icon: "fa-solid fa-chart-pie",
+              isActive: true,
+            },
+            {
+              id: 2,
+              text: "Pacijenti",
+              path: "/pacijenti",
+              icon: "fa-solid fa-wheelchair",
+            },
+            {
+              id: 3,
+              text: "Profil",
+              path: "/profil",
+              icon: "fa-solid fa-user-doctor",
+            },
+          ]}
         />
-
       </div>
 
       <Header
-          avatarUrl={"nikolaSlika 1.jpg"}
-          welcomeMsg={"Dobro jutro"}
-          userName={"Dr. Paun"}
-          userTitle={"Kardiolog"}
-          day={format(new Date(), "d")}
-          date={format(new Date(), "d MMMM, yyyy")}
+        avatarUrl={"nikolaSlika 1.jpg"}
+        welcomeMsg={"Dobro jutro"}
+        userName={"Dr. Paun"}
+        userTitle={"Kardiolog"}
+        day={format(new Date(), "d")}
+        date={format(new Date(), "d MMMM, yyyy")}
       />
 
       <div className="components">
