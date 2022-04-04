@@ -1,15 +1,20 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import DemoPage from "./components/DemoPage/DemoPage";
-import DemoLogin from "./components/DemoLogin/DemoLogin";
+import DemoPage from "./pages/DemoPage/DemoPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import EmployeePreview from "./pages/EmployeePreviewPage/EmployeePreviewPage";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" exact element={<DemoLogin />} />
         <Route path="/" exact element={<DemoPage />} />
+        <Route path="/login" exact element={<LoginPage />} />
+        <Route
+          path="/admin/employee-preview"
+          exact
+          element={<EmployeePreview />}
+        />
       </Routes>
     </BrowserRouter>
   );
