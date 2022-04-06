@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import GeneralStats from "../../components/GeneralStats/GeneralStats.js";
 import Header from "../../components/Header/Header";
 import { format } from "date-fns";
+import { FaChartPie, FaWheelchair, FaUser } from "react-icons/fa";
 
 const DemoPage = () => {
 	const links = [
@@ -11,21 +12,21 @@ const DemoPage = () => {
 			id: 1,
 			text: "Pocetna",
 			path: "/",
-			icon: "fa-solid fa-chart-pie",
+			icon: <FaChartPie />,
 			isActive: true,
 		},
 		{
 			id: 2,
 			text: "Pacijenti",
 			path: "/pacijenti",
-			icon: "fa-solid fa-wheelchair",
+			icon: <FaWheelchair />,
 			dividerAfter: true,
 		},
 		{
 			id: 3,
 			text: "Profil",
 			path: "/profil",
-			icon: "fa-solid fa-user-doctor",
+			icon: <FaUser />,
 		},
 	];
 
