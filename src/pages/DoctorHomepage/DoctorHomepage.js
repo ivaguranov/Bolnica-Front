@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import GeneralStats from "../../components/GeneralStats/GeneralStats";
 import { format } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
+import { getAppointments } from "../../redux/actions/appointment";
 
 const DoctorHomepage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAppointments());
+  }, []);
+
+  const appointments = useSelector((state) => state.appointments);
+
   const sidebarProps = [
     {
       id: 1,
