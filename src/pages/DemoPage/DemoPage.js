@@ -30,40 +30,40 @@ const DemoPage = () => {
 		},
 	];
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-	};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
-	return (
-		<>
-			<div className="sidebar-link-container">
-				<Sidebar links={links} />
-			</div>
-			<div style={{ marginLeft: "15%" }}>
-				<Header
-					avatarUrl={"nikolaSlika 1.jpg"}
-					welcomeMsg={"Dobro jutro"}
-					userName={"Dr. Paun"}
-					userTitle={"Kardiolog"}
-					day={format(new Date(), "d")}
-					date={format(new Date(), "d MMMM, yyyy")}
-				/>
+  return (
+    <>
+      <div className="sidebar-link-container">
+        <Sidebar links={links} />
+      </div>
+      <div style={{ marginLeft: "15%" }}>
+        <Header
+          avatarUrl={"nikolaSlika 1.jpg"}
+          welcomeMsg={"Dobro jutro"}
+          userName={"Dr. Paun"}
+          userTitle={"Kardiolog"}
+          day={format(new Date(), "d")}
+          date={format(new Date(), "d MMMM, yyyy")}
+        />
 
-				<div className="components">
-					<GeneralStats
-						image={"fa-solid fa-briefcase-medical"}
-						text="Zakazani pregledi"
-						number="34"
-					/>
-					<GeneralStats
-						image={"fa-solid fa-person-cane"}
-						text="Broj pacijenata"
-						number="10"
-					/>
-				</div>
-			</div>
-		</>
-	);
+        <div className="components">
+          <GeneralStats
+            image={"fa-solid fa-briefcase-medical"}
+            text="Zakazani pregledi"
+            number="34"
+          />
+          <GeneralStats
+            image={"fa-solid fa-person-cane"}
+            text="Broj pacijenata"
+            number="10"
+          />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default DemoPage;
