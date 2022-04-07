@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import { format } from "date-fns";
 import Table from "../../components/Table/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { getEmployees } from "../../redux/actions/employee";
+import "./styles.css";
 
 const EmployeePreview = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEmployees());
+  }, []);
+
+  const employees = useSelector((state) => state.employees);
+
   const linksSidebar = [
     {
       id: 1,
@@ -37,7 +47,7 @@ const EmployeePreview = () => {
     date: format(new Date(), "d MMMM, yyyy"),
   };
 
-  const headers = ["Name", "Surname", "Address", "City", "Contact", ""];
+  const headers = ["Name", "Surname", "Address", "City", "Contact"];
 
   const tableContent = [
     {
@@ -242,11 +252,33 @@ const EmployeePreview = () => {
           day={linksHeader.day}
           date={linksHeader.date}
         />
+
+        {/* <div class="form-group pull-right">
+          <input
+            type="text"
+            class="search form-control"
+            placeholder="Search..."
+          >
+            <button type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </input>
+        </div> */}
+        <form className="example myInline">
+          <input type="text" placeholder="Search.." name="search" />
+          <button type="submit">
+            <i className="fa fa-search"></i>
+          </button>
+        </form>
+        <div>
+          <h1 className="myTitle">Zaposleni</h1>
+        </div>
         <Table
           headers={headers}
           tableContent={tableContent}
           handleClick={handleClick}
         />
+        <br />
       </div>
     </div>
   );
