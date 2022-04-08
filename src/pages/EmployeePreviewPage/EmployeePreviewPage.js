@@ -11,6 +11,7 @@ import { FaChartPie, FaUserTie, FaUser } from "react-icons/fa";
 const EmployeePreview = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
+		
 		dispatch(getEmployees());
 	}, []);
 
