@@ -18,7 +18,6 @@ const SingleAppointment = ({ props }) => {
     dispatch(updateAppointment(id, data));
     navigate("/appointment");
   }
-
   return (
     <div
       key={`prop-${id}`}
