@@ -3,19 +3,15 @@ import "./styles.css";
 import { format } from "date-fns";
 
 const SingleAppointmentNurse = ({ props }) => {
-  const { id, firstname, lastname, dob, gender, appointmentStatus, time } =
-    props;
+  const { id, firstname, lastname, dob, gender, time } = props;
 
   let age = format(new Date(), "yyyy") - format(dob, "yyyy");
   let appointTime = format(new Date(time), "HH:mm");
-  /* 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   function updateAppointmentStatus(id, data) {
-    dispatch(updateAppointment(id, data));
-    navigate("/appointment");
-  } */
+    /*     console.log(data);
+    console.log(id); */
+  }
 
   return (
     <div key={`prop-${id}`} className="customClass">
@@ -32,13 +28,21 @@ const SingleAppointmentNurse = ({ props }) => {
               {age} {gender}
             </span>
             <div className="d-flex">
-              <button type="button" className="btn customButton1">
+              <button
+                type="button"
+                className="btn customButton1"
+                onClick={() => updateAppointmentStatus(id, "Ceka")}
+              >
                 Čeka
               </button>
               <button type="button" className="btn customButton2">
                 Trenutno
               </button>
-              <button type="button" className="btn customButton3">
+              <button
+                type="button"
+                className="btn customButton3"
+                onClick={() => updateAppointmentStatus(id, "Otkazano")}
+              >
                 Otkazano
               </button>
               <button type="button" className="btn customButton4">
