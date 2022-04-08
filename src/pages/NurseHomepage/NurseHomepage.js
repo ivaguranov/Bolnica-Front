@@ -5,7 +5,7 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import { MdCalendarToday } from "react-icons/md";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import HeaderNurse from "../../components/HeaderNurse/HeaderNurse";
-import HeaderRight from "../../components/HeaderRight/HeaderRight";
+import ScheduledAppointmentsNurse from "../../components/ScheduledAppointmentsNurse/ScheduledAppointmentsNurse";
 
 const NurseHomepage = () => {
   const sidebarProps = [
@@ -64,6 +64,7 @@ const NurseHomepage = () => {
           userName={headerProps.userName}
           userTitle={headerProps.userTitle}
         />
+        <ScheduledAppointmentsNurse />
       </div>
     </>
   );
