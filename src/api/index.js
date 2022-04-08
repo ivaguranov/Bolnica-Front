@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "backend_api_path" });
+const API = axios.create({ baseURL: "http://localhost:9092" });
 
 API.interceptors.request.use((req) => {
-  if (localStorage.getItem("loggedUser")) {
-    req.headers.Authorization = `Bearer ${
-      JSON.parse(localStorage.getItem("loggedUser")).token
-    }`;
-  }
+	if (localStorage.getItem("loggedUser")) {
+		req.headers.Authorization = `Bearer ${
+			JSON.parse(localStorage.getItem("loggedUser")).token
+		}`;
+	}
 
-  return req;
+	return req;
 });
 
 // DEMO ROUTES
@@ -23,4 +23,4 @@ export const deleteDemo = (id) => API.delete(`/demos/${id}`);
 
 export const fetchEmployees = () => API.get(`/employees`);
 export const searchEmployees = (searchValues) =>
-  API.post("/employees", searchValues);
+	API.post("/employees", searchValues);
