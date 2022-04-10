@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import { format } from "date-fns";
-import { FaChartPie, FaUser, FaWheelchair } from "react-icons/fa";
-import { MdCalendarToday } from "react-icons/md";
 import { BiSearchAlt } from "react-icons/bi";
 import Table from "../../components/Table/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { GiMedicalPack } from "react-icons/gi";
-import { IoPersonAddSharp } from "react-icons/io5";
+import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
+import { BiCalendarPlus } from "react-icons/bi";
 import { getPatients, searchPatients } from "../../redux/actions/patient";
 
 const PatientPreviewNurses = () => {
@@ -19,37 +17,32 @@ const PatientPreviewNurses = () => {
 
   const patient = useSelector((state) => state.patient);
   const [value, setValue] = useState("");
-  const linksSidebar = [
+
+  const links = [
     {
       id: 1,
       text: "Početna",
       path: "/nurse",
-      icon: <FaChartPie />,
+      icon: <FaHome />,
     },
     {
       id: 2,
       text: "Pacijenti",
       path: "/nurse/patient-preview",
-      icon: <FaWheelchair />,
+      icon: <FaUserInjured />,
       isActive: true,
     },
     {
       id: 3,
-      text: "Zakazivanje pregleda",
-      path: "/zakazivanje",
-      icon: <GiMedicalPack />,
+      text: "Zakazivanje",
+      path: "/nurse/schedule-appointment",
+      icon: <BiCalendarPlus />,
     },
     {
       id: 4,
-      text: "Dodavanje pacijenta",
-      path: "/dodavanjepcijenta",
-      icon: <IoPersonAddSharp />,
-    },
-    {
-      id: 5,
-      text: "Zakazani pacijenti",
-      path: "/zakazanipacijenti",
-      icon: <MdCalendarToday />,
+      text: "Nov pacijent",
+      path: "/nurse/register-patient",
+      icon: <FaPlusCircle />,
       dividerAfter: true,
     },
     {
@@ -214,7 +207,7 @@ const PatientPreviewNurses = () => {
   return (
     <div>
       <div className="sidebar-link-container">
-        <Sidebar links={linksSidebar} />
+        <Sidebar links={links} />
       </div>
       <div style={{ marginLeft: "15%" }}>
         <Header

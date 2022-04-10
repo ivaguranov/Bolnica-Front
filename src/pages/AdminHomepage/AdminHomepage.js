@@ -3,28 +3,34 @@ import "./styles.css";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import { format } from "date-fns";
-import { FaChartPie, FaWheelchair, FaUser } from "react-icons/fa";
+import { FaHome, FaUserNurse, FaUser, FaPlusCircle } from "react-icons/fa";
 
 const AdminHomepage = () => {
   const links = [
     {
       id: 1,
       text: "Pocetna",
-      path: "/",
-      icon: <FaChartPie />,
+      path: "/admin",
+      icon: <FaHome />,
       isActive: true,
     },
     {
       id: 2,
-      text: "Pacijenti",
-      path: "/pacijenti",
-      icon: <FaWheelchair />,
+      text: "Zaposleni",
+      path: "/admin/employee-preview",
+      icon: <FaUserNurse />,
+    },
+    {
+      id: 2,
+      text: "Nov zaposleni",
+      path: "/admin/register-employee",
+      icon: <FaPlusCircle />,
       dividerAfter: true,
     },
     {
       id: 3,
       text: "Profil",
-      path: "/profil",
+      path: "/profile",
       icon: <FaUser />,
     },
   ];

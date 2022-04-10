@@ -8,7 +8,7 @@ const HeaderNurse = (props) => {
   return (
     <div className="containerCustom">
       <div className="doctor-container">
-        <Dropdown className="dropdownButton">
+        <Dropdown>
           <Dropdown.Toggle
             variant="primary"
             id="dropdown-basic"

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import { format } from "date-fns";
-import { FaChartPie, FaUser, FaWheelchair } from "react-icons/fa";
+import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
 import { BiSearchAlt } from "react-icons/bi";
 import Table from "../../components/Table/Table";
@@ -17,28 +17,27 @@ const PatientPreview = () => {
   const patient = useSelector((state) => state.patient);
   const [value, setValue] = useState("");
 
-  const linksSidebar = [
+  const links = [
     {
       id: 1,
       text: "Početna",
       path: "/",
-      icon: <FaChartPie />,
+      icon: <FaHome />,
     },
     {
       id: 2,
       text: "Pacijenti",
       path: "/patient-preview",
-      icon: <FaWheelchair />,
-      dividerAfter: true,
+      icon: <FaUserInjured />,
       isActive: true,
     },
-    // {
-    //   id: 3,
-    //   text: "Zakazani pregledi",
-    //   path: "/",
-    //   icon: <MdCalendarToday />,
-    //   dividerAfter: true,
-    // },
+    {
+      id: 3,
+      text: "Zakazani pregledi",
+      path: "/appointments",
+      icon: <MdCalendarToday />,
+      dividerAfter: true,
+    },
     {
       id: 4,
       text: "Profil",
@@ -190,7 +189,7 @@ const PatientPreview = () => {
   const handleClick = (id) => {
     console.log("I have been clicked");
   };
-  
+
   function handleOnChange(event) {
     setValue(event.target.value);
   }
@@ -202,7 +201,7 @@ const PatientPreview = () => {
   return (
     <div>
       <div className="sidebar-link-container">
-        <Sidebar links={linksSidebar} />
+        <Sidebar links={links} />
       </div>
       <div style={{ marginLeft: "15%" }}>
         <Header

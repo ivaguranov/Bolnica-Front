@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import { format } from "date-fns";
-import { FaChartPie, FaWheelchair, FaUser } from "react-icons/fa";
+import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router";
 import { Button } from "reactstrap";
 import "./styles.css";
@@ -10,8 +10,9 @@ import ExaminationForm from "../../components/ExaminationForm/ExaminationForm";
 import MedicalRecord from "../../components/MedicalRecord/MedicalRecord";
 import { useDispatch } from "react-redux";
 import { createRecord, getRecord } from "../../redux/actions/records";
+import { MdCalendarToday } from "react-icons/md";
 
-const PatientExaminationPage = () => {
+const PatientExamination = () => {
   const location = useLocation();
   const [patientId, setPatientId] = useState();
   const [isExamination, setIsExamination] = useState(true);
@@ -29,21 +30,27 @@ const PatientExaminationPage = () => {
   const links = [
     {
       id: 1,
-      text: "Pocetna",
+      text: "Početna",
       path: "/",
-      icon: <FaChartPie />,
+      icon: <FaHome />,
     },
     {
       id: 2,
       text: "Pacijenti",
-      path: "/pacijenti",
-      icon: <FaWheelchair />,
-      dividerAfter: true,
+      path: "/patient-preview",
+      icon: <FaUserInjured />,
     },
     {
       id: 3,
+      text: "Zakazani pregledi",
+      path: "/appointments",
+      icon: <MdCalendarToday />,
+      dividerAfter: true,
+    },
+    {
+      id: 4,
       text: "Profil",
-      path: "/profil",
+      path: "/profile",
       icon: <FaUser />,
     },
   ];
@@ -91,4 +98,4 @@ const PatientExaminationPage = () => {
   );
 };
 
-export default PatientExaminationPage;
+export default PatientExamination;

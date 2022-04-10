@@ -1,44 +1,36 @@
 import React from "react";
-import { FaChartPie, FaWheelchair, FaUser } from "react-icons/fa";
-import { GiMedicalPack } from "react-icons/gi";
-import { IoPersonAddSharp } from "react-icons/io5";
-import { MdCalendarToday } from "react-icons/md";
+import { FaHome, FaUserInjured, FaUser, FaPlusCircle } from "react-icons/fa";
+import { BiCalendarPlus } from "react-icons/bi";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import HeaderNurse from "../../components/HeaderNurse/HeaderNurse";
 import ScheduledAppointmentsNurse from "../../components/ScheduledAppointmentsNurse/ScheduledAppointmentsNurse";
 
 const NurseHomepage = () => {
-  const sidebarProps = [
+  const links = [
     {
       id: 1,
       text: "Početna",
       path: "/nurse",
-      icon: <FaChartPie />,
+      isActive: true,
+      icon: <FaHome />,
     },
     {
       id: 2,
       text: "Pacijenti",
-      path: "/patient-preview",
-      icon: <FaWheelchair />,
+      path: "/nurse/patient-preview",
+      icon: <FaUserInjured />,
     },
     {
       id: 3,
-      text: "Zakazivanje pregleda",
-      path: "/zakazivanje",
-      icon: <GiMedicalPack />,
+      text: "Zakazivanje",
+      path: "/nurse/schedule-appointment",
+      icon: <BiCalendarPlus />,
     },
     {
-      id: 4,
-      text: "Dodavanje pacijenta",
-      path: "/dodavanjepcijenta",
-      icon: <IoPersonAddSharp />,
-    },
-    {
-      id: 5,
-      text: "Zakazani pacijenti",
-      path: "/zakazanipacijenti",
-      icon: <MdCalendarToday />,
-      isActive: true,
+      id: 3,
+      text: "Nov pacijent",
+      path: "/nurse/register-patient",
+      icon: <FaPlusCircle />,
       dividerAfter: true,
     },
     {
@@ -57,7 +49,7 @@ const NurseHomepage = () => {
   return (
     <>
       <div className="sidebar-link-container">
-        <Sidebar links={sidebarProps} />
+        <Sidebar links={links} />
       </div>
       <div style={{ marginLeft: "15%" }}>
         <HeaderNurse

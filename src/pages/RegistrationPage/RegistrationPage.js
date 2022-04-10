@@ -2,7 +2,39 @@ import "./registration.css";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { FaHome, FaUserNurse, FaPlusCircle, FaUser } from "react-icons/fa";
+import Sidebar from "../../components/Sidebar/Sidebar";
+
 function RegistrationPage() {
+  const links = [
+    {
+      id: 1,
+      text: "Pocetna",
+      path: "/admin",
+      icon: <FaHome />,
+    },
+    {
+      id: 2,
+      text: "Zaposleni",
+      path: "/admin/employee-preview",
+      icon: <FaUserNurse />,
+    },
+    {
+      id: 2,
+      text: "Nov zaposleni",
+      path: "/admin/register-employee",
+      icon: <FaPlusCircle />,
+      dividerAfter: true,
+      isActive: true,
+    },
+    {
+      id: 3,
+      text: "Profil",
+      path: "/profile",
+      icon: <FaUser />,
+    },
+  ];
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState();
@@ -88,7 +120,10 @@ function RegistrationPage() {
     //dispatch(createEmployee(data, navigate));
   };
   return (
-    <div>
+    <div style={{ marginLeft: "15%" }}>
+      <div className="sidebar-link-container">
+        <Sidebar links={links} />
+      </div>
       <div class="container" id="container">
         <div class="form-container sign-in-container">
           <form action="#" onSubmit={handleSubmit}>
@@ -138,7 +173,7 @@ function RegistrationPage() {
                 />
               </div>
             </div>
-            
+
             <div className="element-container">
               <div class="element one">
                 <input
@@ -179,21 +214,25 @@ function RegistrationPage() {
               </div>
               <div class="element">
                 <select name="titula" onChange={onChangeProfessioneHandler}>
-                    <option value="">Zanimanje</option>
-                    <option value="Med. sestra">Med. sestra</option>
-                    <option value="Spec. biohemicar">Spec. biohemicar</option>
-                    <option value="Spec. gastroenterolog.">Spec. gastroenterolog</option>
-                    <option value="Spec. ginekolog">Spec. ginekolog</option>
-                    <option value="Spec. endrokrinolog">Spec. endrokrinolog</option>
-                    <option value="Spec. kardiolog">Spec. kardiolog</option>
-                    <option value="Spec. neurolog">Spec. neurolog</option>
-                    <option value="Spec. nefrolog">Spec. nefrolog</option>
-                    <option value="Spec. pshijatar">Spec. pshijatar</option>
-                    <option value="Spec. pulmolog">Spec. pulmolog</option>
-                    <option value="Spec. urolog">Spec. urolog</option>
-                    <option value="Spec. hematolog">Spec. hematolog</option>
-                    <option value="Spec. hirurg">Spec. hirurg</option>
-                  </select>
+                  <option value="">Zanimanje</option>
+                  <option value="Med. sestra">Med. sestra</option>
+                  <option value="Spec. biohemicar">Spec. biohemicar</option>
+                  <option value="Spec. gastroenterolog.">
+                    Spec. gastroenterolog
+                  </option>
+                  <option value="Spec. ginekolog">Spec. ginekolog</option>
+                  <option value="Spec. endrokrinolog">
+                    Spec. endrokrinolog
+                  </option>
+                  <option value="Spec. kardiolog">Spec. kardiolog</option>
+                  <option value="Spec. neurolog">Spec. neurolog</option>
+                  <option value="Spec. nefrolog">Spec. nefrolog</option>
+                  <option value="Spec. pshijatar">Spec. pshijatar</option>
+                  <option value="Spec. pulmolog">Spec. pulmolog</option>
+                  <option value="Spec. urolog">Spec. urolog</option>
+                  <option value="Spec. hematolog">Spec. hematolog</option>
+                  <option value="Spec. hirurg">Spec. hirurg</option>
+                </select>
               </div>
             </div>
             <div className="element-container">

@@ -1,8 +1,46 @@
 import "./registrationPatient.css";
-import React, {useState} from "react";
-import {useDispatch} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
+import { BiCalendarPlus } from "react-icons/bi";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 function RegistrationPatientPage() {
+  const links = [
+    {
+      id: 1,
+      text: "Početna",
+      path: "/nurse",
+      icon: <FaHome />,
+    },
+    {
+      id: 2,
+      text: "Pacijenti",
+      path: "/nurse/patient-preview",
+      icon: <FaUserInjured />,
+    },
+    {
+      id: 3,
+      text: "Zakazivanje",
+      path: "/nurse/schedule-appointment",
+      icon: <BiCalendarPlus />,
+    },
+    {
+      id: 4,
+      text: "Nov pacijent",
+      path: "/nurse/register-patient",
+      icon: <FaPlusCircle />,
+      dividerAfter: true,
+      isActive: true,
+    },
+    {
+      id: 6,
+      text: "Profil",
+      path: "/profile",
+      icon: <FaUser />,
+    },
+  ];
+
   const dispatch = useDispatch();
   const [name, setName] = useState();
   const [surname, setSurname] = useState();
@@ -74,7 +112,10 @@ function RegistrationPatientPage() {
     };
   };
   return (
-    <div>
+    <div style={{ marginLeft: "15%" }}>
+      <div className="sidebar-link-container">
+        <Sidebar links={links} />
+      </div>
       <div class="container" id="container">
         <div class="form-container sign-in-container">
           <form action="#">
@@ -98,21 +139,21 @@ function RegistrationPatientPage() {
               </div>
             </div>
             <div className="element-container">
-                <div class="element ">
+              <div class="element ">
                 <input placeholder="JMBG" onChange={onChangeIdHandler} />
-                </div>
-                </div>
-                <div className="element-container">    
-                <div class="element one">  
-           <input placeholder="Datum rodjenja" />
-           </div>
-           <div class="element one">  
-           <input placeholder="Mesto rodjenja"/>
-           </div>
-           <div class="element">
-           <input placeholder="Pol"/>
+              </div>
             </div>
-           </div>
+            <div className="element-container">
+              <div class="element one">
+                <input placeholder="Datum rodjenja" />
+              </div>
+              <div class="element one">
+                <input placeholder="Mesto rodjenja" />
+              </div>
+              <div class="element">
+                <input placeholder="Pol" />
+              </div>
+            </div>
             <div className="element-container">
               <div class="element one">
                 <input
@@ -149,7 +190,11 @@ function RegistrationPatientPage() {
                 />
               </div>
               <div class="element">
-                <input type= "Email" placeholder="Email" onChange={onChangeTitleHandler} />
+                <input
+                  type="Email"
+                  placeholder="Email"
+                  onChange={onChangeTitleHandler}
+                />
               </div>
             </div>
             <div className="element-container">
@@ -169,46 +214,48 @@ function RegistrationPatientPage() {
 
             <div className="element-container">
               <div class="element one">
-              <select name="porodicniStatus" >
-              <option value="">Porodicni status</option>
-                <option value="Oba roditelja">Oba roditelja</option>
-                <option value="">Rodtitelj razdvojeni</option>
-                <option value="">Razvedni</option>
-                <option value="">Jedan roditelje</option>
-                <option value="">Bez roditelja</option>
-                <option value="">Usvojen</option>
-              </select>
+                <select name="porodicniStatus">
+                  <option value="">Porodicni status</option>
+                  <option value="Oba roditelja">Oba roditelja</option>
+                  <option value="">Rodtitelj razdvojeni</option>
+                  <option value="">Razvedni</option>
+                  <option value="">Jedan roditelje</option>
+                  <option value="">Bez roditelja</option>
+                  <option value="">Usvojen</option>
+                </select>
               </div>
               <div class="element one">
-              <select name="bracniStatus" >
-              <option value="">Bracni status</option>
-                <option value="Oba roditelja">U braku</option>
-                <option value="">Razvedeni</option>
-                <option value="">Udovac/udovica</option>
-                <option value="">Samac/samica</option>
-              </select>
+                <select name="bracniStatus">
+                  <option value="">Bracni status</option>
+                  <option value="Oba roditelja">U braku</option>
+                  <option value="">Razvedeni</option>
+                  <option value="">Udovac/udovica</option>
+                  <option value="">Samac/samica</option>
+                </select>
               </div>
               <div class="element">
-            <input placeholder = 'Broj dece'/>
-            </div>
+                <input placeholder="Broj dece" />
+              </div>
             </div>
 
             <div className="element-container">
-            <div class="element one">
+              <div class="element one">
                 <input
                   placeholder="Zanimanje"
                   onChange={onChangePasswordHandler}
                 />
               </div>
-            <div class="element">
-              <select name="stepenStrucneSpreme" >
-              <option value="">Stepen strucne spreme</option>
-                <option value="Oba roditelja">Bez osnovnog obrazovanja</option>
-                <option value="">Osnovno obrazovanje</option>
-                <option value="">Srednje obrazovanje</option>
-                <option value="">Vise obrazovanje</option>
-                <option value="">Visoko obrazovanje</option>
-              </select>
+              <div class="element">
+                <select name="stepenStrucneSpreme">
+                  <option value="">Stepen strucne spreme</option>
+                  <option value="Oba roditelja">
+                    Bez osnovnog obrazovanja
+                  </option>
+                  <option value="">Osnovno obrazovanje</option>
+                  <option value="">Srednje obrazovanje</option>
+                  <option value="">Vise obrazovanje</option>
+                  <option value="">Visoko obrazovanje</option>
+                </select>
               </div>
             </div>
             <br></br>
@@ -220,4 +267,3 @@ function RegistrationPatientPage() {
   );
 }
 export default RegistrationPatientPage;
-;

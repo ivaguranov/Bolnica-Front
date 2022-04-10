@@ -6,7 +6,7 @@ import Table from "../../components/Table/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmployees, searchEmployees } from "../../redux/actions/employee";
 import "./styles.css";
-import { FaChartPie, FaUserTie, FaUser } from "react-icons/fa";
+import { FaHome, FaUserNurse, FaPlusCircle, FaUser } from "react-icons/fa";
 import { BiSearchAlt } from "react-icons/bi";
 
 const EmployeePreview = () => {
@@ -18,21 +18,26 @@ const EmployeePreview = () => {
   const [value, setValue] = useState("");
 
   const employees = useSelector((state) => state.employees);
-
-  const linksSidebar = [
+  const links = [
     {
       id: 1,
-      text: "Početna",
+      text: "Pocetna",
       path: "/admin",
-      icon: <FaChartPie />,
+      icon: <FaHome />,
     },
     {
       id: 2,
       text: "Zaposleni",
       path: "/admin/employee-preview",
-      icon: <FaUserTie />,
-      dividerAfter: true,
+      icon: <FaUserNurse />,
       isActive: true,
+    },
+    {
+      id: 2,
+      text: "Nov zaposleni",
+      path: "/admin/register-employee",
+      icon: <FaPlusCircle />,
+      dividerAfter: true,
     },
     {
       id: 3,
@@ -253,7 +258,7 @@ const EmployeePreview = () => {
   return (
     <div>
       <div className="sidebar-link-container">
-        <Sidebar links={linksSidebar} />
+        <Sidebar links={links} />
       </div>
 
       <div style={{ marginLeft: "15%" }}>

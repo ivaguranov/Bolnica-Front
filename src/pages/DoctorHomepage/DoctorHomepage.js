@@ -6,12 +6,7 @@ import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getAppointments } from "../../redux/actions/appointment";
 import ScheduledAppointments from "../../components/ScheduledAppointments/ScheduledAppointments";
-import {
-  FaChartPie,
-  FaWheelchair,
-  FaUser,
-  FaUserInjured,
-} from "react-icons/fa";
+import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
 import { GiMedicalDrip, GiMedicalPack } from "react-icons/gi";
 
@@ -24,12 +19,12 @@ const DoctorHomepage = () => {
 
   const appointments = useSelector((state) => state.appointments);
 
-  const sidebarProps = [
+  const links = [
     {
       id: 1,
       text: "Početna",
       path: "/",
-      icon: <FaChartPie />,
+      icon: <FaHome />,
 
       isActive: true,
     },
@@ -37,12 +32,12 @@ const DoctorHomepage = () => {
       id: 2,
       text: "Pacijenti",
       path: "/patient-preview",
-      icon: <FaWheelchair />,
+      icon: <FaUserInjured />,
     },
     {
       id: 3,
       text: "Zakazani pregledi",
-      path: "/",
+      path: "/appointments",
       icon: <MdCalendarToday />,
       dividerAfter: true,
     },
@@ -63,17 +58,17 @@ const DoctorHomepage = () => {
 
   const generalStatsProps = [
     {
-      image: <GiMedicalPack size="65px" />,
+      image: <GiMedicalPack size="45px" />,
       text: "Zakazani pregledi",
       number: "34",
     },
     {
-      image: <FaUserInjured size="65px" />,
+      image: <FaUserInjured size="45px" />,
       text: "Broj pacijenata",
       number: "10",
     },
     {
-      image: <GiMedicalDrip size="65px" />,
+      image: <GiMedicalDrip size="45px" />,
       text: "Operacije",
       number: "10",
     },
@@ -82,7 +77,7 @@ const DoctorHomepage = () => {
   return (
     <>
       <div className="sidebar-link-container">
-        <Sidebar links={sidebarProps} />
+        <Sidebar links={links} />
       </div>
       <div style={{ marginLeft: "15%" }}>
         <Header
