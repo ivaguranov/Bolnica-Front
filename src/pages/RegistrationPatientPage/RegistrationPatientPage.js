@@ -4,266 +4,297 @@ import { useDispatch } from "react-redux";
 import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
 import { BiCalendarPlus } from "react-icons/bi";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import { createPatient } from "../../redux/actions/patient";
+
+const initialState = {
+	jmbg: "",
+	name: "",
+	parentName: "",
+	surname: "",
+	dob: new Date(),
+	pob: "",
+	country: "",
+	address: "",
+	city: "",
+	currentCountry: "",
+	phone: "",
+	email: "",
+	keeperJmbg: "",
+	keeperName: "",
+	familyStatus: "",
+	maritalStatus: "",
+	childrenNumber: 0,
+	proffesionalLevel: "",
+	proffesion: "",
+};
 
 function RegistrationPatientPage() {
-  const links = [
-    {
-      id: 1,
-      text: "Početna",
-      path: "/nurse",
-      icon: <FaHome />,
-    },
-    {
-      id: 2,
-      text: "Pacijenti",
-      path: "/nurse/patient-preview",
-      icon: <FaUserInjured />,
-    },
-    {
-      id: 3,
-      text: "Zakazivanje",
-      path: "/nurse/schedule-appointment",
-      icon: <BiCalendarPlus />,
-    },
-    {
-      id: 4,
-      text: "Nov pacijent",
-      path: "/nurse/register-patient",
-      icon: <FaPlusCircle />,
-      dividerAfter: true,
-      isActive: true,
-    },
-    {
-      id: 6,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
+	const [form, setForm] = useState(initialState);
+	const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
-  const [name, setName] = useState();
-  const [surname, setSurname] = useState();
-  const [email, setEmail] = useState();
-  const [id, setId] = useState();
-  const [address, setAddress] = useState();
-  const [city, setCity] = useState();
-  const [proffesion, setProfession] = useState();
-  const [title, setTitle] = useState();
-  const [contact, setContact] = useState();
-  const [password, setPassword] = useState();
-  const [userName, setUserName] = useState();
-  const [gender, setGender] = useState();
-  const [dateOfBirth, setDate] = useState();
+	const links = [
+		{
+			id: 1,
+			text: "Početna",
+			path: "/nurse",
+			icon: <FaHome />,
+		},
+		{
+			id: 2,
+			text: "Pacijenti",
+			path: "/nurse/patient-preview",
+			icon: <FaUserInjured />,
+		},
+		{
+			id: 3,
+			text: "Zakazivanje",
+			path: "/nurse/schedule-appointment",
+			icon: <BiCalendarPlus />,
+		},
+		{
+			id: 4,
+			text: "Nov pacijent",
+			path: "/nurse/register-patient",
+			icon: <FaPlusCircle />,
+			dividerAfter: true,
+			isActive: true,
+		},
+		{
+			id: 6,
+			text: "Profil",
+			path: "/profile",
+			icon: <FaUser />,
+		},
+	];
 
-  const onChangeNameHandler = (e) => {
-    setName(e.target.value);
-  };
+	const handleChange = (e) =>
+		setForm({ ...form, [e.target.name]: e.target.value });
 
-  const onChangeSurNameHandler = (e) => {
-    setSurname(e.target.value);
-  };
+	const onChangeDateHandler = (e) =>
+		setForm({ ...form, dob: new Date(e.target.value) });
 
-  const onChangeEmailHandler = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onChangeIdHandler = (e) => {
-    setId(e.target.value);
-  };
-
-  const onChangeAddressHandler = (e) => {
-    setAddress(e.target.value);
-  };
-  const onChangeProfessioneHandler = (e) => {
-    setProfession(e.target.value);
-  };
-  const onChangeTitleHandler = (e) => {
-    setTitle(e.target.value);
-  };
-  const onChangeContactHandler = (e) => {
-    setContact(e.target.value);
-  };
-  const onChangeCityHandler = (e) => {
-    setCity(e.target.value);
-  };
-  const onChangePasswordHandler = (e) => {
-    setPassword(e.target.value);
-  };
-  const onChangeUserNameHandler = (e) => {
-    setUserName(e.target.value);
-  };
-  const handleSubmit = (e) => {
-    const data = {
-      name: name,
-      surname: surname,
-      email: email,
-      id: id,
-      address: address,
-      city: city,
-      proffesion: proffesion,
-      title: title,
-      contact: contact,
-      password: password,
-      userName: userName,
-      city: city,
-      gender: gender,
-      dateOfBirth: dateOfBirth,
-    };
-  };
-  return (
-    <div style={{ marginLeft: "15%" }}>
-      <div className="sidebar-link-container">
-        <Sidebar links={links} />
-      </div>
-      <div class="container" id="container">
-        <div class="form-container sign-in-container">
-          <form action="#">
-            <h1>Dodavanje pacijenta</h1>
-            <br></br>
-            <div className="element-container">
-              <div class="element one">
-                <input placeholder="Ime" onChange={onChangeNameHandler} />
-              </div>
-              <div class="element one">
-                <input
-                  placeholder="Ime roditelja"
-                  onChange={onChangeSurNameHandler}
-                />
-              </div>
-              <div class="element ">
-                <input
-                  placeholder="Prezime"
-                  onChange={onChangeSurNameHandler}
-                />
-              </div>
-            </div>
-            <div className="element-container">
-              <div class="element ">
-                <input placeholder="JMBG" onChange={onChangeIdHandler} />
-              </div>
-            </div>
-            <div className="element-container">
-              <div class="element one">
-                <input placeholder="Datum rodjenja" />
-              </div>
-              <div class="element one">
-                <input placeholder="Mesto rodjenja" />
-              </div>
-              <div class="element">
-                <input placeholder="Pol" />
-              </div>
-            </div>
-            <div className="element-container">
-              <div class="element one">
-                <input
-                  placeholder="Adresa stanovanja"
-                  onChange={onChangeAddressHandler}
-                />
-              </div>
-              <div class="element">
-                <input
-                  placeholder="Mesto stanovanja"
-                  onChange={onChangeCityHandler}
-                />
-              </div>
-            </div>
-            <div className="element-container">
-              <div class="element one">
-                <input
-                  placeholder="Zemlja stanovanja"
-                  onChange={onChangeAddressHandler}
-                />
-              </div>
-              <div class="element">
-                <input
-                  placeholder="Zemlja drzavljanstva"
-                  onChange={onChangeCityHandler}
-                />
-              </div>
-            </div>
-            <div className="element-container">
-              <div class="element one">
-                <input
-                  placeholder="Kontankt telefon"
-                  onChange={onChangeProfessioneHandler}
-                />
-              </div>
-              <div class="element">
-                <input
-                  type="Email"
-                  placeholder="Email"
-                  onChange={onChangeTitleHandler}
-                />
-              </div>
-            </div>
-            <div className="element-container">
-              <div class="element one">
-                <input
-                  placeholder="Ime i prezime staratelja"
-                  onChange={onChangePasswordHandler}
-                />
-              </div>
-              <div class="element">
-                <input
-                  placeholder="JMBG staratelja"
-                  onChange={onChangeUserNameHandler}
-                />
-              </div>
-            </div>
-
-            <div className="element-container">
-              <div class="element one">
-                <select name="porodicniStatus">
-                  <option value="">Porodicni status</option>
-                  <option value="Oba roditelja">Oba roditelja</option>
-                  <option value="">Rodtitelj razdvojeni</option>
-                  <option value="">Razvedni</option>
-                  <option value="">Jedan roditelje</option>
-                  <option value="">Bez roditelja</option>
-                  <option value="">Usvojen</option>
-                </select>
-              </div>
-              <div class="element one">
-                <select name="bracniStatus">
-                  <option value="">Bracni status</option>
-                  <option value="Oba roditelja">U braku</option>
-                  <option value="">Razvedeni</option>
-                  <option value="">Udovac/udovica</option>
-                  <option value="">Samac/samica</option>
-                </select>
-              </div>
-              <div class="element">
-                <input placeholder="Broj dece" />
-              </div>
-            </div>
-
-            <div className="element-container">
-              <div class="element one">
-                <input
-                  placeholder="Zanimanje"
-                  onChange={onChangePasswordHandler}
-                />
-              </div>
-              <div class="element">
-                <select name="stepenStrucneSpreme">
-                  <option value="">Stepen strucne spreme</option>
-                  <option value="Oba roditelja">
-                    Bez osnovnog obrazovanja
-                  </option>
-                  <option value="">Osnovno obrazovanje</option>
-                  <option value="">Srednje obrazovanje</option>
-                  <option value="">Vise obrazovanje</option>
-                  <option value="">Visoko obrazovanje</option>
-                </select>
-              </div>
-            </div>
-            <br></br>
-            <button>Registruj pacijenta</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(form);
+		dispatch(createPatient(form));
+		// navigate("/nurse");
+	};
+	return (
+		<div style={{ marginLeft: "15%" }}>
+			<div className="sidebar-link-container">
+				<Sidebar links={links} />
+			</div>
+			<form className="form-custom">
+				<h1 className="form-heading">Dodavanje pacijenta</h1>
+				<br></br>
+				<div className="form-group-custom">
+					<input
+						type="text"
+						className="margin-right"
+						placeholder="Ime"
+						onChange={handleChange}
+						name="name"
+					/>
+					<input
+						type="text"
+						className="margin-left"
+						placeholder="Prezime"
+						onChange={handleChange}
+						name="surname"
+					/>
+				</div>
+				<div className="form-group-custom">
+					<input
+						type="text"
+						className="margin-right"
+						placeholder="Ime roditelja"
+						onChange={handleChange}
+						name="parentName"
+					/>
+					<input
+						type="text"
+						className="margin-left"
+						placeholder="JMBG"
+						onChange={handleChange}
+						name="jmbg"
+					/>
+				</div>
+				<div className="form-group-custom">
+					<input
+						type="date"
+						className="margin-right"
+						data-date=""
+						data-date-format="ddmmyyyy"
+						onChange={onChangeDateHandler}
+						name="dob"
+					/>
+					<input
+						type="text"
+						className="margin-left margin-right"
+						placeholder="Mesto rodjenja"
+						name="pob"
+						onChange={handleChange}
+					/>
+					<input
+						type="text"
+						className="margin-left"
+						placeholder="Adresa stanovanja"
+						onChange={handleChange}
+						name="address"
+					/>
+				</div>
+				<div className="form-group-custom">
+					<input
+						type="text"
+						className="margin-right"
+						placeholder="Mesto stanovanja"
+						onChange={handleChange}
+						name="city"
+					/>
+					<input
+						type="text"
+						className="margin-left margin-right"
+						placeholder="Zemlja stanovanja"
+						onChange={handleChange}
+						name="currentCountry"
+					/>
+					<input
+						type="text"
+						className="margin-left"
+						placeholder="Zemlja drzavljanstva"
+						onChange={handleChange}
+						name="country"
+					/>
+				</div>
+				<div className="form-group-custom">
+					<input
+						className="margin-right"
+						type="text"
+						placeholder="Kontankt telefon"
+						onChange={handleChange}
+						name="phone"
+					/>
+					<input
+						className="margin-left"
+						type="email"
+						placeholder="Email"
+						onChange={handleChange}
+						name="email"
+					/>
+				</div>
+				<div className="form-group-custom">
+					<input
+						type="text"
+						className="margin-right"
+						placeholder="Ime i prezime staratelja"
+						onChange={handleChange}
+						name="keeperName"
+					/>
+					<input
+						type="text"
+						className="margin-left"
+						placeholder="JMBG staratelja"
+						onChange={handleChange}
+						name="keeperJmbg"
+					/>
+				</div>
+				<div className="form-group-custom">
+					<select
+						className="form-select-custom small-select margin-right"
+						aria-label="Default select example"
+						defaultValue=""
+						name="familyStatus"
+						onChange={handleChange}
+					>
+						<option value="" disabled>
+							Porodicni status
+						</option>
+						<option value="Oba roditelja">Oba roditelja</option>
+						<option value="asdasd">Roditelj razdvojeni</option>
+						<option value="">Razvedni</option>
+						<option value="">Jedan roditelje</option>
+						<option value="">Bez roditelja</option>
+						<option value="">Usvojen</option>
+					</select>
+					<select
+						className="form-select-custom small-select margin-left"
+						aria-label="Default select example"
+						defaultValue=""
+						name="maritalStatus"
+						onChange={handleChange}
+					>
+						<option value="" disabled>
+							Bracni status
+						</option>
+						<option value="Oba roditelja">U braku</option>
+						<option value="">Razvedeni</option>
+						<option value="">Udovac/udovica</option>
+						<option value="">Samac/samica</option>
+					</select>
+				</div>
+				<div className="form-group-custom">
+					<input
+						type="number"
+						className="margin-right"
+						placeholder="Broj dece"
+						name="childrenNumber"
+					/>
+					<input
+						type="text"
+						className="margin-left margin-right"
+						placeholder="Zanimanje"
+						onChange={handleChange}
+						name="proffesion"
+					/>
+					<select
+						className="form-select-custom small-select margin-left"
+						aria-label="Default select example"
+						defaultValue=""
+						name="proffesionalLevel"
+					>
+						<option value="" disabled>
+							Stepen strucne spreme
+						</option>
+						<option value="Oba roditelja">
+							Bez osnovnog obrazovanja
+						</option>
+						<option value="">Osnovno obrazovanje</option>
+						<option value="">Srednje obrazovanje</option>
+						<option value="">Vise obrazovanje</option>
+						<option value="">Visoko obrazovanje</option>
+					</select>
+				</div>
+				<br></br>
+				<div className="form-group-custom">
+					<div className="wrapper">
+						<input
+							type="radio"
+							name="gender"
+							id="option-1"
+							value="male"
+							onChange={handleChange}
+							checked
+						/>
+						<input
+							type="radio"
+							name="gender"
+							value="female"
+							id="option-2"
+							onChange={handleChange}
+						/>
+						<label htmlFor="option-1" className="option option-1">
+							<div className="dot"></div>
+							<span>Muski pol</span>
+						</label>
+						<label htmlFor="option-2" className="option option-2">
+							<div className="dot"></div>
+							<span>Zenski pol</span>
+						</label>
+					</div>
+				</div>
+				<button onClick={handleSubmit}>Registruj pacijenta</button>
+			</form>
+		</div>
+	);
 }
 export default RegistrationPatientPage;
