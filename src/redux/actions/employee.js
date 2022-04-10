@@ -1,5 +1,6 @@
 import {
 	CREATE_EMPLOYEE,
+	DELETE_EMPLOYEE,
 	GET_EMPLOYEES,
 	SEARCH_EMPLOYEES,
 } from "../actionTypes";
@@ -28,6 +29,16 @@ export const searchEmployees = (searchValue) => async (dispatch) => {
 		console.log(searchValue);
 		const { data } = await api.searchEmployees(searchValue);
 		dispatch({ type: GET_EMPLOYEES, data });
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const deleteEmployee = (id) => async (dispatch) => {
+	try {
+		console.log("CAO");
+		await api.deleteEmployee(id);
+		dispatch({ type: DELETE_EMPLOYEE, id });
 	} catch (error) {
 		console.log(error);
 	}

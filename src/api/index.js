@@ -53,6 +53,7 @@ export const fetchEmployees = () => API.get(`/employees`);
 export const searchEmployees = (searchValues) =>
 	API.post("/employees", searchValues);
 export const createEmployee = (formData) => API.post(`/employees`, formData);
+export const deleteEmployee = (id) => API.delete(`/employees/${id}`);
 
 // DEPARTMENTS
 
@@ -61,3 +62,4 @@ export const fetchDepartments = () => API.get(`/employees`);
 // PATIENTS
 
 export const createPatient = (formData) => API.post(`/patients`, formData);
+export const deletePatient = (id) => API.delete(`/patients/${id}`);

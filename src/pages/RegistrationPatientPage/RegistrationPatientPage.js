@@ -292,7 +292,9 @@ function RegistrationPatientPage() {
 						</label>
 					</div>
 				</div>
-				<button onClick={handleSubmit}>Registruj pacijenta</button>
+				<button onClick={handleSubmit} style={{ marginTop: "10px" }}>
+					Registruj pacijenta
+				</button>
 			</form>
 		</div>
 	);
