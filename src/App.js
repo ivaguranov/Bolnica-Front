@@ -9,6 +9,8 @@ import EmployeePreview from "./pages/EmployeePreviewPage/EmployeePreviewPage";
 import PatientPreview from "./pages/PatientPreviewPage/PatientPreviewPage";
 import PatientPreviewNurses from "./pages/PatientPreviewPageNurses/PatientPreviewPageNurses";
 import NurseHomepage from "./pages/NurseHomepage/NurseHomepage";
+import AdminHomepage from "./pages/AdminHomepage/AdminHomepage";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,6 +19,7 @@ const App = () => {
         <Route path="/login" exact element={<LoginPage />} />
         <Route path="/demo-page" exact element={<DemoPage />} />
         <Route path="/nurse" exact element={<NurseHomepage />} />
+        <Route path="/admin" exact element={<AdminHomepage />} />
         <Route
           path="/admin/employee-preview"
           exact
