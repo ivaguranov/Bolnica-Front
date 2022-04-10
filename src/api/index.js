@@ -37,6 +37,13 @@ export const fetchEmployees = () => API.get(`/employees`);
 export const searchEmployees = (searchValues) =>
   API.post("/employees", searchValues);
 
+// EXAMINATIONS
+export const createExamination = (formData) => API.post("/demos", formData);
+
+// RECORDS
+
+export const fetchRecord = (id) => API.get(`/records/${id}`);
+export const createRecord = (formData) => API.post(`/records`, formData);
 export const fetchPatients = () => API.get(`/patients`);
 export const searchPatients = (searchValues) =>
   API.post("/patients", searchValues);
