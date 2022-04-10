@@ -6,6 +6,7 @@ import employees from "./employee";
 import records from "./records";
 import doctors from "./doctors";
 import patients from "./patient";
+import loggedUser from "./auth";
 
 export const reducers = combineReducers({
   demo,
@@ -14,4 +15,5 @@ export const reducers = combineReducers({
   patients,
   appointments,
   records,
+  loggedUser,
 });

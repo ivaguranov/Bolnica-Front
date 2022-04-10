@@ -20,6 +20,10 @@ export const createDemo = (data) => API.post("/demos", data);
 export const updateDemo = (id, data) => API.put(`/demos/${id}`, data);
 export const deleteDemo = (id) => API.delete(`/demos/${id}`);
 
+// AUTH
+
+export const login = (formData) => API.post("/login", formData);
+
 // NURSE ROUTES
 
 export const fetchDoctors = () => API.get(`/doctors`);
