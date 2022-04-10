@@ -1,16 +1,40 @@
 import { LOGIN, LOGOUT } from "../actionTypes";
 import * as api from "../../api/index.js";
+import jwt from "jwt-decode";
 
 export const login = (formData, navigate) => async (dispatch) => {
-	try {
-		console.log(`Login form data`);
-		console.log(formData);
-		const { data } = await api.login(formData);
-		console.log(`Login form respone`);
-		console.log(data);
-		dispatch({ type: LOGIN, payload: data });
-		navigate("/");
-	} catch (error) {
-		console.log(error);
-	}
+  try {
+    const { data } = await api.login(formData);
+    const user = jwt(data);
+    const roles = user.roles.split(",");
+    localStorage.setItem("token", data);
+    console.log(user);
+    dispatch({ type: LOGIN, payload: user });
+    if (roles.includes("ROLE_ADMIN")) navigate("/admin");
+    else if (roles.includes("ROLE_DR_SPEC_POV")) navigate("/");
+    else navigate("/nurse");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const logout = (navigate) => async (dispatch) => {
+  try {
+    localStorage.removeItem("token");
+    dispatch({ type: LOGOUT });
+    navigate("/login");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const resetUser = () => async (dispatch) => {
+  try {
+    const data = localStorage.getItem("token");
+    const user = jwt(data);
+    console.log(user);
+    dispatch({ type: LOGIN, payload: user });
+  } catch (error) {
+    console.log(error);
+  }
 };

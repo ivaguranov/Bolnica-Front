@@ -1,15 +1,13 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:9092/api" });
+const API = axios.create({ baseURL: "http://localhost:9092/" });
 
 API.interceptors.request.use((req) => {
-	if (localStorage.getItem("loggedUser")) {
-		req.headers.Authorization = `Bearer ${
-			JSON.parse(localStorage.getItem("loggedUser")).token
-		}`;
-	}
+  if (localStorage.getItem("token")) {
+    req.headers.Authorization = `Bearer:${localStorage.getItem("token")}`;
+  }
 
-	return req;
+  return req;
 });
 
 // DEMO ROUTES
@@ -22,18 +20,23 @@ export const deleteDemo = (id) => API.delete(`/demos/${id}`);
 
 // AUTH
 
-export const login = (formData) => API.post("/login", formData);
+export const login = (formData) =>
+  API.post("/bolnica-user-service/api/login", formData);
 
 // NURSE ROUTES
 
 export const fetchDoctors = () => API.get(`/doctors`);
-export const fetchAppointments = (id) => API.get(`/appointments/${id}`);
+export const fetchAppointments = (lbz) =>
+  API.post(`/bolnica-management-service/api/list-appointments-by-lbz`, {
+    lbz,
+    date: null,
+  });
 export const createAppointmentNurse = (data) =>
-	API.post("/nurse/create_appointment", data);
+  API.post("/bolnica-management-service/api/set-appointment", data);
 export const deleteAppointmentNurse = (id) => API.delete(`/demos/${id}`);
 
 export const updateAppointment = (id, data) =>
-	API.put(`/appointment/${id}`, data);
+  API.put(`/appointment/${id}`, data);
 
 // EXAMINATIONS
 
@@ -43,23 +46,29 @@ export const createExamination = (formData) => API.post("/demos", formData);
 
 export const fetchRecord = (id) => API.get(`/records/${id}`);
 export const createRecord = (formData) => API.post(`/records`, formData);
-export const fetchPatients = () => API.get(`/patients`);
 export const searchPatients = (searchValues) =>
-	API.post("/patients", searchValues);
+  API.post("/patients", searchValues);
 
 // EMPLOYEES
-
-export const fetchEmployees = () => API.get(`/employees`);
+export const fetchEmployees = () =>
+  API.post(`/bolnica-user-service/api/list-employees?page=1&size=5`, {
+    department: 1,
+  });
 export const searchEmployees = (searchValues) =>
-	API.post("/employees", searchValues);
-export const createEmployee = (formData) => API.post(`/employees`, formData);
+  API.post("/employees", searchValues);
+export const createEmployee = (formData) =>
+  API.post(`/bolnica-user-service/api/create-employee`, formData);
 export const deleteEmployee = (id) => API.delete(`/employees/${id}`);
 
 // DEPARTMENTS
 
-export const fetchDepartments = () => API.get(`/employees`);
+export const fetchDepartments = () =>
+  API.get(`/bolnica-management-service/api/fetch-departments`);
 
 // PATIENTS
 
-export const createPatient = (formData) => API.post(`/patients`, formData);
+export const fetchPatients = () =>
+  API.post(`/bolnica-management-service/api/filter-patients`, {});
+export const createPatient = (formData) =>
+  API.post(`/bolnica-management-service/api/create-patient`, formData);
 export const deletePatient = (id) => API.delete(`/patients/${id}`);

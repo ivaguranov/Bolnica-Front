@@ -9,12 +9,12 @@ const Table = (props) => {
   const listHeaders = headers.map((header) => <th scope="col">{header}</th>);
 
   const listTable = tableContent.map((content, i) => (
-    <tr key={i}>
+    <tr key={content.id}>
       {Object.values(content).map((item) => (
         <td>{item}</td>
       ))}
       <td style={{ width: "15%" }}>
-        <button className="buttonIcon" onClick={() => handleClick(i)}>
+        <button className="buttonIcon" onClick={() => handleClick(content.id)}>
           <ImBin />
         </button>
       </td>

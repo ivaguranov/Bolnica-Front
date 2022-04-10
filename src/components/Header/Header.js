@@ -2,13 +2,15 @@ import React from "react";
 import "./styles.css";
 import { FaCalendar } from "react-icons/fa";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/actions/auth";
 
 const Header = ({ avatarUrl, welcomeMsg, userName, userTitle, day, date }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const logout = () => {
-    console.log("logout");
-    navigate("/login");
+  const logoutUser = () => {
+    dispatch(logout(navigate));
   };
 
   return (
@@ -33,7 +35,7 @@ const Header = ({ avatarUrl, welcomeMsg, userName, userTitle, day, date }) => {
         </span>
         <span className="date-span">{date}</span>
       </div>
-      <div className="button-container" onClick={logout}>
+      <div className="button-container" onClick={logoutUser}>
         <button className="logout-btn">Logout</button>
       </div>
     </div>
