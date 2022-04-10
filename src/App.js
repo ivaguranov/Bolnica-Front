@@ -23,8 +23,12 @@ const App = () => {
           element={<EmployeePreview />}
         />
         <Route path="/patient-preview" exact element={<PatientPreview />} />
-        <Route path="/register-employee" exact element={<RegistrationPage/>}/>
-        <Route path="/register-patient" exact element={<RegistrationPatientPage/>}/>
+        <Route path="/register-employee" exact element={<RegistrationPage />} />
+        <Route
+          path="/register-patient"
+          exact
+          element={<RegistrationPatientPage />}
+        />
         <Route
           path="/nurse/patient-preview"
           exact

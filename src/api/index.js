@@ -15,15 +15,21 @@ API.interceptors.request.use((req) => {
 // DEMO ROUTES
 
 export const fetchDemos = () => API.get(`/demos`);
-
 export const fetchDemo = (id) => API.get(`/demos/${id}`);
 export const createDemo = (data) => API.post("/demos", data);
 export const updateDemo = (id, data) => API.put(`/demos/${id}`, data);
 export const deleteDemo = (id) => API.delete(`/demos/${id}`);
 
+// NURSE ROUTES
+
+export const fetchDoctors = () => API.get(`/doctors`);
+export const fetchAppointments = (id) => API.get(`/appointments/${id}`);
+export const createAppointmentNurse = (data) =>
+  API.post("/nurse/create_appointment", data);
+export const deleteAppointmentNurse = (id) => API.delete(`/demos/${id}`);
+
 // SCHEDULED APPOINTMENTS ROUTES
 
-export const fetchAppointments = () => API.get(`/appointments`);
 export const updateAppointment = (id, data) =>
   API.put(`/appointment/${id}`, data);
 
