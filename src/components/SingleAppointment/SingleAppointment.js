@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 const SingleAppointment = ({ props }) => {
   const { id, firstname, lastname, dob, gender, appointmentStatus, time } =
     props;
-
   let age = format(new Date(), "yyyy") - format(dob, "yyyy");
   let appointTime = format(new Date(time), "HH:mm");
 

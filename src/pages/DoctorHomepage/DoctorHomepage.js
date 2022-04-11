@@ -10,20 +10,23 @@ import { FaHome, FaUser, FaUserInjured } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
 import { GiMedicalDrip, GiMedicalPack } from "react-icons/gi";
 import { resetUser } from "../../redux/actions/auth";
+import { useNavigate } from "react-router";
 
 const DoctorHomepage = () => {
   const dispatch = useDispatch();
-  const doctor = useSelector((state) => state.loggedUser);
+  const navigate = useNavigate();
+  // const doctor = useSelector((state) => state.loggedUser);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
-    if (token) {
-      dispatch(resetUser());
-    }
-  }, []);
 
-  doctor && dispatch(getAppointments(doctor.LBZ));
+    if (token) {
+      const doctor = JSON.parse(localStorage.getItem("loggedUser"));
+      console.log(doctor);
+      dispatch(resetUser());
+      dispatch(getAppointments(doctor.LBZ));
+    } else navigate("/login");
+  }, []);
 
   const appointments = useSelector((state) => state.appointments);
 
@@ -116,7 +119,7 @@ const DoctorHomepage = () => {
             number={generalStatsProps[2].number}
           />
         </div>
-        <ScheduledAppointments />
+        {appointments && <ScheduledAppointments appointments={appointments} />}
       </div>
     </>
   );

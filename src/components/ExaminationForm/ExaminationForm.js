@@ -3,18 +3,18 @@ import { useState } from "react";
 import "./styles.css";
 
 const initialState = {
-  mainDifficulties: "",
-  currentDisease: "",
-  personalAnamnesis: "",
-  familyAnamnesis: "",
-  patientOpinion: "",
-  objectiveFinding: "",
-  diagnosis: "",
-  healingResult: "",
-  currentStatusDescription: "",
-  existingDiagnosis: false,
-  therapyProposal: "",
-  advice: "",
+  glavneTegobe: "",
+  sadasnjaBolest: "",
+  licnaAnamneza: "",
+  porodicnaAnamneza: "",
+  misljenjePacijenta: "",
+  objektivniNalaz: "",
+  dijagnoza: "",
+  rezultatLecenja: "",
+  opisTekucegStanja: "",
+  indikatorPoverljivosti: false,
+  predlozenaTerapija: "",
+  savet: "",
 };
 
 const ExaminationForm = ({ saveRecord }) => {
@@ -60,32 +60,36 @@ const ExaminationForm = ({ saveRecord }) => {
       <p className="form-section-heading">Anamneza</p>
       <div className="form-group-custom">
         <div className="form-label-custom">Glavne tegobe:</div>
-        <textarea type="text" name="mainDifficulties" onChange={handleChange} />
+        <textarea type="text" name="glavneTegobe" onChange={handleChange} />
       </div>
       <div className="form-group-custom">
         <div className="form-label-custom">Sadasnja bolest:</div>
-        <textarea type="text" name="currentDisease" onChange={handleChange} />
+        <textarea type="text" name="sadasnjaBolest" onChange={handleChange} />
       </div>
       <div className="form-group-custom">
         <div className="form-label-custom">Licna anamneza:</div>
+        <textarea type="text" name="licnaAnamneza" onChange={handleChange} />
+      </div>
+      <div className="form-group-custom">
+        <div className="form-label-custom">Porodicna anamneza:</div>
         <textarea
           type="text"
-          name="personalAnamnesis"
+          name="porodicnaAnamneza"
           onChange={handleChange}
         />
       </div>
       <div className="form-group-custom">
-        <div className="form-label-custom">Porodicna anamneza:</div>
-        <textarea type="text" name="familyAnamnesis" onChange={handleChange} />
-      </div>
-      <div className="form-group-custom">
         <div className="form-label-custom">Misljenje pacijenta:</div>
-        <textarea type="text" name="patientOpinion" onChange={handleChange} />
+        <textarea
+          type="text"
+          name="misljenjePacijenta"
+          onChange={handleChange}
+        />
       </div>
       <p className="form-section-heading">Postavljanje dijagnoze</p>
       <div className="form-group-custom">
         <div className="form-label-custom">Objektivni nalaz:</div>
-        <textarea type="text" name="objectiveFinding" onChange={handleChange} />
+        <textarea type="text" name="objektivniNalaz" onChange={handleChange} />
       </div>
       <button
         className="examSubmit"
@@ -103,7 +107,7 @@ const ExaminationForm = ({ saveRecord }) => {
               className="form-select-custom "
               aria-label="Default select example"
               defaultValue="0"
-              name="diagnosis"
+              name="dijagnoza"
             >
               <option value="A15.3">A15.3 - Tuberkuloza pluća</option>
               <option value="D50">D50 - Nedostatkom gvožđa</option>
@@ -128,7 +132,7 @@ const ExaminationForm = ({ saveRecord }) => {
               className="form-select-custom "
               aria-label="Default select example"
               defaultValue="0"
-              name="healingResult"
+              name="rezultatLecenja"
             >
               <option value="1">U toku</option>
               <option value="2">Oporavljen</option>
@@ -140,14 +144,14 @@ const ExaminationForm = ({ saveRecord }) => {
             <div className="form-label-custom">Opis tekuceg stanja:</div>
             <textarea
               type="text"
-              name="currentStatusDescription"
+              name="opisTekucegStanja"
               onChange={handleChange}
             />
           </div>
           <div>Postojeca dijagnoza</div>
           <input
             type="checkbox"
-            name="existingDiagnosis"
+            name="indikatorPoverljivosti"
             onChange={handleCheckBox}
           />
         </>
@@ -157,11 +161,15 @@ const ExaminationForm = ({ saveRecord }) => {
       <p className="form-section-heading">Predlaganje terapije</p>
       <div className="form-group-custom">
         <div className="form-label-custom">Predlaganje terapije:</div>
-        <textarea type="text" name="therapyProposal" onChange={handleChange} />
+        <textarea
+          type="text"
+          name="predlozenaTerapija"
+          onChange={handleChange}
+        />
       </div>
       <div className="form-group-custom">
         <div className="form-label-custom">Savet:</div>
-        <textarea type="text" name="advice" onChange={handleChange} />
+        <textarea type="text" name="savet" onChange={handleChange} />
       </div>
 
       <button className="examSubmit" onClick={() => saveRecord(form)}>

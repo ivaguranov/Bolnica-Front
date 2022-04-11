@@ -8,7 +8,7 @@ export const login = (formData, navigate) => async (dispatch) => {
     const user = jwt(data);
     const roles = user.roles.split(",");
     localStorage.setItem("token", data);
-    console.log(user);
+    localStorage.setItem("loggedUser", JSON.stringify(user));
     dispatch({ type: LOGIN, payload: user });
     if (roles.includes("ROLE_ADMIN")) navigate("/admin");
     else if (roles.includes("ROLE_DR_SPEC_POV")) navigate("/");

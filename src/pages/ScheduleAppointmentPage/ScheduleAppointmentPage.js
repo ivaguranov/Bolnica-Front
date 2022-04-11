@@ -46,8 +46,8 @@ const ScheduleAppointmentPage = () => {
     return this;
   };
 
-  const doctor = employees[1];
-  console.log(employees[1]);
+  const doctor = employees[0];
+  console.log(employees);
 
   const links = [
     {

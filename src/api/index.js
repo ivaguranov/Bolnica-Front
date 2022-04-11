@@ -5,6 +5,9 @@ const API = axios.create({ baseURL: "http://localhost:9092/" });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("token")) {
     req.headers.Authorization = `Bearer:${localStorage.getItem("token")}`;
+    req.headers.common["Content-Type"] = "application/json;charset=UTF-8";
+    req["headers"]["common"]["Accept"] = "application/json";
+    // req["headers"]["common"]["Content-Type"] = "text/html";
   }
 
   return req;
@@ -26,11 +29,8 @@ export const login = (formData) =>
 // NURSE ROUTES
 
 export const fetchDoctors = () => API.get(`/doctors`);
-export const fetchAppointments = (lbz) =>
-  API.post(`/bolnica-management-service/api/list-appointments-by-lbz`, {
-    lbz,
-    date: null,
-  });
+export const fetchAppointments = (data) =>
+  API.post(`/bolnica-management-service/api/list-appointments-by-lbz`, data);
 export const createAppointmentNurse = (data) =>
   API.post("/bolnica-management-service/api/set-appointment", data);
 export const deleteAppointmentNurse = (id) => API.delete(`/demos/${id}`);
@@ -45,7 +45,8 @@ export const createExamination = (formData) => API.post("/demos", formData);
 // RECORDS
 
 export const fetchRecord = (id) => API.get(`/records/${id}`);
-export const createRecord = (formData) => API.post(`/records`, formData);
+export const createRecord = (formData) =>
+  API.post(`/bolnica-management-service/api/create-pregled-report`, formData);
 export const searchPatients = (searchValues) =>
   API.post("/patients", searchValues);
 

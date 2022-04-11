@@ -20,6 +20,8 @@ const PatientExamination = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const doctor = JSON.parse(localStorage.getItem("loggedUser"));
+    console.log(doctor);
     const pathParts = location.pathname.split("/");
     setPatientId(pathParts[pathParts.length - 1]);
     dispatch(getRecord(pathParts[pathParts.length - 1]));
@@ -56,7 +58,13 @@ const PatientExamination = () => {
   ];
 
   const saveRecord = (formData) => {
-    dispatch(createRecord(formData));
+    dispatch(
+      createRecord({
+        ...formData,
+        lbp: "db5096cc-b01e-4d7e-8e93-67e52ee87bb7",
+        zaposleniId: "a5be48ed-9ed8-465f-94c1-0ddc00b60326",
+      })
+    );
     navigate("/");
   };
 
