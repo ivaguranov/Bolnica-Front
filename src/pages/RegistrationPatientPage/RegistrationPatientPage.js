@@ -5,6 +5,7 @@ import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
 import { BiCalendarPlus } from "react-icons/bi";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { createPatient } from "../../redux/actions/patient";
+import { useNavigate } from "react-router";
 
 const initialState = {
   jmbg: "",
@@ -33,6 +34,7 @@ const initialState = {
 function RegistrationPatientPage() {
   const [form, setForm] = useState(initialState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const links = [
     {
@@ -90,7 +92,7 @@ function RegistrationPatientPage() {
     e.preventDefault();
     console.log(form);
     dispatch(createPatient({ ...form, pol: "MUSKI" }));
-    // navigate("/nurse");
+    navigate("/nurse");
   };
   return (
     <div style={{ marginLeft: "15%" }}>

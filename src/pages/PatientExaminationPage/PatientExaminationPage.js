@@ -8,9 +8,11 @@ import { Button } from "reactstrap";
 import "./styles.css";
 import ExaminationForm from "../../components/ExaminationForm/ExaminationForm";
 import MedicalRecord from "../../components/MedicalRecord/MedicalRecord";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createRecord, getRecord } from "../../redux/actions/records";
 import { MdCalendarToday } from "react-icons/md";
+import { getExaminations } from "../../redux/actions/examinations";
+import { getPatients } from "../../redux/actions/patient";
 
 const PatientExamination = () => {
   const location = useLocation();
@@ -24,8 +26,18 @@ const PatientExamination = () => {
     console.log(doctor);
     const pathParts = location.pathname.split("/");
     setPatientId(pathParts[pathParts.length - 1]);
-    dispatch(getRecord(pathParts[pathParts.length - 1]));
+    // dispatch(getRecord(pathParts[pathParts.length - 1]));
+    dispatch(getPatients());
   }, []);
+
+  const examinations = useSelector((state) => state.examinations);
+  const patients = useSelector((state) => state.patients);
+  console.log(examinations);
+
+  if (patients.length > 0) {
+    console.log(patients);
+    dispatch(getExaminations(patients[1].lbp));
+  }
 
   if (patientId) console.log(patientId);
 
@@ -63,9 +75,10 @@ const PatientExamination = () => {
         ...formData,
         lbp: "db5096cc-b01e-4d7e-8e93-67e52ee87bb7",
         zaposleniId: "a5be48ed-9ed8-465f-94c1-0ddc00b60326",
+        sadasnjaBolest: null,
       })
     );
-    navigate("/");
+    // navigate("/");
   };
 
   const swapTabs = () => {

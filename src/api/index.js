@@ -40,6 +40,13 @@ export const updateAppointment = (id, data) =>
 
 // EXAMINATIONS
 
+export const fetchExaminations = (lbp) =>
+  API.post(
+    `/bolnica-management-service/api/fetch-istorija-bolesti/${lbp}?page=1&size=5`,
+    {
+      dijagnoza: "string",
+    }
+  );
 export const createExamination = (formData) => API.post("/demos", formData);
 
 // RECORDS

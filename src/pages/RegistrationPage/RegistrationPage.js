@@ -116,7 +116,7 @@ function RegistrationPage() {
     e.preventDefault();
     console.log({ ...form, department: 1 });
     dispatch(createEmployee({ ...form, department: 1 }));
-    // navigate("/admin");
+    navigate("/admin");
   };
   return (
     <div style={{ marginLeft: "15%" }}>

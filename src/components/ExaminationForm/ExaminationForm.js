@@ -172,7 +172,13 @@ const ExaminationForm = ({ saveRecord }) => {
         <textarea type="text" name="savet" onChange={handleChange} />
       </div>
 
-      <button className="examSubmit" onClick={() => saveRecord(form)}>
+      <button
+        className="examSubmit"
+        onClick={(e) => {
+          e.preventDefault();
+          saveRecord(form);
+        }}
+      >
         Sacuvaj
       </button>
     </form>
