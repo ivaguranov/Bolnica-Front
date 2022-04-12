@@ -5,7 +5,6 @@ import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Table = (props) => {
   const { headers, tableContent, handleClick } = props;
-
   const listHeaders = headers.map((header) => (
     <th scope="col" key={header.key}>
       {header.value}

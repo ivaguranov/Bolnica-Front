@@ -17,7 +17,7 @@ const initialState = {
   savet: "",
 };
 
-const ExaminationForm = ({ saveRecord }) => {
+const ExaminationForm = ({ saveExamination, record }) => {
   const [form, setForm] = useState(initialState);
   const [diagnosisContent, setDiagnosisContent] = useState(false);
 
@@ -32,8 +32,8 @@ const ExaminationForm = ({ saveRecord }) => {
     setDiagnosisContent(!diagnosisContent);
   };
 
-  const dummyDate = new Date();
-  const stringDate = dummyDate.toLocaleDateString();
+  const dob = new Date(record.pacijent.datumRodjenja);
+  const dobString = dob.toLocaleDateString();
 
   const alergies = ["polen", "macja dlaka", "mleko"];
   const activeDiagnosis = ["slomljena kost", "upala pluca"];
@@ -43,9 +43,11 @@ const ExaminationForm = ({ saveRecord }) => {
       <p className="form-section-heading">Podaci o pacijentu</p>
       <div className="patient-info-custom">
         <div className="patient-personal-info">
-          <p className="patient-info-text">Ime: Pacijent</p>
-          <p className="patient-info-text">Prezime: Pacijentic</p>
-          <p className="patient-info-text">Datum rodjena: {stringDate}</p>
+          <p className="patient-info-text">Ime: {record.pacijent.ime}</p>
+          <p className="patient-info-text">
+            Prezime: {record.pacijent.prezime}
+          </p>
+          <p className="patient-info-text">Datum rodjena: {dobString}</p>
         </div>
         <div className="patient-other-info">
           <p className="patient-info-text">
@@ -176,7 +178,7 @@ const ExaminationForm = ({ saveRecord }) => {
         className="examSubmit"
         onClick={(e) => {
           e.preventDefault();
-          saveRecord(form);
+          saveExamination(form);
         }}
       >
         Sacuvaj

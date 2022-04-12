@@ -5,6 +5,7 @@ import GeneralStats from "../../components/GeneralStats/GeneralStats";
 import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { getAppointments } from "../../redux/actions/appointment";
+import { getPatients } from "../../redux/actions/patient";
 import ScheduledAppointments from "../../components/ScheduledAppointments/ScheduledAppointments";
 import { FaHome, FaUser, FaUserInjured } from "react-icons/fa";
 import { MdCalendarToday } from "react-icons/md";
@@ -25,12 +26,14 @@ const DoctorHomepage = () => {
       console.log(doctor);
       dispatch(resetUser());
       dispatch(getAppointments(doctor.LBZ));
+      dispatch(getPatients());
     } else navigate("/login");
   }, []);
 
   const appointments = useSelector((state) => state.appointments);
+  const patients = useSelector((state) => state.patients);
 
-  console.log(appointments);
+  console.log(patients);
 
   const links = [
     {
@@ -119,7 +122,12 @@ const DoctorHomepage = () => {
             number={generalStatsProps[2].number}
           />
         </div>
-        {appointments && <ScheduledAppointments appointments={appointments} />}
+        {appointments && patients && (
+          <ScheduledAppointments
+            appointments={appointments}
+            patients={patients}
+          />
+        )}
       </div>
     </>
   );

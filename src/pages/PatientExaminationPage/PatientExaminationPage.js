@@ -12,34 +12,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { createRecord, getRecord } from "../../redux/actions/records";
 import { MdCalendarToday } from "react-icons/md";
 import { getExaminations } from "../../redux/actions/examinations";
-import { getPatients } from "../../redux/actions/patient";
+import { getDiseases } from "../../redux/actions/diseases";
 
 const PatientExamination = () => {
   const location = useLocation();
-  const [patientId, setPatientId] = useState();
+  const [lbp, setLbp] = useState();
+  const [doctor, setDoctor] = useState();
   const [isExamination, setIsExamination] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const doctor = JSON.parse(localStorage.getItem("loggedUser"));
-    console.log(doctor);
+    const doctorLocal = JSON.parse(localStorage.getItem("loggedUser"));
+    if (doctorLocal) {
+      setDoctor(doctorLocal);
+    } else navigate("/login");
     const pathParts = location.pathname.split("/");
-    setPatientId(pathParts[pathParts.length - 1]);
-    // dispatch(getRecord(pathParts[pathParts.length - 1]));
-    dispatch(getPatients());
+    setLbp(pathParts[pathParts.length - 1]);
+    dispatch(getRecord(pathParts[pathParts.length - 1]));
+    dispatch(
+      getDiseases(pathParts[pathParts.length - 1], { dijagnoza: "string" })
+    );
+    dispatch(getExaminations(pathParts[pathParts.length - 1]));
   }, []);
 
   const examinations = useSelector((state) => state.examinations);
-  const patients = useSelector((state) => state.patients);
+  const record = useSelector((state) => state.records);
+  const diseases = useSelector((state) => state.diseases);
   console.log(examinations);
+  console.log(doctor);
+  console.log(record);
+  console.log(diseases);
 
-  if (patients.length > 0) {
-    console.log(patients);
-    dispatch(getExaminations(patients[1].lbp));
-  }
-
-  if (patientId) console.log(patientId);
+  if (lbp) console.log(lbp);
 
   const links = [
     {
@@ -69,16 +74,17 @@ const PatientExamination = () => {
     },
   ];
 
-  const saveRecord = (formData) => {
+  const saveExamination = (formData) => {
     dispatch(
       createRecord({
         ...formData,
-        lbp: "db5096cc-b01e-4d7e-8e93-67e52ee87bb7",
-        zaposleniId: "a5be48ed-9ed8-465f-94c1-0ddc00b60326",
+        lbp,
+        zaposleniId: doctor.LBZ,
         sadasnjaBolest: null,
       })
     );
     // navigate("/");
+    swapTabs();
   };
 
   const swapTabs = () => {
@@ -108,10 +114,21 @@ const PatientExamination = () => {
           </Button>
         </div>
         <div className="main">
-          {isExamination ? (
-            <ExaminationForm saveRecord={saveRecord} />
+          {record.length > 0 && examinations && diseases ? (
+            isExamination ? (
+              <ExaminationForm
+                saveExamination={saveExamination}
+                record={record[0]}
+              />
+            ) : (
+              <MedicalRecord
+                record={record[0]}
+                diseases={diseases}
+                examinations={examinations}
+              />
+            )
           ) : (
-            <MedicalRecord />
+            <></>
           )}
         </div>
       </div>

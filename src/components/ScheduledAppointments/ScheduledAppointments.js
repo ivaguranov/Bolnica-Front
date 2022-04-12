@@ -2,7 +2,7 @@ import React from "react";
 import SingleAppointment from "../SingleAppointment/SingleAppointment";
 import "./styles.css";
 
-const ScheduledAppointments = ({ appointments }) => {
+const ScheduledAppointments = ({ appointments, patients }) => {
   const scheduledProps = [
     {
       id: 1,
@@ -53,8 +53,8 @@ const ScheduledAppointments = ({ appointments }) => {
   return (
     <div>
       <div className="title">Današnji pacijenti</div>
-      {scheduledProps.map((props) => {
-        return <SingleAppointment props={props} key={props.id} />;
+      {patients.map((patient) => {
+        return <SingleAppointment patient={patient} key={patient.lbp} />;
       })}
     </div>
   );

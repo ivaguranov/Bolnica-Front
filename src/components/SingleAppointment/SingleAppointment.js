@@ -4,24 +4,25 @@ import { updateAppointment } from "../../redux/actions/appointment";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-const SingleAppointment = ({ props }) => {
-  const { id, firstname, lastname, dob, gender, appointmentStatus, time } =
-    props;
-  let age = format(new Date(), "yyyy") - format(dob, "yyyy");
+const SingleAppointment = ({ patient }) => {
+  const { lbp, ime, prezime, datumRodjenja, pol } = patient;
+  const time = 50656565;
+  const appointmentStatus = "Ceka";
+  let age = format(new Date(), "yyyy") - format(datumRodjenja, "yyyy");
   let appointTime = format(new Date(time), "HH:mm");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function updateAppointmentStatus(id, data) {
-    // dispatch(updateAppointment(id, data));
-    navigate(`examination/${id}`);
+  function updateAppointmentStatus(lbp, data) {
+    // dispatch(updateAppointment(lbp, data));
+    navigate(`examination/${lbp}`);
   }
   return (
     <div
-      key={`prop-${id}`}
+      key={`prop-${lbp}`}
       className={` ${appointmentStatus === "Trenutno" ? "isCurrently" : null}`}
-      onClick={() => updateAppointmentStatus(id, "Trenutno")}
+      onClick={() => updateAppointmentStatus(lbp, "Trenutno")}
     >
       <div className="d-flex flex-row align-items-center ">
         <div className="appTime">
@@ -30,10 +31,10 @@ const SingleAppointment = ({ props }) => {
         <div className="customContainer">
           <div className="d-flex flex-row justify-content-around appointment">
             <span className="text-dark text1">
-              {firstname} {lastname}
+              {ime} {prezime}
             </span>
             <span className="text2">
-              {age} {gender}
+              {age} {pol}
             </span>
             <div
               className={`badge flex-row text-white appointmentStatus ${

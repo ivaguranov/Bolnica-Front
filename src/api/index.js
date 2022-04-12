@@ -51,7 +51,8 @@ export const createExamination = (formData) => API.post("/demos", formData);
 
 // RECORDS
 
-export const fetchRecord = (id) => API.get(`/records/${id}`);
+export const fetchRecord = (lbp) =>
+  API.get(`/bolnica-management-service/api/fetch-zdravstveni-karton/${lbp}`);
 export const createRecord = (formData) =>
   API.post(`/bolnica-management-service/api/create-pregled-report`, formData);
 export const searchPatients = (searchValues) =>
@@ -77,6 +78,15 @@ export const fetchDepartments = () =>
 
 export const fetchPatients = () =>
   API.post(`/bolnica-management-service/api/filter-patients`, {});
+export const fetchPatient = (lbp) =>
+  API.get(`/bolnica-management-service/api/fetch-patient/${lbp}`);
 export const createPatient = (formData) =>
   API.post(`/bolnica-management-service/api/create-patient`, formData);
 export const deletePatient = (id) => API.delete(`/patients/${id}`);
+
+// DISEASES
+export const fetchDiseases = (lbp, data) =>
+  API.post(
+    `/bolnica-management-service/api/fetch-istorija-bolesti/${lbp}?page=1&size=5`,
+    data
+  );
