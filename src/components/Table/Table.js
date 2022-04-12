@@ -6,23 +6,37 @@ import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 const Table = (props) => {
   const { headers, tableContent, handleClick } = props;
 
-  const listHeaders = headers.map((header) => <th scope="col">{header}</th>);
+  const listHeaders = headers.map((header) => (
+    <th scope="col" key={header.key}>
+      {header.value}
+    </th>
+  ));
 
-  const listTable = tableContent.map((content, i) => (
-    <tr key={content.id}>
-      {Object.values(content).map((item) => (
-        <td>{item}</td>
-      ))}
+  const info = tableContent.map((content) => {
+    const entry = Object.entries(content).filter((item, index) => {
+      for (let i = 0; i < headers.length; i++) {
+        if (headers[i].key === item[0]) return item[1];
+      }
+      return false;
+    });
+    return entry;
+  });
+
+  const listTable = info.map((entry) => (
+    <tr key={entry}>
+      {entry.map((element) => {
+        return <td key={element}>{element[1]}</td>;
+      })}
       <td style={{ width: "15%" }}>
-        <button className="buttonIcon" onClick={() => handleClick(content.id)}>
+        <button className="buttonIcon" onClick={() => handleClick(entry.id)}>
           <ImBin />
         </button>
       </td>
     </tr>
   ));
   const numberOfItems = listTable.length;
-  const numberPerPage = 8;
-  const pageLimit = 3;
+  const numberPerPage = 6;
+  const pageLimit = 1;
   const numberOfPages = Math.ceil(numberOfItems / numberPerPage);
   const [currentPage, setCurrentPage] = useState(1);
   const trimStart = (currentPage - 1) * numberPerPage;

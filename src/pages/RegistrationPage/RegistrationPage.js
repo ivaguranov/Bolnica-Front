@@ -116,7 +116,7 @@ function RegistrationPage() {
     e.preventDefault();
     console.log({ ...form, department: 1 });
     dispatch(createEmployee({ ...form, department: 1 }));
-    navigate("/admin");
+    navigate("/admin/employee-preview");
   };
   return (
     <div style={{ marginLeft: "15%" }}>
@@ -242,7 +242,7 @@ function RegistrationPage() {
             name="title"
           >
             <option value="">Titula</option>
-            <option value="Prof. dr. med">Prof. dr. med.</option>
+            <option value="Prof. dr. med.">Prof. dr. med.</option>
             <option value="Dr med. spec.">Dr med. spec.</option>
             <option value="Dr. sci. med">Dr sci. med.</option>
             <option value="Dipl. farm.">Dipl. farm.</option>

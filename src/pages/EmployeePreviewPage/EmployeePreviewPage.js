@@ -24,6 +24,7 @@ const EmployeePreview = () => {
 
   const employees = useSelector((state) => state.employees);
   console.log(employees);
+
   const links = [
     {
       id: 1,
@@ -53,7 +54,7 @@ const EmployeePreview = () => {
     },
   ];
 
-  const linksHeader = {
+  const headerProps = {
     avatarUrl: "../nikolaSlika 1.jpg",
     welcomeMsg: "Dobro jutro",
     userName: "Dr. Paun",
@@ -63,51 +64,46 @@ const EmployeePreview = () => {
   };
 
   const headers = [
-    "ID",
-    "Ime",
-    "Prezime",
-    "Titula",
-    "Email",
-    "Zanimanje",
-    "Kontakt",
-    "Naziv odeljenja",
+    {
+      key: "name",
+      value: "Ime",
+    },
+    {
+      key: "surname",
+      value: "Prezime",
+    },
+    // {
+    //   key: "dob",
+    //   value: "Datum rodjenja",
+    // },
+    {
+      key: "lbz",
+      value: "LBZ",
+    },
+    {
+      key: "contact",
+      value: "Kontakt",
+    },
+    {
+      key: "email",
+      value: "Email",
+    },
+    {
+      key: "title",
+      value: "Titula",
+    },
+    {
+      key: "profession",
+      value: "Zanimanje",
+    },
+    {
+      key: "department",
+      value: "Odeljenje",
+    },
   ];
 
-  const tableContent = [
-    {
-      id: 0,
-      name: "Marija",
-      surname: "Markovic",
-      title: "Kursulina 49",
-      email: "Beograd",
-      profession: "Nesto",
-      contact: "0601234567",
-      department: "Neko odeljenje",
-    },
-    {
-      id: 1,
-      name: "Marija",
-      surname: "Markovic",
-      title: "Kursulina 49",
-      email: "Beograd",
-      profession: "Nesto",
-      contact: "0601234567",
-      department: "Neko odeljenje",
-    },
-    {
-      id: 2,
-      name: "Marija",
-      surname: "Markovic",
-      title: "Kursulina 49",
-      email: "Beograd",
-      profession: "Nesto",
-      contact: "0601234567",
-      department: "Neko odeljenje",
-    },
-  ];
   const handleClick = (id) => {
     console.log(id);
-    console.log("I have been clicked");
     dispatch(deleteEmployee(id));
   };
 
@@ -128,12 +124,12 @@ const EmployeePreview = () => {
 
       <div style={{ marginLeft: "15%" }}>
         <Header
-          avatarUrl={linksHeader.avatarUrl}
-          welcomeMsg={linksHeader.welcomeMsg}
-          userName={linksHeader.userName}
-          userTitle={linksHeader.userTitle}
-          day={linksHeader.day}
-          date={linksHeader.date}
+          avatarUrl={headerProps.avatarUrl}
+          welcomeMsg={headerProps.welcomeMsg}
+          userName={headerProps.userName}
+          userTitle={headerProps.userTitle}
+          day={headerProps.day}
+          date={headerProps.date}
         />
         <form className="example myInline">
           <input
@@ -151,11 +147,14 @@ const EmployeePreview = () => {
         <div>
           <h1 className="myTitle">Zaposleni</h1>
         </div>
-        <Table
-          headers={headers}
-          tableContent={tableContent}
-          handleClick={handleClick}
-        />
+        {employees && (
+          <Table
+            headers={headers}
+            tableContent={employees}
+            handleClick={handleClick}
+          />
+        )}
+
         <br />
       </div>
     </div>

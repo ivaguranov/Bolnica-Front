@@ -9,7 +9,6 @@ import * as api from "../../api/index.js";
 export const getEmployees = () => async (dispatch) => {
   try {
     const { data } = await api.fetchEmployees();
-    console.log(data);
     dispatch({ type: GET_EMPLOYEES, data });
   } catch (error) {
     console.log(error);

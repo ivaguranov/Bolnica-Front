@@ -92,7 +92,7 @@ function RegistrationPatientPage() {
     e.preventDefault();
     console.log(form);
     dispatch(createPatient({ ...form, pol: "MUSKI" }));
-    navigate("/nurse");
+    navigate("/nurse/patient-preview");
   };
   return (
     <div style={{ marginLeft: "15%" }}>
@@ -225,11 +225,11 @@ function RegistrationPatientPage() {
               Porodicni status
             </option>
             <option value="OBA_RODITELJA">Oba roditelja</option>
-            <option value="asdasd">Roditelj razdvojeni</option>
-            <option value="">Razvedni</option>
-            <option value="">Jedan roditelje</option>
-            <option value="">Bez roditelja</option>
-            <option value="">Usvojen</option>
+            <option value="RAZDVOJENI">Roditelj razdvojeni</option>
+            <option value="RAZVEDENI">Razvedeni</option>
+            <option value="JEDAN_RODITELJ">Jedan roditelje</option>
+            <option value="BEZ_RODITELJA">Bez roditelja</option>
+            <option value="USVOJEN">Usvojen</option>
           </select>
           <select
             className="form-select-custom small-select margin-left"
@@ -242,9 +242,10 @@ function RegistrationPatientPage() {
               Bracni status
             </option>
             <option value="U_BRAKU">U braku</option>
-            <option value="">Razvedeni</option>
-            <option value="">Udovac/udovica</option>
-            <option value="">Samac/samica</option>
+            <option value="UDOVAC">Udovac</option>
+            <option value="UDOVICA">Udovica</option>
+            <option value="SAMAC">Samac</option>
+            <option value="SAMICA">Samica</option>
           </select>
         </div>
         <div className="form-group-custom">
@@ -271,11 +272,13 @@ function RegistrationPatientPage() {
             <option value="" disabled>
               Stepen strucne spreme
             </option>
-            <option value="OSNOVNO">Bez osnovnog obrazovanja</option>
-            <option value="">Osnovno obrazovanje</option>
-            <option value="">Srednje obrazovanje</option>
-            <option value="">Vise obrazovanje</option>
-            <option value="">Visoko obrazovanje</option>
+            <option value="BEZ_OSNOVNOG_OBRAZOVANJA">
+              Bez osnovnog obrazovanja
+            </option>
+            <option value="OSNOVNO">Osnovno obrazovanje</option>
+            <option value="SREDNJE">Srednje obrazovanje</option>
+            <option value="VISE">Vise obrazovanje</option>
+            <option value="VISOKO">Visoko obrazovanje</option>
           </select>
         </div>
         <br></br>

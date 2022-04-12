@@ -11,6 +11,7 @@ import Header from "../../components/Header/Header";
 import {
   createAppointmentNurse,
   deleteAppointmentNurse,
+  getAppointments,
 } from "../../redux/actions/appointments";
 import DeleteAppointment from "../../components/DeleteAppointment/DeleteAppointment";
 import { getEmployees } from "../../redux/actions/employee";
@@ -20,6 +21,7 @@ const ScheduleAppointmentPage = () => {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees);
   const patients = useSelector((state) => state.patients);
+  const appointments = useSelector((state) => state.appointments);
   const [date, setDate] = useState(new Date());
   const [newAppointmentVisible, setNewAppointmentVisible] = useState(false);
   const [deleteAppointmentVisible, setDeleteAppointmentVisible] =
@@ -40,14 +42,19 @@ const ScheduleAppointmentPage = () => {
     dispatch(getEmployees());
     dispatch(getPatients());
   }, []);
+  useEffect(() => {
+    if (employees.length > 0) getAppointments(employees[0].lbz);
+  }, [employees]);
 
+  // eslint-disable-next-line no-extend-native
   Date.prototype.addHours = function (h) {
     this.setTime(this.getTime() + h * 60 * 60 * 1000);
     return this;
   };
 
-  const doctor = employees[0];
+  const selectedDoctor = employees[0];
   console.log(employees);
+  console.log(appointments);
 
   const links = [
     {
@@ -84,11 +91,9 @@ const ScheduleAppointmentPage = () => {
     },
   ];
 
-  const getDoctorAppointments = (id) => {
-    console.log(id);
+  const getDoctorAppointments = (lbz) => {
+    console.log(lbz);
   };
-
-  // if (doctors) getDoctorAppointments(doctors[0].id);
 
   const createNewAppointment = (doctorId, patientId, date, examinationType) => {
     const newEvent = {
@@ -126,29 +131,27 @@ const ScheduleAppointmentPage = () => {
       <div>
         <Sidebar links={links} />
       </div>
-      <Dropdown className="dropdownButton">
-        <Dropdown.Toggle variant="primary" id="dropdown-basic">
-          Dr. Paun
-        </Dropdown.Toggle>
+      {selectedDoctor && (
+        <Dropdown className="dropdownButton">
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Dr. {selectedDoctor.name}
+          </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          {/* {doctors.map((doctor) => {
-						return (
-							<Dropdown.Item
-								onClick={() => getDoctorAppointments(doctor.id)}
-							>
-								Dr. {doctor.name}
-							</Dropdown.Item>
-						);
-					})} */}
-          <Dropdown.Item onClick={() => getDoctorAppointments(1)}>
-            Dr. Prvi
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => getDoctorAppointments(2)}>
-            Dr. Drugi
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+          <Dropdown.Menu>
+            {employees.map((doctor) => {
+              if (doctor.lbz !== selectedDoctor.lbz)
+                return (
+                  <Dropdown.Item
+                    key={doctor.lbz}
+                    onClick={() => getDoctorAppointments(doctor.lbz)}
+                  >
+                    Dr. {doctor.name}
+                  </Dropdown.Item>
+                );
+            })}
+          </Dropdown.Menu>
+        </Dropdown>
+      )}
       <div style={{ marginLeft: "15%", height: "100vh" }}>
         <CustomCalendar
           events={events}
@@ -158,12 +161,12 @@ const ScheduleAppointmentPage = () => {
           setAppointmentIdDelete={setAppointmentIdDelete}
         />
       </div>
-      {newAppointmentVisible && doctor ? (
+      {newAppointmentVisible && selectedDoctor ? (
         <NewAppointment
           avatarUrl={"nikolaSlika 1.jpg"}
           userName={"Dr. Paun"}
           userTitle={"Kardiolog"}
-          doctorId={doctor.lbz}
+          doctorId={selectedDoctor.lbz}
           createNewAppointment={createNewAppointment}
           setNewAppointmentVisible={setNewAppointmentVisible}
           date={date}

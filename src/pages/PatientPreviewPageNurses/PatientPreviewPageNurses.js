@@ -22,8 +22,6 @@ const PatientPreviewNurses = () => {
   const patients = useSelector((state) => state.patients);
   const [value, setValue] = useState("");
 
-  console.log(patients);
-
   const links = [
     {
       id: 1,
@@ -68,136 +66,33 @@ const PatientPreviewNurses = () => {
     date: format(new Date(), "d MMMM, yyyy"),
   };
 
-  const headers = ["Name", "Surname", "Address", "City", "Contact"];
-
-  const tableContent = [
+  const headers = [
     {
-      name: "Marija",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
+      key: "ime",
+      value: "Ime",
     },
     {
-      name: "Marko",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
+      key: "prezime",
+      value: "Prezime",
     },
     {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
+      key: "kontaktTelefon",
+      value: "Kontakt",
     },
     {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
+      key: "email",
+      value: "Email",
     },
     {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
+      key: "zanimanje",
+      value: "Zanimanje",
     },
     {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
-    },
-    {
-      name: "Dejan",
-      surname: "Markovic",
-      address: "Kursulina 49",
-      city: "Beograd",
-      contact: "0601234567",
+      key: "lbp",
+      value: "LBP",
     },
   ];
+
   const handleClick = (id) => {
     dispatch(deletePatient(id));
     console.log("I have been clicked");
@@ -241,11 +136,13 @@ const PatientPreviewNurses = () => {
         <div>
           <h1 className="myTitle">Pacijenti</h1>
         </div>
-        <Table
-          headers={headers}
-          tableContent={tableContent}
-          handleClick={handleClick}
-        />
+        {patients && (
+          <Table
+            headers={headers}
+            tableContent={patients}
+            handleClick={handleClick}
+          />
+        )}
         <br />
       </div>
     </div>

@@ -67,13 +67,11 @@ const NewAppointment = (props) => {
             </option>
             {patients.map((patient) => {
               return (
-                <option value={patient.lbp}>
+                <option key={patient.lbp} value={patient.lbp}>
                   {patient.ime} {patient.prezime}
                 </option>
               );
             })}
-            <option value="2">Pacijent 2</option>
-            <option value="3">Pacijent 3</option>
           </FormSelect>
         </div>
         <div className="dropdown3">

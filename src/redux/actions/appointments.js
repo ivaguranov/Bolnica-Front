@@ -5,9 +5,9 @@ import {
 } from "../actionTypes";
 import * as api from "../../api/index.js";
 
-export const getAppointments = (id) => async (dispatch) => {
+export const getAppointments = (lbz) => async (dispatch) => {
   try {
-    const { data } = await api.fetchAppointments(id);
+    const { data } = await api.fetchAppointments(lbz);
     dispatch({ type: GET_APPOINTMENTS, data });
   } catch (error) {
     console.log(error);
