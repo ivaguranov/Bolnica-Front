@@ -38,11 +38,10 @@ export const createPatient = (formData) => async (dispatch) => {
   }
 };
 
-export const deletePatient = (id) => async (dispatch) => {
+export const deletePatient = (lbp) => async (dispatch) => {
   try {
-    console.log("CAO");
-    await api.deletePatient(id);
-    dispatch({ type: DELETE_PATIENT, id });
+    await api.deletePatient(lbp);
+    dispatch({ type: DELETE_PATIENT, lbp });
   } catch (error) {
     console.log(error);
   }

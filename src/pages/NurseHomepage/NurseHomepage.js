@@ -27,7 +27,7 @@ const NurseHomepage = () => {
       icon: <BiCalendarPlus />,
     },
     {
-      id: 3,
+      id: 4,
       text: "Nov pacijent",
       path: "/nurse/register-patient",
       icon: <FaPlusCircle />,

@@ -3,7 +3,6 @@ import * as api from "../../api/index.js";
 
 export const getAppointments = (lbz) => async (dispatch) => {
   try {
-    console.log({ lbz });
     const { data } = await api.fetchAppointments({ lbz });
     dispatch({ type: GET_APPOINTMENTS, data });
   } catch (error) {

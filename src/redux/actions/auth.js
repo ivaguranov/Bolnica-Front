@@ -32,7 +32,6 @@ export const resetUser = () => async (dispatch) => {
   try {
     const data = localStorage.getItem("token");
     const user = jwt(data);
-    console.log(user);
     dispatch({ type: LOGIN, payload: user });
   } catch (error) {
     console.log(error);

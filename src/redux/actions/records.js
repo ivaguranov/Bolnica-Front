@@ -1,10 +1,10 @@
-import { CREATE_RECORD, GET_RECORD } from "../actionTypes";
+import { CREATE_RECORD, GET_RECORDS } from "../actionTypes";
 import * as api from "../../api/index.js";
 
 export const getRecord = (lbp) => async (dispatch) => {
   try {
     const { data } = await api.fetchRecord(lbp);
-    dispatch({ type: GET_RECORD, data });
+    dispatch({ type: GET_RECORDS, data });
   } catch (error) {
     console.log(error);
   }

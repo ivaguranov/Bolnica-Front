@@ -34,11 +34,10 @@ export const searchEmployees = (searchValue) => async (dispatch) => {
   }
 };
 
-export const deleteEmployee = (id) => async (dispatch) => {
+export const deleteEmployee = (lbz) => async (dispatch) => {
   try {
-    console.log("CAO");
-    await api.deleteEmployee(id);
-    dispatch({ type: DELETE_EMPLOYEE, id });
+    await api.deleteEmployee(lbz);
+    dispatch({ type: DELETE_EMPLOYEE, lbz });
   } catch (error) {
     console.log(error);
   }

@@ -67,7 +67,8 @@ export const searchEmployees = (searchValues) =>
   API.post("/employees", searchValues);
 export const createEmployee = (formData) =>
   API.post(`/bolnica-user-service/api/create-employee`, formData);
-export const deleteEmployee = (id) => API.delete(`/employees/${id}`);
+export const deleteEmployee = (lbz) =>
+  API.delete(`/bolnica-user-service/api/remove-employee/${lbz}`);
 
 // DEPARTMENTS
 
@@ -82,7 +83,8 @@ export const fetchPatient = (lbp) =>
   API.get(`/bolnica-management-service/api/fetch-patient/${lbp}`);
 export const createPatient = (formData) =>
   API.post(`/bolnica-management-service/api/create-patient`, formData);
-export const deletePatient = (id) => API.delete(`/patients/${id}`);
+export const deletePatient = (lbp) =>
+  API.delete(`/bolnica-management-service/api/remove-patient/${lbp}`);
 
 // DISEASES
 export const fetchDiseases = (lbp, data) =>

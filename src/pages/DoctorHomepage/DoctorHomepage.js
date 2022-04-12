@@ -16,14 +16,12 @@ import { useNavigate } from "react-router";
 const DoctorHomepage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const doctor = useSelector((state) => state.loggedUser);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
       const doctor = JSON.parse(localStorage.getItem("loggedUser"));
-      console.log(doctor);
       dispatch(resetUser());
       dispatch(getAppointments(doctor.LBZ));
       dispatch(getPatients());
@@ -32,8 +30,6 @@ const DoctorHomepage = () => {
 
   const appointments = useSelector((state) => state.appointments);
   const patients = useSelector((state) => state.patients);
-
-  console.log(patients);
 
   const links = [
     {

@@ -102,9 +102,8 @@ const EmployeePreview = () => {
     },
   ];
 
-  const handleClick = (id) => {
-    console.log(id);
-    dispatch(deleteEmployee(id));
+  const handleClick = (lbz) => {
+    dispatch(deleteEmployee(lbz));
   };
 
   function handleOnChange(event) {
@@ -152,6 +151,7 @@ const EmployeePreview = () => {
             headers={headers}
             tableContent={employees}
             handleClick={handleClick}
+            tableType="employees"
           />
         )}
 

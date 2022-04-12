@@ -39,12 +39,12 @@ const PatientExamination = () => {
   const examinations = useSelector((state) => state.examinations);
   const record = useSelector((state) => state.records);
   const diseases = useSelector((state) => state.diseases);
-  console.log(examinations);
-  console.log(doctor);
-  console.log(record);
-  console.log(diseases);
+  // console.log(examinations);
+  // console.log(doctor);
+  // console.log(record);
+  // console.log(diseases);
 
-  if (lbp) console.log(lbp);
+  // if (lbp) console.log(lbp);
 
   const links = [
     {
@@ -114,15 +114,15 @@ const PatientExamination = () => {
           </Button>
         </div>
         <div className="main">
-          {record.length > 0 && examinations && diseases ? (
+          {record.pacijent && examinations && diseases ? (
             isExamination ? (
               <ExaminationForm
                 saveExamination={saveExamination}
-                record={record[0]}
+                record={record}
               />
             ) : (
               <MedicalRecord
-                record={record[0]}
+                record={record}
                 diseases={diseases}
                 examinations={examinations}
               />

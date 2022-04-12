@@ -93,10 +93,11 @@ const PatientPreviewNurses = () => {
     },
   ];
 
-  const handleClick = (id) => {
-    dispatch(deletePatient(id));
-    console.log("I have been clicked");
+  const handleClick = (lbp) => {
+    dispatch(deletePatient(lbp));
+    console.log("I have been clicked", lbp);
   };
+
   function handleOnChange(event) {
     setValue(event.target.value);
   }
@@ -141,6 +142,7 @@ const PatientPreviewNurses = () => {
             headers={headers}
             tableContent={patients}
             handleClick={handleClick}
+            tableType="patients"
           />
         )}
         <br />

@@ -3,8 +3,8 @@ import Table from "../Table/Table";
 import { Button } from "reactstrap";
 
 const MedicalRecord = ({ record, diseases, examinations }) => {
-  const dummyDate = new Date();
-  const stringDate = dummyDate.toLocaleDateString();
+  const dob = new Date(record.pacijent.datumRodjenja);
+  const stringDate = dob.toLocaleDateString();
   const [isExamination, setIsExamination] = useState(true);
 
   const alergies = ["polen", "macja dlaka", "mleko"];
@@ -66,16 +66,20 @@ const MedicalRecord = ({ record, diseases, examinations }) => {
       <div>
         <div className="patient-info-custom">
           <div className="patient-personal-info">
-            <p className="patient-info-text">Ime: Pacijent</p>
-            <p className="patient-info-text">Prezime: Pacijentic</p>
+            <p className="patient-info-text">Ime: {record.pacijent.ime}</p>
+            <p className="patient-info-text">
+              Prezime: {record.pacijent.prezime}
+            </p>
             <p className="patient-info-text">Datum rodjena: {stringDate}</p>
             <p className="patient-info-text">
               Alergije: {alergies.map((alergy) => `${alergy} `)}
             </p>
           </div>
           <div className="patient-other-info">
-            <p className="patient-info-text">Krvna grupa: AB</p>
-            <p className="patient-info-text">RH faktor: +</p>
+            <p className="patient-info-text">
+              Krvna grupa: {record.krvnaGrupa}
+            </p>
+            <p className="patient-info-text">RH faktor: {record.rhFaktor}</p>
             <p className="patient-info-text">
               Vakcine: {vaccines.map((vaccine) => `${vaccine} `)}
             </p>
@@ -99,6 +103,7 @@ const MedicalRecord = ({ record, diseases, examinations }) => {
             headers={headers}
             tableContent={examinations}
             handleClick={handleClick}
+            tableType="examinations"
           />
         </>
       ) : diseases.length > 0 ? (
@@ -118,6 +123,7 @@ const MedicalRecord = ({ record, diseases, examinations }) => {
             headers={headers2}
             tableContent={diseases}
             handleClick={handleClick}
+            tableType="diseases"
           />
         </>
       ) : (
