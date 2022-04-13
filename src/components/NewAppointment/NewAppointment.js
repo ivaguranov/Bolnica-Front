@@ -14,10 +14,13 @@ const NewAppointment = (props) => {
     patients,
   } = props;
 
+  const [comment, setComment] = useState("");
+  const [isComment, setIsComment] = useState(false);
   const [examinationType, setVal] = useState("");
   const [patientId, setPatientId] = useState("");
 
-  console.log(date);
+  const handleChange = (e) => setComment(e.target.value);
+
   const dateString = date.toLocaleString();
   return (
     <div className="new-appointment-container">
@@ -26,19 +29,33 @@ const NewAppointment = (props) => {
         <hr className="break-line" />
         <div className="new-appointment-doctor">
           <div className="doctor-container">
-            <div className="avatar-container">
+            {/* <div className="avatar-container">
               <img className="user-avatar" src={avatarUrl} alt={userName} />
-            </div>
+            </div> */}
             <div className="name-container">
               <p className="user-name">{userName}</p>
               <p className="user-title">{userTitle}</p>
             </div>
           </div>
           <div className="btn-container">
-            <button className="comment-btn">Dodaj komentar</button>
+            <button
+              onClick={() => setIsComment(!isComment)}
+              className="comment-btn"
+            >
+              {!isComment ? "Dodaj komentar" : "Ukloni komentar"}
+            </button>
           </div>
         </div>
       </div>
+      {isComment && (
+        <textarea
+          style={{ width: "60%" }}
+          placeholder="Komentar"
+          onChange={handleChange}
+          name="surname"
+          type="text"
+        />
+      )}
       <div className="new-appointment-body">
         <div className="dropdown1">
           <p className="reason-p">Razlog pregleda</p>
@@ -89,7 +106,13 @@ const NewAppointment = (props) => {
         <button
           className="my-save-btn"
           onClick={() =>
-            createNewAppointment(doctorId, patientId, date, examinationType)
+            createNewAppointment(
+              doctorId,
+              patientId,
+              date,
+              examinationType,
+              comment
+            )
           }
         >
           Sačuvaj

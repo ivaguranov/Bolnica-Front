@@ -26,7 +26,7 @@ const ScheduleAppointmentPage = () => {
   const [newAppointmentVisible, setNewAppointmentVisible] = useState(false);
   const [deleteAppointmentVisible, setDeleteAppointmentVisible] =
     useState(false);
-  const [currentDoctor, setCurrentDoctor] = useState(1);
+  const [selectedDoctor, setSelectedDoctor] = useState({});
   const [appointmentIdDelete, setAppointmentIdDelete] = useState(1);
   const [events, setEvents] = useState([
     {
@@ -42,8 +42,12 @@ const ScheduleAppointmentPage = () => {
     dispatch(getEmployees());
     dispatch(getPatients());
   }, []);
+
   useEffect(() => {
-    if (employees.length > 0) getAppointments(employees[0].lbz);
+    if (employees.length > 0) {
+      setSelectedDoctor(employees[0]);
+      getAppointments(employees[0].lbz);
+    }
   }, [employees]);
 
   // eslint-disable-next-line no-extend-native
@@ -51,10 +55,6 @@ const ScheduleAppointmentPage = () => {
     this.setTime(this.getTime() + h * 60 * 60 * 1000);
     return this;
   };
-
-  const selectedDoctor = employees[0];
-  console.log(employees);
-  console.log(appointments);
 
   const links = [
     {
@@ -92,10 +92,18 @@ const ScheduleAppointmentPage = () => {
   ];
 
   const getDoctorAppointments = (lbz) => {
-    console.log(lbz);
+    const newDoctor = employees.find((doctor) => doctor.lbz === lbz);
+    setSelectedDoctor(newDoctor);
+    // dispatch(getAppointments(lbz));
   };
 
-  const createNewAppointment = (doctorId, patientId, date, examinationType) => {
+  const createNewAppointment = (
+    doctorId,
+    patientId,
+    date,
+    examinationType,
+    note
+  ) => {
     const newEvent = {
       id: events.length + 1,
       startAt: date.toISOString(),
@@ -112,7 +120,7 @@ const ScheduleAppointmentPage = () => {
         examinationEmployeeId: doctorId,
         patient: patientId,
         dateAndTimeOfAppointment: date.toISOString(),
-        note: "",
+        note,
         // examinationType,
       })
     );
@@ -120,7 +128,6 @@ const ScheduleAppointmentPage = () => {
 
   const deleteAppointment = () => {
     setDeleteAppointmentVisible(false);
-    //delete event from list
     dispatch((appointmentIdDelete) =>
       deleteAppointmentNurse({ appointmentIdDelete })
     );
@@ -164,7 +171,7 @@ const ScheduleAppointmentPage = () => {
       {newAppointmentVisible && selectedDoctor ? (
         <NewAppointment
           avatarUrl={"nikolaSlika 1.jpg"}
-          userName={"Dr. Paun"}
+          userName={`Dr. ${selectedDoctor.name}`}
           userTitle={"Kardiolog"}
           doctorId={selectedDoctor.lbz}
           createNewAppointment={createNewAppointment}

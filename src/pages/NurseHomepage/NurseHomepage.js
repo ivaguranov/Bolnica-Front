@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaHome, FaUserInjured, FaUser, FaPlusCircle } from "react-icons/fa";
 import { BiCalendarPlus } from "react-icons/bi";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import HeaderNurse from "../../components/HeaderNurse/HeaderNurse";
 import ScheduledAppointmentsNurse from "../../components/ScheduledAppointmentsNurse/ScheduledAppointmentsNurse";
+import { useDispatch, useSelector } from "react-redux";
+import { getEmployees } from "../../redux/actions/employee";
+import { getPatients } from "../../redux/actions/patient";
+import { getAppointments } from "../../redux/actions/appointment";
 
 const NurseHomepage = () => {
+  const dispatch = useDispatch();
+  const [selectedDoctor, setSelectedDoctor] = useState({});
+  const employees = useSelector((state) => state.employees);
+  const patients = useSelector((state) => state.patients);
+
+  useEffect(() => {
+    dispatch(getEmployees());
+    dispatch(getPatients());
+  }, []);
+
+  useEffect(() => {
+    setSelectedDoctor(employees[0]);
+  }, [employees]);
+
   const links = [
     {
       id: 1,
@@ -46,17 +64,28 @@ const NurseHomepage = () => {
     userTitle: "Med sestra",
   };
 
+  const getDoctorAppointments = (lbz) => {
+    const newDoctor = employees.find((doctor) => doctor.lbz === lbz);
+    setSelectedDoctor(newDoctor);
+    // dispatch(getAppointments(lbz));
+  };
+
   return (
     <>
       <div className="sidebar-link-container">
         <Sidebar links={links} />
       </div>
       <div style={{ marginLeft: "15%" }}>
-        <HeaderNurse
-          userName={headerProps.userName}
-          userTitle={headerProps.userTitle}
-        />
-        <ScheduledAppointmentsNurse />
+        {employees && selectedDoctor && (
+          <HeaderNurse
+            employees={employees}
+            selectedDoctor={selectedDoctor}
+            userName={headerProps.userName}
+            userTitle={headerProps.userTitle}
+            getDoctorAppointments={getDoctorAppointments}
+          />
+        )}
+        {patients && <ScheduledAppointmentsNurse patients={patients} />}
       </div>
     </>
   );

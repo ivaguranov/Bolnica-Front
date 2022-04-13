@@ -1,9 +1,25 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { logout } from "../../redux/actions/auth";
 import "./styles.css";
 
 const HeaderNurse = (props) => {
-  const { userName, userTitle } = props;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {
+    userName,
+    userTitle,
+    employees,
+    getDoctorAppointments,
+    selectedDoctor,
+  } = props;
+
+  const logoutUser = () => {
+    dispatch(logout(navigate));
+  };
 
   return (
     <div className="containerCustom">
@@ -14,27 +30,23 @@ const HeaderNurse = (props) => {
             id="dropdown-basic"
             className="dropdownToggle toggleButton"
           >
-            Dr. Paun
+            Dr. {selectedDoctor.name}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            {/* {doctors.map((doctor) => {
-						return (
-							<Dropdown.Item
-								onClick={() => getDoctorAppointments(doctor.id)}
-							>
-								Dr. {doctor.name}
-							</Dropdown.Item>
-						);
-					})} */}
-            {/*             <Dropdown.Item onClick={() => getDoctorAppointments(1)}>
-              Dr. Prvi
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => getDoctorAppointments(2)}>
-              Dr. Drugi
-            </Dropdown.Item> */}
-            <Dropdown.Item>Dr. Prvi</Dropdown.Item>
-            <Dropdown.Item>Dr. Drugi</Dropdown.Item>
+            {employees.map((doctor) => {
+              if (doctor.lbz !== selectedDoctor.lbz) {
+                return (
+                  <Dropdown.Item
+                    key={doctor.lbz}
+                    onClick={() => getDoctorAppointments(doctor.lbz)}
+                  >
+                    Dr. {doctor.name}
+                  </Dropdown.Item>
+                );
+              }
+              return <></>;
+            })}
           </Dropdown.Menu>
         </Dropdown>
       </div>
@@ -44,7 +56,9 @@ const HeaderNurse = (props) => {
           <p className="user-title">{userTitle}</p>
         </div>
         <div className="button-container">
-          <button className="logout-btn">Logout</button>
+          <button onClick={logoutUser} className="logout-btn">
+            Logout
+          </button>
         </div>
       </div>
     </div>
