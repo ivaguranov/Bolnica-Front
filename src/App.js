@@ -13,6 +13,7 @@ import AdminHomepage from "./pages/AdminHomepage/AdminHomepage";
 import PatientExamination from "./pages/PatientExaminationPage/PatientExaminationPage";
 import ScheduleAppointmentPage from "./pages/ScheduleAppointmentPage/ScheduleAppointmentPage";
 import EditEmployeePage from "./pages/EditEmployeePage/EditEmployeePage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 const App = () => {
   return (
@@ -21,8 +22,9 @@ const App = () => {
         {/* DEMO */}
         <Route path="/demo-page" exact element={<DemoPage />} />
 
-        {/* AUTH */}
+        {/* GENERAL */}
         <Route path="/login" exact element={<LoginPage />} />
+        <Route path="/profile" exact element={<ProfilePage />} />
 
         {/* DOCTOR ROUTES */}
         <Route path="/" exact element={<DoctorHomepage />} />

@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router";
 import { FaHome, FaUserNurse, FaPlusCircle, FaUser } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { updateEmployee, getEmployee } from "../../redux/actions/employee";
+import { ImPencil } from "react-icons/im";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const initialState = {
   name: "",
@@ -25,21 +27,21 @@ const initialState = {
 };
 
 function EditEmployeePage() {
-  const location = useLocation();
   const dispatch = useDispatch();
-  const [lbz, setLbz] = useState();
+  const [employee, setEmployee] = useState();
+  const [editable, setEditable] = useState(false);
   const navigate = useNavigate();
-  const employee = useSelector((state) => state.employees);
   const [form, setForm] = useState(initialState);
 
   useEffect(() => {
-    const pathParts = location.pathname.split("/");
-    setLbz(pathParts[pathParts.length - 1]);
-    dispatch(getEmployee(pathParts[pathParts.length - 1]));
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    if (loggedUser) {
+      setEmployee(loggedUser);
+    } else navigate("/login");
   }, []);
 
   useEffect(() => {
-    if (employee.length !== 0) {
+    if (employee) {
       const dateOfBirth = new Date(employee.dob);
       var day = ("0" + dateOfBirth.getDate()).slice(-2);
       var month = ("0" + (dateOfBirth.getMonth() + 1)).slice(-2);
@@ -55,7 +57,7 @@ function EditEmployeePage() {
         profession: employee.profession,
         title: employee.title,
         contact: employee.contact,
-        gender: "male",
+        gender: employee.gender,
         dob: today,
         department: employee.department,
         newPassword: "",
@@ -140,6 +142,11 @@ function EditEmployeePage() {
     });
   };
 
+  const nesto = (e) => {
+    e.preventDefault();
+    setEditable(!editable);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ ...form, department: 1 });
@@ -149,7 +156,7 @@ function EditEmployeePage() {
         department: 1,
         newPassword: "",
         oldPassword: "",
-        lbz,
+        lbz: employee.lbz,
       })
     );
     navigate("/admin/employee-preview");
@@ -161,8 +168,23 @@ function EditEmployeePage() {
       </div>
       {employee && (
         <form onSubmit={handleSubmit} className="form-custom">
-          <h1 className="form-heading">Izmena zaposlenog</h1>
-          <br></br>
+          <h1 className="form-heading">Profil</h1>
+          <p className="form-section-heading">
+            Podaci{" "}
+            <button className="buttonIconBlue" onClick={nesto}>
+              {editable ? (
+                <>
+                  {" "}
+                  Pregled podataka <AiOutlineCloseCircle />
+                </>
+              ) : (
+                <>
+                  {" "}
+                  Izmeni <ImPencil />
+                </>
+              )}
+            </button>
+          </p>
           <div className="form-group-custom">
             <input
               className="margin-right"
@@ -171,6 +193,7 @@ function EditEmployeePage() {
               name="name"
               type="text"
               value={form.name}
+              disabled={!editable}
             />
             <input
               className="margin-left"
@@ -179,6 +202,7 @@ function EditEmployeePage() {
               name="surname"
               type="text"
               value={form.surname}
+              disabled={!editable}
             />
           </div>
           <div className="form-group-custom">
@@ -188,6 +212,7 @@ function EditEmployeePage() {
               onChange={handleChange}
               name="email"
               value={form.email}
+              disabled={!editable}
             />
           </div>
           <div className="form-group-custom">
@@ -199,6 +224,7 @@ function EditEmployeePage() {
               name="dob"
               className="margin-right"
               value={form.dob}
+              disabled={!editable}
             />
             <input
               type="text"
@@ -207,6 +233,7 @@ function EditEmployeePage() {
               name="address"
               className="margin-left margin-right"
               value={form.address}
+              disabled={!editable}
             />
             <input
               type="text"
@@ -215,6 +242,7 @@ function EditEmployeePage() {
               name="city"
               className="margin-left"
               value={form.city}
+              disabled={!editable}
             />
           </div>
           <div className="form-group-custom">
@@ -225,6 +253,7 @@ function EditEmployeePage() {
               name="contact"
               className="margin-right"
               value={form.contact}
+              disabled={!editable}
             />
             <input
               className="margin-left"
@@ -233,6 +262,7 @@ function EditEmployeePage() {
               onChange={handleChange}
               name="jmbg"
               value={form.jmbg}
+              disabled={!editable}
             />
           </div>
           <div className="form-group-custom">
@@ -242,6 +272,7 @@ function EditEmployeePage() {
               aria-label="Default select example"
               name="title"
               value={form.title}
+              disabled={!editable}
             >
               <option value="">Titula</option>
               <option value="Prof. dr. med.">Prof. dr. med.</option>
@@ -257,6 +288,7 @@ function EditEmployeePage() {
               aria-label="Default select example"
               name="profession"
               value={form.profession}
+              disabled={!editable}
             >
               <option value="">Zanimanje</option>
               <option value="Med. sestra">Med. sestra</option>
@@ -281,6 +313,7 @@ function EditEmployeePage() {
               aria-label="Default select example"
               name="department"
               value={form.department}
+              disabled={!editable}
             >
               <option value="" disabled>
                 Odeljenje
@@ -294,35 +327,8 @@ function EditEmployeePage() {
               })}
             </select>
           </div>
-          <div className="form-group-custom">
-            <div className="wrapper">
-              <input
-                type="radio"
-                name="gender"
-                id="option-1"
-                value="male"
-                onChange={handleChange}
-                checked
-              />
-              <input
-                type="radio"
-                name="gender"
-                value="female"
-                id="option-2"
-                onChange={handleChange}
-              />
-              <label htmlFor="option-1" className="option option-1">
-                <div className="dot"></div>
-                <span>Muski pol</span>
-              </label>
-              <label htmlFor="option-2" className="option option-2">
-                <div className="dot"></div>
-                <span>Zenski pol</span>
-              </label>
-            </div>
-          </div>
           <br></br>
-          <button onClick={handleSubmit}>Izmeni zaposlenog</button>
+          <button onClick={handleSubmit}>Izmeni profil</button>
         </form>
       )}
     </div>
