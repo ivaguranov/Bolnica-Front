@@ -1,20 +1,15 @@
 import React from "react";
 import "./styles.css";
 import { format } from "date-fns";
-import { updateAppointment } from "../../redux/actions/appointment";
 import { useDispatch } from "react-redux";
 
-const SingleAppointmentNurse = ({ props }) => {
+const SingleAppointmentNurse = ({ props, updateAppointmentStatus }) => {
   const { id, firstname, lastname, dob, gender, time } = props;
 
   let age = format(new Date(), "yyyy") - format(dob, "yyyy");
   let appointTime = format(new Date(time), "HH:mm");
 
   const dispatch = useDispatch();
-
-  function updateAppointmentStatus(id, data) {
-    dispatch(updateAppointment(id, data));
-  }
 
   return (
     <div key={`prop-${id}`} className="customClass">
@@ -34,7 +29,7 @@ const SingleAppointmentNurse = ({ props }) => {
               <button
                 type="button"
                 className="btn customButton1"
-                onClick={() => updateAppointmentStatus(id, "Ceka")}
+                onClick={() => updateAppointmentStatus(id, "ZAKAZANO")}
               >
                 Čeka
               </button>
@@ -44,7 +39,7 @@ const SingleAppointmentNurse = ({ props }) => {
               <button
                 type="button"
                 className="btn customButton3"
-                onClick={() => updateAppointmentStatus(id, "Otkazano")}
+                onClick={() => updateAppointmentStatus(id, "OTKAZANO")}
               >
                 Otkazano
               </button>

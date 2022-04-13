@@ -10,13 +10,14 @@ export const getAppointments = (lbz) => async (dispatch) => {
   }
 };
 
-export const updateAppointment = (id, appointment) => async (dispatch) => {
+export const updateAppointment = (appointmentData) => async (dispatch) => {
   try {
-    console.log(id);
-    console.log(appointment);
-
-    const { data } = await api.updateAppointment(id, appointment);
-    dispatch({ type: UPDATE_APPOINTMENT, id, data });
+    const { data } = await api.updateAppointment(appointmentData);
+    dispatch({
+      type: UPDATE_APPOINTMENT,
+      id: appointmentData.appointmentId,
+      data,
+    });
   } catch (error) {
     console.log(error);
   }

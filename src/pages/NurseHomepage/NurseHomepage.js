@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEmployees } from "../../redux/actions/employee";
 import { getPatients } from "../../redux/actions/patient";
 import { getAppointments } from "../../redux/actions/appointment";
+import { updateAppointment } from "../../redux/actions/appointment";
 
 const NurseHomepage = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,10 @@ const NurseHomepage = () => {
     // dispatch(getAppointments(lbz));
   };
 
+  const updateAppointmentStatus = (appointmentId, appointmentStatus) => {
+    dispatch(updateAppointment({ appointmentId, appointmentStatus }));
+  };
+
   return (
     <>
       <div className="sidebar-link-container">
@@ -85,7 +90,12 @@ const NurseHomepage = () => {
             getDoctorAppointments={getDoctorAppointments}
           />
         )}
-        {patients && <ScheduledAppointmentsNurse patients={patients} />}
+        {patients && (
+          <ScheduledAppointmentsNurse
+            patients={patients}
+            updateAppointmentStatus={updateAppointmentStatus}
+          />
+        )}
       </div>
     </>
   );

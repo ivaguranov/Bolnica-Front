@@ -35,8 +35,8 @@ export const createAppointmentNurse = (data) =>
   API.post("/bolnica-management-service/api/set-appointment", data);
 export const deleteAppointmentNurse = (id) => API.delete(`/demos/${id}`);
 
-export const updateAppointment = (id, data) =>
-  API.put(`/appointment/${id}`, data);
+export const updateAppointment = (data) =>
+  API.put(`/bolnica-management-service/api/update-appointment-status`, data);
 
 // EXAMINATIONS
 
