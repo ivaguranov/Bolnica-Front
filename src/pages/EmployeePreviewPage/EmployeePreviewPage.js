@@ -13,9 +13,11 @@ import "./styles.css";
 import { FaHome, FaUserNurse, FaPlusCircle, FaUser } from "react-icons/fa";
 import { BiSearchAlt } from "react-icons/bi";
 import { deletePatient } from "../../redux/actions/patient";
+import { useNavigate } from "react-router";
 
 const EmployeePreview = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getEmployees());
   }, []);
@@ -106,6 +108,10 @@ const EmployeePreview = () => {
     dispatch(deleteEmployee(lbz));
   };
 
+  const handleEdit = (lbz) => {
+    navigate(`/admin/edit-employee/${lbz}`);
+  };
+
   function handleOnChange(event) {
     setValue(event.target.value);
   }
@@ -146,15 +152,15 @@ const EmployeePreview = () => {
         <div>
           <h1 className="myTitle">Zaposleni</h1>
         </div>
-        {employees && (
+        {employees.length > 0 && (
           <Table
             headers={headers}
             tableContent={employees}
             handleClick={handleClick}
+            handleEdit={handleEdit}
             tableType="employees"
           />
         )}
-
         <br />
       </div>
     </div>

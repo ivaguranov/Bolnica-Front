@@ -12,6 +12,7 @@ import NurseHomepage from "./pages/NurseHomepage/NurseHomepage";
 import AdminHomepage from "./pages/AdminHomepage/AdminHomepage";
 import PatientExamination from "./pages/PatientExaminationPage/PatientExaminationPage";
 import ScheduleAppointmentPage from "./pages/ScheduleAppointmentPage/ScheduleAppointmentPage";
+import EditEmployeePage from "./pages/EditEmployeePage/EditEmployeePage";
 
 const App = () => {
   return (
@@ -57,6 +58,11 @@ const App = () => {
           path="/admin/register-employee"
           exact
           element={<RegistrationPage />}
+        />
+        <Route
+          path="/admin/edit-employee/:lbz"
+          exact
+          element={<EditEmployeePage />}
         />
       </Routes>
     </BrowserRouter>

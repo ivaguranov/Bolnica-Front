@@ -34,6 +34,12 @@
   color: #ff6760;
 }
 
+.buttonIconBlue {
+  border: 0px;
+  background: transparent;
+  color: #336cfb;
+}
+
 .myIcon {
   color: #336cfb;
 }

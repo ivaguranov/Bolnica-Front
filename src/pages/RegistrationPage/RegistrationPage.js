@@ -20,6 +20,7 @@ const initialState = {
   gender: "male",
   dob: "",
   department: "",
+  username: "",
   //   privilege: "",
 };
 
@@ -144,18 +145,19 @@ function RegistrationPage() {
         </div>
         <div className="form-group-custom">
           <input
+            placeholder="Korisnicko ime"
+            type="text"
+            onChange={handleChange}
+            name="username"
+            className="margin-right"
+          />
+          <input
             type="email"
             placeholder="Email"
             onChange={handleChange}
             name="email"
-          />
-          {/* <input
-            placeholder="Lozinka"
-            type="password"
-            onChange={handleChange}
-            name="password"
             className="margin-left"
-          /> */}
+          />
         </div>
         <div className="form-group-custom">
           <input

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./styles.css";
-import { ImBin } from "react-icons/im";
+import { ImBin, ImPencil } from "react-icons/im";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Table = (props) => {
-  const { headers, tableContent, handleClick, tableType } = props;
+  const { headers, tableContent, handleClick, tableType, handleEdit } = props;
   const listHeaders = headers.map((header) => (
     <th scope="col" key={header.key}>
       {header.value}
@@ -15,6 +15,12 @@ const Table = (props) => {
     console.log(key, entry);
     const value = entry.filter((element) => element[0] === key);
     handleClick(value[0][1]);
+  };
+
+  const handleEditButton = (key, entry) => {
+    console.log(key, entry);
+    const value = entry.filter((element) => element[0] === key);
+    handleEdit(value[0][1]);
   };
 
   const info = tableContent.map((content) => {
@@ -38,22 +44,29 @@ const Table = (props) => {
       })}
       {tableType === "patients" ? (
         <td style={{ width: "5%" }}>
-          <button
-            className="buttonIcon"
-            onClick={() => handleButton("lbp", entry)}
-          >
+          <button className="buttonIcon" onClick={() => handleButton("lbp")}>
             <ImBin />
           </button>
         </td>
       ) : tableType === "employees" ? (
-        <td style={{ width: "5%" }}>
-          <button
-            className="buttonIcon"
-            onClick={() => handleButton("lbz", entry)}
-          >
-            <ImBin />
-          </button>
-        </td>
+        <>
+          <td style={{ width: "5%" }}>
+            <button
+              className="buttonIconBlue"
+              onClick={() => handleEditButton("lbz", entry)}
+            >
+              <ImPencil />
+            </button>
+          </td>
+          <td style={{ width: "5%" }}>
+            <button
+              className="buttonIcon"
+              onClick={() => handleButton("lbz", entry)}
+            >
+              <ImBin />
+            </button>
+          </td>
+        </>
       ) : (
         <></>
       )}
