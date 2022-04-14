@@ -2,31 +2,45 @@ import {
   GET_APPOINTMENTS,
   CREATE_APPOINTMENT,
   DELETE_APPOINTMENT,
+  UPDATE_APPOINTMENT,
 } from "../actionTypes";
 import * as api from "../../api/index.js";
 
 export const getAppointments = (lbz) => async (dispatch) => {
   try {
-    const { data } = await api.fetchAppointments(lbz);
+    const { data } = await api.fetchAppointments({ lbz });
     dispatch({ type: GET_APPOINTMENTS, data });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const createAppointmentNurse = (formData) => async (dispatch) => {
+export const createAppointment = (formData) => async (dispatch) => {
   try {
     console.log(formData);
-    const { data } = await api.createAppointmentNurse(formData);
+    const { data } = await api.createAppointment(formData);
     dispatch({ type: CREATE_APPOINTMENT, data });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteAppointmentNurse = (formData) => async (dispatch) => {
+export const updateAppointment = (appointmentData) => async (dispatch) => {
   try {
-    const { data } = await api.deleteAppointmentNurse(formData);
+    const { data } = await api.updateAppointment(appointmentData);
+    dispatch({
+      type: UPDATE_APPOINTMENT,
+      id: appointmentData.appointmentId,
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteAppointment = (formData) => async (dispatch) => {
+  try {
+    const { data } = await api.deleteAppointment(formData);
     dispatch({ type: DELETE_APPOINTMENT, data });
   } catch (error) {
     console.log(error);

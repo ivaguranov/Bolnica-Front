@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import NewAppointment from "../../components/NewAppointment/NewAppointment";
 import Header from "../../components/Header/Header";
 import {
-  createAppointmentNurse,
-  deleteAppointmentNurse,
+  createAppointment,
+  deleteAppointment,
   getAppointments,
 } from "../../redux/actions/appointments";
 import DeleteAppointment from "../../components/DeleteAppointment/DeleteAppointment";
 import { getEmployees } from "../../redux/actions/employee";
-import { getPatients } from "../../redux/actions/patient";
+import { getPatients } from "../../redux/actions/patients";
 import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const ScheduleAppointmentPage = () => {
@@ -80,7 +80,7 @@ const ScheduleAppointmentPage = () => {
     setNewAppointmentVisible(false);
     setEvents([...events, newEvent]);
     dispatch(
-      createAppointmentNurse({
+      createAppointment({
         examinationEmployeeId: doctorId,
         patient: patientId,
         dateAndTimeOfAppointment: date.toISOString(),
@@ -93,7 +93,7 @@ const ScheduleAppointmentPage = () => {
   const deleteAppointment = () => {
     setDeleteAppointmentVisible(false);
     dispatch((appointmentIdDelete) =>
-      deleteAppointmentNurse({ appointmentIdDelete })
+      deleteAppointment({ appointmentIdDelete })
     );
   };
 

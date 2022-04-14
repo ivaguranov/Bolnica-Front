@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { updatePatient, getPatient } from "../../redux/actions/patient";
+import { updatePatient, getPatient } from "../../redux/actions/patients";
 import { useLocation, useNavigate } from "react-router";
 import { getSidebarLinks } from "../../commons/sidebarLinks";
 

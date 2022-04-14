@@ -10,7 +10,7 @@ import {
   deletePatient,
   getPatients,
   searchPatients,
-} from "../../redux/actions/patient";
+} from "../../redux/actions/patients";
 import { useNavigate } from "react-router";
 const PatientPreview = () => {
   const navigate = useNavigate();

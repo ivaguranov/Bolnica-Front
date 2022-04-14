@@ -25,11 +25,10 @@ export const getDemo = (id) => async (dispatch) => {
   }
 };
 
-export const createDemo = (formData, navigate) => async (dispatch) => {
+export const createDemo = (formData) => async (dispatch) => {
   try {
     const { data } = await api.createDemo(formData);
     dispatch({ type: CREATE_DEMO, data });
-    navigate("/teachers");
   } catch (error) {
     console.log(error);
   }

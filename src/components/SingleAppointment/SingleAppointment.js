@@ -1,6 +1,6 @@
 import "./styles.css";
 import { format } from "date-fns";
-import { updateAppointment } from "../../redux/actions/appointment";
+import { updateAppointment } from "../../redux/actions/appointments";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 

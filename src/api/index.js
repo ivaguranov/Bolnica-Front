@@ -21,22 +21,20 @@ export const createDemo = (data) => API.post("/demos", data);
 export const updateDemo = (id, data) => API.put(`/demos/${id}`, data);
 export const deleteDemo = (id) => API.delete(`/demos/${id}`);
 
-// AUTH
+// GENERAL
 
 export const login = (formData) =>
   API.post("/bolnica-user-service/api/login", formData);
 export const resetPassword = (email) =>
   API.post("/bolnica-user-service/api/forgot-password", email);
 
-// NURSE ROUTES
+// APPOINTMENTS
 
-export const fetchDoctors = () => API.get(`/doctors`);
 export const fetchAppointments = (data) =>
   API.post(`/bolnica-management-service/api/list-appointments-by-lbz`, data);
-export const createAppointmentNurse = (data) =>
+export const createAppointment = (data) =>
   API.post("/bolnica-management-service/api/set-appointment", data);
-export const deleteAppointmentNurse = (id) => API.delete(`/demos/${id}`);
-
+export const deleteAppointment = (id) => API.delete(`/demos/${id}`);
 export const updateAppointment = (data) =>
   API.put(`/bolnica-management-service/api/update-appointment-status`, data);
 
@@ -57,8 +55,6 @@ export const fetchRecord = (lbp) =>
   API.get(`/bolnica-management-service/api/fetch-zdravstveni-karton/${lbp}`);
 export const createRecord = (formData) =>
   API.post(`/bolnica-management-service/api/create-pregled-report`, formData);
-export const searchPatients = (searchValues) =>
-  API.post("/patients", searchValues);
 
 // EMPLOYEES
 export const fetchEmployees = () =>
@@ -67,14 +63,14 @@ export const fetchEmployees = () =>
   });
 export const fetchEmployee = (lbz) =>
   API.get(`/bolnica-user-service/api/get-employee/${lbz}`);
-export const searchEmployees = (searchValues) =>
-  API.post("/employees", searchValues);
 export const createEmployee = (formData) =>
   API.post(`/bolnica-user-service/api/create-employee`, formData);
 export const updateEmployee = (formData) =>
   API.put(`/bolnica-user-service/api/update-employee`, formData);
 export const deleteEmployee = (lbz) =>
   API.delete(`/bolnica-user-service/api/remove-employee/${lbz}`);
+export const searchEmployees = (searchValues) =>
+  API.post("/employees", searchValues);
 
 // DEPARTMENTS
 
@@ -93,6 +89,8 @@ export const updatePatient = (formData, lbp) =>
   API.put(`/bolnica-management-service/api/update-patient/${lbp}`, formData);
 export const deletePatient = (lbp) =>
   API.delete(`/bolnica-management-service/api/remove-patient/${lbp}`);
+export const searchPatients = (searchValues) =>
+  API.post("/patients", searchValues);
 
 // DISEASES
 export const fetchDiseases = (lbp, data) =>

@@ -4,9 +4,9 @@ import HeaderNurse from "../../components/HeaderNurse/HeaderNurse";
 import ScheduledAppointmentsNurse from "../../components/ScheduledAppointmentsNurse/ScheduledAppointmentsNurse";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmployees } from "../../redux/actions/employee";
-import { getPatients } from "../../redux/actions/patient";
-import { getAppointments } from "../../redux/actions/appointment";
-import { updateAppointment } from "../../redux/actions/appointment";
+import { getPatients } from "../../redux/actions/patients";
+import { getAppointments } from "../../redux/actions/appointments";
+import { updateAppointment } from "../../redux/actions/appointments";
 import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const NurseHomepage = () => {

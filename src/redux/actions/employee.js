@@ -2,7 +2,6 @@ import {
   CREATE_EMPLOYEE,
   DELETE_EMPLOYEE,
   GET_EMPLOYEES,
-  SEARCH_EMPLOYEES,
   UPDATE_EMPLOYEE,
 } from "../actionTypes";
 import * as api from "../../api/index.js";

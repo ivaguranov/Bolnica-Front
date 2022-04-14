@@ -9,7 +9,7 @@ import {
   deletePatient,
   getPatients,
   searchPatients,
-} from "../../redux/actions/patient";
+} from "../../redux/actions/patients";
 import { useNavigate } from "react-router";
 import { getSidebarLinks } from "../../commons/sidebarLinks";
 

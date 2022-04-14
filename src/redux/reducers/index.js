@@ -1,20 +1,18 @@
 import { combineReducers } from "redux";
 
 import demo from "./demo";
-import appointments from "./appointment";
+import appointments from "./appointments";
 import employees from "./employee";
 import records from "./records";
-import doctors from "./doctors";
 import diseases from "./diseases";
 import examinations from "./examinations";
 import departments from "./departments";
-import patients from "./patient";
+import patients from "./patients";
 import loggedUser from "./auth";
 
 export const reducers = combineReducers({
   demo,
   employees,
-  doctors,
   patients,
   appointments,
   records,

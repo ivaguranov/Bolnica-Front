@@ -11,7 +11,7 @@ import {
 } from "../../redux/actions/employee";
 import "./styles.css";
 import { BiSearchAlt } from "react-icons/bi";
-import { deletePatient } from "../../redux/actions/patient";
+import { deletePatient } from "../../redux/actions/patients";
 import { useNavigate } from "react-router";
 import { getSidebarLinks } from "../../commons/sidebarLinks";
 

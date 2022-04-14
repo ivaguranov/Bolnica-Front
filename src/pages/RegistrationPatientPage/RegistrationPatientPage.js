@@ -2,7 +2,7 @@ import "./registrationPatient.css";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { createPatient } from "../../redux/actions/patient";
+import { createPatient } from "../../redux/actions/patients";
 import { useNavigate } from "react-router";
 import { getSidebarLinks } from "../../commons/sidebarLinks";
 
