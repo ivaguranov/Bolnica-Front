@@ -127,7 +127,9 @@ const Table = (props) => {
               )}
             </tr>
           </thead>
-          <tbody>{listTable.slice(trimStart, trimEnd)}</tbody>
+          <tbody className="familyFix">
+            {listTable.slice(trimStart, trimEnd)}
+          </tbody>
         </table>
         <div>
           <nav className="myPagination" aria-label="Page navigation example">

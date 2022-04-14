@@ -181,20 +181,20 @@
 }
 
 .my-close-btn {
-  width: 118px;
-  height: 36px;
+  padding: 10px 20px;
   margin-right: 20px;
   background: #e74f48;
   border-radius: 5px;
   text-align: center;
-  padding: 0;
+  outline: none;
+  border: none;
 }
 
 .my-save-btn {
-  width: 118px;
-  height: 36px;
+  padding: 10px 20px;
   margin-left: 20px;
   background: #0156ff;
   border-radius: 5px;
-  padding: 0;
+  outline: none;
+  border: none;
 }

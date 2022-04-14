@@ -25,22 +25,22 @@ const NewAppointment = (props) => {
   return (
     <div className="new-appointment-container">
       <div className="new-appointment-header">
-        <p className="header-paragraph">Dodaj novi pregled</p>
+        <p className="header-paragraph familyFix">Dodaj novi pregled</p>
         <hr className="break-line" />
         <div className="new-appointment-doctor">
           <div className="doctor-container">
             {/* <div className="avatar-container">
               <img className="user-avatar" src={avatarUrl} alt={userName} />
             </div> */}
-            <div className="name-container">
-              <p className="user-name">{userName}</p>
-              <p className="user-title">{userTitle}</p>
+            <div className="name-container ">
+              <p className="user-name familyFix">{userName}</p>
+              <p className="user-title familyFix">{userTitle}</p>
             </div>
           </div>
           <div className="btn-container">
             <button
               onClick={() => setIsComment(!isComment)}
-              className="comment-btn"
+              className="comment-btn familyFix"
             >
               {!isComment ? "Dodaj komentar" : "Ukloni komentar"}
             </button>
@@ -56,9 +56,9 @@ const NewAppointment = (props) => {
           type="text"
         />
       )}
-      <div className="new-appointment-body">
+      <div className="new-appointment-body familyFix">
         <div className="dropdown1">
-          <p className="reason-p">Razlog pregleda</p>
+          <p className="reason-p familyFix">Razlog pregleda</p>
           <FormSelect
             aria-label="select type of medical examination"
             onChange={(e) => setVal(e.target.value)}
@@ -71,7 +71,7 @@ const NewAppointment = (props) => {
           </FormSelect>
         </div>
         <div className="dropdown2">
-          <p className="patient-p">Pacijent</p>
+          <p className="patient-p familyFix">Pacijent</p>
           <FormSelect
             aria-label="select patient"
             onChange={(e) => {
@@ -92,7 +92,7 @@ const NewAppointment = (props) => {
           </FormSelect>
         </div>
         <div className="dropdown3">
-          <p className="date-p">Datum pregleda</p>
+          <p className="date-p familyFix">Datum pregleda</p>
           <p>{dateString}</p>
         </div>
       </div>

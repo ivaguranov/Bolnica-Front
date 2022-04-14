@@ -2,28 +2,28 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // GENERAL
-import DemoPage from "./pages/DemoPage/DemoPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
+import DemoPage from "./pages/General/DemoPage/DemoPage";
+import LoginPage from "./pages/General/LoginPage/LoginPage";
+import ProfilePage from "./pages/General/ProfilePage/ProfilePage";
+import ForgotPasswordPage from "./pages/General/ForgotPasswordPage/ForgotPasswordPage";
 
 // ADMIN
-import AdminHomepage from "./pages/AdminHomepage/AdminHomepage";
-import EmployeePreview from "./pages/EmployeePreviewPage/EmployeePreviewPage";
-import EditEmployeePage from "./pages/EditEmployeePage/EditEmployeePage";
-import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+import AdminHomepage from "./pages/Admin/AdminHomepage/AdminHomepage";
+import EmployeePreview from "./pages/Admin/EmployeePreviewPage/EmployeePreviewPage";
+import EditEmployeePage from "./pages/Admin/EditEmployeePage/EditEmployeePage";
+import RegistrationPage from "./pages/Admin/RegistrationPage/RegistrationPage";
 
 // DOCTOR
-import DoctorHomepage from "./pages/DoctorHomepage/DoctorHomepage";
-import PatientPreview from "./pages/PatientPreviewPage/PatientPreviewPage";
-import EditPatientPage from "./pages/EditPatientPage/EditPatientPage";
-import PatientExamination from "./pages/PatientExaminationPage/PatientExaminationPage";
+import DoctorHomepage from "./pages/Doctor/DoctorHomepage/DoctorHomepage";
+import PatientPreview from "./pages/Doctor/PatientPreviewPage/PatientPreviewPage";
+import EditPatientPage from "./pages/Doctor/EditPatientPage/EditPatientPage";
+import PatientExamination from "./pages/Doctor/PatientExaminationPage/PatientExaminationPage";
 
 // NURSE
-import NurseHomepage from "./pages/NurseHomepage/NurseHomepage";
-import PatientPreviewNurses from "./pages/PatientPreviewPageNurses/PatientPreviewPageNurses";
-import RegistrationPatientPage from "./pages/RegistrationPatientPage/RegistrationPatientPage";
-import ScheduleAppointmentPage from "./pages/ScheduleAppointmentPage/ScheduleAppointmentPage";
+import NurseHomepage from "./pages/Nurse/NurseHomepage/NurseHomepage";
+import PatientPreviewNurses from "./pages/Nurse/PatientPreviewPageNurses/PatientPreviewPageNurses";
+import RegistrationPatientPage from "./pages/Nurse/RegistrationPatientPage/RegistrationPatientPage";
+import ScheduleAppointmentPage from "./pages/Nurse/ScheduleAppointmentPage/ScheduleAppointmentPage";
 
 const App = () => {
   return (

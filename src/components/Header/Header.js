@@ -23,10 +23,10 @@ const Header = ({ avatarUrl, welcomeMsg, userName, userTitle, day, date }) => {
 						alt={userName}
 					/>
 				</div> */}
-        <div className="name-container">
-          <p className="welcome-msg">{welcomeMsg}</p>
-          <p className="user-name">{userName}</p>
-          <p className="user-title">{userTitle}</p>
+        <div className="name-container ">
+          <p className="welcome-msg familyFix">{welcomeMsg}</p>
+          <p className="user-name familyFix">{userName}</p>
+          <p className="user-title familyFix">{userTitle}</p>
         </div>
       </div>
       <div className="date-container">

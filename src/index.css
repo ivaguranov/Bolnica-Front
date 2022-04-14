@@ -140,3 +140,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.familyFix,
+p {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
