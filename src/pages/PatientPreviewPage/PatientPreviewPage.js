@@ -7,6 +7,7 @@ import { MdCalendarToday } from "react-icons/md";
 import { BiSearchAlt } from "react-icons/bi";
 import Table from "../../components/Table/Table";
 import { useDispatch, useSelector } from "react-redux";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 import {
   deletePatient,
   getPatients,
@@ -20,35 +21,6 @@ const PatientPreview = () => {
 
   const patients = useSelector((state) => state.patients);
   const [value, setValue] = useState("");
-
-  const links = [
-    {
-      id: 1,
-      text: "Početna",
-      path: "/",
-      icon: <FaHome />,
-    },
-    {
-      id: 2,
-      text: "Pacijenti",
-      path: "/patient-preview",
-      icon: <FaUserInjured />,
-      isActive: true,
-    },
-    {
-      id: 3,
-      text: "Zakazani pregledi",
-      path: "/appointments",
-      icon: <MdCalendarToday />,
-      dividerAfter: true,
-    },
-    {
-      id: 4,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
 
   const linksHeader = {
     avatarUrl: "../nikolaSlika 1.jpg",
@@ -101,7 +73,7 @@ const PatientPreview = () => {
   return (
     <div>
       <div className="sidebar-link-container">
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("doctor", 2)} />
       </div>
       <div style={{ marginLeft: "15%" }}>
         <Header

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import { format } from "date-fns";
-import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router";
 import { Button } from "reactstrap";
 import "./styles.css";
@@ -10,9 +9,9 @@ import ExaminationForm from "../../components/ExaminationForm/ExaminationForm";
 import MedicalRecord from "../../components/MedicalRecord/MedicalRecord";
 import { useDispatch, useSelector } from "react-redux";
 import { createRecord, getRecord } from "../../redux/actions/records";
-import { MdCalendarToday } from "react-icons/md";
 import { getExaminations } from "../../redux/actions/examinations";
 import { getDiseases } from "../../redux/actions/diseases";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const PatientExamination = () => {
   const location = useLocation();
@@ -40,34 +39,6 @@ const PatientExamination = () => {
   const record = useSelector((state) => state.records);
   const diseases = useSelector((state) => state.diseases);
 
-  const links = [
-    {
-      id: 1,
-      text: "Početna",
-      path: "/",
-      icon: <FaHome />,
-    },
-    {
-      id: 2,
-      text: "Pacijenti",
-      path: "/patient-preview",
-      icon: <FaUserInjured />,
-    },
-    {
-      id: 3,
-      text: "Zakazani pregledi",
-      path: "/appointments",
-      icon: <MdCalendarToday />,
-      dividerAfter: true,
-    },
-    {
-      id: 4,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
-
   const saveExamination = (formData) => {
     dispatch(
       createRecord({
@@ -88,7 +59,7 @@ const PatientExamination = () => {
   return (
     <>
       <div className="sidebar-link-container">
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("doctor", 0)} />
       </div>
       <div style={{ marginLeft: "15%" }}>
         <Header

@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAppointments } from "../../redux/actions/appointment";
 import { getPatients } from "../../redux/actions/patient";
 import ScheduledAppointments from "../../components/ScheduledAppointments/ScheduledAppointments";
-import { FaHome, FaUser, FaUserInjured } from "react-icons/fa";
-import { MdCalendarToday } from "react-icons/md";
+import { FaUserInjured } from "react-icons/fa";
 import { GiMedicalDrip, GiMedicalPack } from "react-icons/gi";
 import { resetUser } from "../../redux/actions/auth";
 import { useNavigate } from "react-router";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const DoctorHomepage = () => {
   const dispatch = useDispatch();
@@ -30,36 +30,6 @@ const DoctorHomepage = () => {
 
   const appointments = useSelector((state) => state.appointments);
   const patients = useSelector((state) => state.patients);
-
-  const links = [
-    {
-      id: 1,
-      text: "Početna",
-      path: "/",
-      icon: <FaHome />,
-
-      isActive: true,
-    },
-    {
-      id: 2,
-      text: "Pacijenti",
-      path: "/patient-preview",
-      icon: <FaUserInjured />,
-    },
-    {
-      id: 3,
-      text: "Zakazani pregledi",
-      path: "/appointments",
-      icon: <MdCalendarToday />,
-      dividerAfter: true,
-    },
-    {
-      id: 4,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
 
   const headerProps = {
     avatarUrl: "nikolaSlika 1.jpg",
@@ -89,7 +59,7 @@ const DoctorHomepage = () => {
   return (
     <>
       <div className="sidebar-link-container">
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("doctor", 1)} />
       </div>
       <div style={{ marginLeft: "15%" }}>
         <Header

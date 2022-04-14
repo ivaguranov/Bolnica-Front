@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
-import { BiCalendarPlus } from "react-icons/bi";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import CustomCalendar from "../../components/CustomCalendar/CustomCalendar";
 import { Dropdown } from "react-bootstrap";
@@ -16,6 +14,7 @@ import {
 import DeleteAppointment from "../../components/DeleteAppointment/DeleteAppointment";
 import { getEmployees } from "../../redux/actions/employee";
 import { getPatients } from "../../redux/actions/patient";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const ScheduleAppointmentPage = () => {
   const dispatch = useDispatch();
@@ -55,41 +54,6 @@ const ScheduleAppointmentPage = () => {
     this.setTime(this.getTime() + h * 60 * 60 * 1000);
     return this;
   };
-
-  const links = [
-    {
-      id: 1,
-      text: "Početna",
-      path: "/nurse",
-      icon: <FaHome />,
-    },
-    {
-      id: 2,
-      text: "Pacijenti",
-      path: "/nurse/patient-preview",
-      icon: <FaUserInjured />,
-    },
-    {
-      id: 3,
-      text: "Zakazivanje",
-      path: "/nurse/schedule-appointment",
-      icon: <BiCalendarPlus />,
-      isActive: true,
-    },
-    {
-      id: 4,
-      text: "Nov pacijent",
-      path: "/nurse/register-patient",
-      icon: <FaPlusCircle />,
-      dividerAfter: true,
-    },
-    {
-      id: 6,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
 
   const getDoctorAppointments = (lbz) => {
     const newDoctor = employees.find((doctor) => doctor.lbz === lbz);
@@ -136,7 +100,7 @@ const ScheduleAppointmentPage = () => {
   return (
     <div className="page-container">
       <div>
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("nurse", 3)} />
       </div>
       {selectedDoctor && (
         <Dropdown className="dropdownButton">

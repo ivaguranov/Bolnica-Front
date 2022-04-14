@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { FaHome, FaUserNurse, FaPlusCircle, FaUser } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { updateEmployee } from "../../redux/actions/employee";
 import { ImPencil } from "react-icons/im";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const initialState = {
   name: "",
@@ -64,35 +64,6 @@ function EditEmployeePage() {
       });
     }
   }, [employee]);
-
-  const links = [
-    {
-      id: 1,
-      text: "Pocetna",
-      path: "/admin",
-      icon: <FaHome />,
-    },
-    {
-      id: 4,
-      text: "Zaposleni",
-      path: "/admin/employee-preview",
-      icon: <FaUserNurse />,
-    },
-    {
-      id: 2,
-      text: "Nov zaposleni",
-      path: "/admin/register-employee",
-      icon: <FaPlusCircle />,
-      dividerAfter: true,
-    },
-    {
-      id: 3,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-      isActive: true,
-    },
-  ];
 
   const departmentsDemo = [
     {
@@ -162,7 +133,7 @@ function EditEmployeePage() {
   return (
     <div style={{ marginLeft: "15%" }}>
       <div className="sidebar-link-container">
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("admin", 4)} />
       </div>
       {employee && (
         <form onSubmit={handleSubmit} className="form-custom">

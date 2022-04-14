@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
-import { BiCalendarPlus } from "react-icons/bi";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { updatePatient, getPatient } from "../../redux/actions/patient";
 import { useLocation, useNavigate } from "react-router";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const initialState = {
   jmbg: "",
@@ -77,40 +76,6 @@ function RegistrationPatientPage() {
     }
   }, [patient]);
 
-  const links = [
-    {
-      id: 1,
-      text: "Početna",
-      path: "/nurse",
-      icon: <FaHome />,
-    },
-    {
-      id: 2,
-      text: "Pacijenti",
-      path: "/nurse/patient-preview",
-      icon: <FaUserInjured />,
-    },
-    {
-      id: 3,
-      text: "Zakazivanje",
-      path: "/nurse/schedule-appointment",
-      icon: <BiCalendarPlus />,
-    },
-    {
-      id: 4,
-      text: "Nov pacijent",
-      path: "/nurse/register-patient",
-      icon: <FaPlusCircle />,
-      dividerAfter: true,
-    },
-    {
-      id: 6,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
-
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -137,7 +102,7 @@ function RegistrationPatientPage() {
   return (
     <div style={{ marginLeft: "15%" }}>
       <div className="sidebar-link-container">
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("nurse", 0)} />
       </div>
       <form className="form-custom">
         <h1 className="form-heading">Izmena pacijenta</h1>

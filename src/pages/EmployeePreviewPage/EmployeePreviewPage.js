@@ -10,10 +10,10 @@ import {
   searchEmployees,
 } from "../../redux/actions/employee";
 import "./styles.css";
-import { FaHome, FaUserNurse, FaPlusCircle, FaUser } from "react-icons/fa";
 import { BiSearchAlt } from "react-icons/bi";
 import { deletePatient } from "../../redux/actions/patient";
 import { useNavigate } from "react-router";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const EmployeePreview = () => {
   const dispatch = useDispatch();
@@ -25,35 +25,6 @@ const EmployeePreview = () => {
   const [value, setValue] = useState("");
 
   const employees = useSelector((state) => state.employees);
-
-  const links = [
-    {
-      id: 1,
-      text: "Pocetna",
-      path: "/admin",
-      icon: <FaHome />,
-    },
-    {
-      id: 2,
-      text: "Zaposleni",
-      path: "/admin/employee-preview",
-      icon: <FaUserNurse />,
-      isActive: true,
-    },
-    {
-      id: 4,
-      text: "Nov zaposleni",
-      path: "/admin/register-employee",
-      icon: <FaPlusCircle />,
-      dividerAfter: true,
-    },
-    {
-      id: 3,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
 
   const headerProps = {
     avatarUrl: "../nikolaSlika 1.jpg",
@@ -123,7 +94,7 @@ const EmployeePreview = () => {
   return (
     <div>
       <div className="sidebar-link-container">
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("admin", 2)} />
       </div>
 
       <div style={{ marginLeft: "15%" }}>

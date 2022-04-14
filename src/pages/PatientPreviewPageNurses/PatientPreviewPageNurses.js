@@ -5,14 +5,13 @@ import { format } from "date-fns";
 import { BiSearchAlt } from "react-icons/bi";
 import Table from "../../components/Table/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
-import { BiCalendarPlus } from "react-icons/bi";
 import {
   deletePatient,
   getPatients,
   searchPatients,
 } from "../../redux/actions/patient";
 import { useNavigate } from "react-router";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const PatientPreviewNurses = () => {
   const dispatch = useDispatch();
@@ -23,41 +22,6 @@ const PatientPreviewNurses = () => {
 
   const patients = useSelector((state) => state.patients);
   const [value, setValue] = useState("");
-
-  const links = [
-    {
-      id: 1,
-      text: "Početna",
-      path: "/nurse",
-      icon: <FaHome />,
-    },
-    {
-      id: 2,
-      text: "Pacijenti",
-      path: "/nurse/patient-preview",
-      icon: <FaUserInjured />,
-      isActive: true,
-    },
-    {
-      id: 3,
-      text: "Zakazivanje",
-      path: "/nurse/schedule-appointment",
-      icon: <BiCalendarPlus />,
-    },
-    {
-      id: 4,
-      text: "Nov pacijent",
-      path: "/nurse/register-patient",
-      icon: <FaPlusCircle />,
-      dividerAfter: true,
-    },
-    {
-      id: 6,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
 
   const linksHeader = {
     avatarUrl: "../nikolaSlika 1.jpg",
@@ -115,7 +79,7 @@ const PatientPreviewNurses = () => {
   return (
     <div>
       <div className="sidebar-link-container">
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("nurse", 2)} />
       </div>
       <div style={{ marginLeft: "15%" }}>
         <Header

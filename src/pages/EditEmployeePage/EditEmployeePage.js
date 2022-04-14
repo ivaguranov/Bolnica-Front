@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router";
 import { FaHome, FaUserNurse, FaPlusCircle, FaUser } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { updateEmployee, getEmployee } from "../../redux/actions/employee";
+import { getSidebarLinks } from "../../commons/sidebarLinks";
 
 const initialState = {
   name: "",
@@ -63,34 +64,6 @@ function EditEmployeePage() {
       });
     }
   }, [employee]);
-
-  const links = [
-    {
-      id: 1,
-      text: "Pocetna",
-      path: "/admin",
-      icon: <FaHome />,
-    },
-    {
-      id: 4,
-      text: "Zaposleni",
-      path: "/admin/employee-preview",
-      icon: <FaUserNurse />,
-    },
-    {
-      id: 2,
-      text: "Nov zaposleni",
-      path: "/admin/register-employee",
-      icon: <FaPlusCircle />,
-      dividerAfter: true,
-    },
-    {
-      id: 3,
-      text: "Profil",
-      path: "/profile",
-      icon: <FaUser />,
-    },
-  ];
 
   const departmentsDemo = [
     {
@@ -155,7 +128,7 @@ function EditEmployeePage() {
   return (
     <div style={{ marginLeft: "15%" }}>
       <div className="sidebar-link-container">
-        <Sidebar links={links} />
+        <Sidebar links={getSidebarLinks("admin", 0)} />
       </div>
       {employee && (
         <form onSubmit={handleSubmit} className="form-custom">
