@@ -88,7 +88,7 @@ const DoctorHomepage = () => {
             number={generalStatsProps[2].number}
           />
         </div>
-        {appointments && patients && (
+        {appointments && patients.length > 0 && (
           <ScheduledAppointments
             appointments={appointments}
             patients={patients}

@@ -74,6 +74,7 @@ const App = () => {
           exact
           element={<EditEmployeePage />}
         />
+        <Route path="/edit-patient/:lbp" exact element={<EditPatientPage />} />
       </Routes>
     </BrowserRouter>
   );

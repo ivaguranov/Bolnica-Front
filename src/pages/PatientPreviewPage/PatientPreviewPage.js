@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import { format } from "date-fns";
-import { FaHome, FaUser, FaUserInjured, FaPlusCircle } from "react-icons/fa";
-import { MdCalendarToday } from "react-icons/md";
 import { BiSearchAlt } from "react-icons/bi";
 import Table from "../../components/Table/Table";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +11,9 @@ import {
   getPatients,
   searchPatients,
 } from "../../redux/actions/patient";
+import { useNavigate } from "react-router";
 const PatientPreview = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPatients());
@@ -70,6 +70,11 @@ const PatientPreview = () => {
     event.preventDefault();
     dispatch(searchPatients(value));
   }
+
+  const handleEdit = (lbp) => {
+    navigate(`/edit-patient/${lbp}`);
+  };
+
   return (
     <div>
       <div className="sidebar-link-container">
@@ -100,11 +105,12 @@ const PatientPreview = () => {
         <div>
           <h1 className="myTitle">Pacijenti</h1>
         </div>
-        {patients && (
+        {patients.length > 0 && (
           <Table
             headers={headers}
             tableContent={patients}
             handleClick={handleClick}
+            handleEdit={handleEdit}
             tableType="patients"
           />
         )}

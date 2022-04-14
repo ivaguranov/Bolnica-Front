@@ -35,10 +35,12 @@ function RegistrationPatientPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [lbp, setLbp] = useState();
+  const [role, setRole] = useState("");
   const patient = useSelector((state) => state.patients);
 
   useEffect(() => {
     const pathParts = location.pathname.split("/");
+    setRole(pathParts[1]);
     setLbp(pathParts[pathParts.length - 1]);
     dispatch(getPatient(pathParts[pathParts.length - 1]));
   }, []);
@@ -96,13 +98,21 @@ function RegistrationPatientPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updatePatient({ ...form, pol: "MUSKI" }, lbp));
-    navigate("/nurse/patient-preview");
+    role === "nurse"
+      ? navigate("/nurse/patient-preview")
+      : navigate("/patient-preview");
   };
 
   return (
     <div style={{ marginLeft: "15%" }}>
       <div className="sidebar-link-container">
-        <Sidebar links={getSidebarLinks("nurse", 0)} />
+        <Sidebar
+          links={
+            role === "nurse"
+              ? getSidebarLinks("nurse", 0)
+              : getSidebarLinks("doctor", 0)
+          }
+        />
       </div>
       <form className="form-custom">
         <h1 className="form-heading">Izmena pacijenta</h1>
