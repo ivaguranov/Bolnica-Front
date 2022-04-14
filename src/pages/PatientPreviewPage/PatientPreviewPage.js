@@ -88,7 +88,6 @@ const PatientPreview = () => {
 
   const handleClick = (lbp) => {
     dispatch(deletePatient(lbp));
-    console.log("I have been clicked", lbp);
   };
 
   function handleOnChange(event) {

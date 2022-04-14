@@ -25,7 +25,6 @@ const EmployeePreview = () => {
   const [value, setValue] = useState("");
 
   const employees = useSelector((state) => state.employees);
-  console.log(employees);
 
   const links = [
     {

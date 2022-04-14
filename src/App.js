@@ -14,6 +14,8 @@ import PatientExamination from "./pages/PatientExaminationPage/PatientExaminatio
 import ScheduleAppointmentPage from "./pages/ScheduleAppointmentPage/ScheduleAppointmentPage";
 import EditEmployeePage from "./pages/EditEmployeePage/EditEmployeePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
+import EditPatientPage from "./pages/EditPatientPage/EditPatientPage";
 
 const App = () => {
   return (
@@ -25,6 +27,7 @@ const App = () => {
         {/* GENERAL */}
         <Route path="/login" exact element={<LoginPage />} />
         <Route path="/profile" exact element={<ProfilePage />} />
+        <Route path="/forgot-password" exact element={<ForgotPasswordPage />} />
 
         {/* DOCTOR ROUTES */}
         <Route path="/" exact element={<DoctorHomepage />} />
@@ -47,6 +50,11 @@ const App = () => {
           path="/nurse/register-patient"
           exact
           element={<RegistrationPatientPage />}
+        />
+        <Route
+          path="/nurse/edit-patient/:lbp"
+          exact
+          element={<EditPatientPage />}
         />
 
         {/* ADMIN ROUTES */}

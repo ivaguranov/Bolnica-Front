@@ -39,12 +39,6 @@ const PatientExamination = () => {
   const examinations = useSelector((state) => state.examinations);
   const record = useSelector((state) => state.records);
   const diseases = useSelector((state) => state.diseases);
-  // console.log(examinations);
-  // console.log(doctor);
-  // console.log(record);
-  // console.log(diseases);
-
-  // if (lbp) console.log(lbp);
 
   const links = [
     {

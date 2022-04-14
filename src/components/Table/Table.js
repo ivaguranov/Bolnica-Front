@@ -5,20 +5,21 @@ import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Table = (props) => {
   const { headers, tableContent, handleClick, tableType, handleEdit } = props;
-  const listHeaders = headers.map((header) => (
-    <th scope="col" key={header.key}>
-      {header.value}
-    </th>
-  ));
+  const listHeaders = headers.map((header) => {
+    if (header.key === "lbp" || header.key === "lbz") return <></>;
+    return (
+      <th scope="col" key={header.key}>
+        {header.value}
+      </th>
+    );
+  });
 
   const handleButton = (key, entry) => {
-    console.log(key, entry);
     const value = entry.filter((element) => element[0] === key);
     handleClick(value[0][1]);
   };
 
   const handleEditButton = (key, entry) => {
-    console.log(key, entry);
     const value = entry.filter((element) => element[0] === key);
     handleEdit(value[0][1]);
   };
@@ -36,6 +37,7 @@ const Table = (props) => {
   const listTable = info.map((entry) => (
     <tr key={entry}>
       {entry.map((element) => {
+        if (element[0] === "lbp" || element[0] === "lbz") return <></>;
         return (
           <td key={element} style={{ padding: "25px 0px" }}>
             {element[1]}
@@ -43,11 +45,24 @@ const Table = (props) => {
         );
       })}
       {tableType === "patients" ? (
-        <td style={{ width: "5%" }}>
-          <button className="buttonIcon" onClick={() => handleButton("lbp")}>
-            <ImBin />
-          </button>
-        </td>
+        <>
+          <td style={{ width: "5%" }}>
+            <button
+              className="buttonIconBlue"
+              onClick={() => handleEditButton("lbp", entry)}
+            >
+              <ImPencil />
+            </button>
+          </td>
+          <td style={{ width: "5%" }}>
+            <button
+              className="buttonIcon"
+              onClick={() => handleButton("lbp", entry)}
+            >
+              <ImBin />
+            </button>
+          </td>
+        </>
       ) : tableType === "employees" ? (
         <>
           <td style={{ width: "5%" }}>

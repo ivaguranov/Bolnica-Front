@@ -115,7 +115,6 @@ function RegistrationPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ ...form, department: 1 });
     dispatch(createEmployee({ ...form, department: 1 }));
     navigate("/admin/employee-preview");
   };

@@ -83,7 +83,6 @@ function EditEmployeePage() {
       path: "/admin/register-employee",
       icon: <FaPlusCircle />,
       dividerAfter: true,
-      isActive: true,
     },
     {
       id: 3,
@@ -142,7 +141,6 @@ function EditEmployeePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ ...form, department: 1 });
     dispatch(
       updateEmployee({
         ...form,

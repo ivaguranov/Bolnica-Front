@@ -9,7 +9,6 @@ const employeeReducer = (state = [], action) => {
       return state.map((employee) =>
         employee.lbz !== action.data.lbz ? employee : action.data
       );
-
     case actionType.DELETE_EMPLOYEE:
       return [
         ...state,

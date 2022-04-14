@@ -29,7 +29,6 @@ export const createEmployee = (formData) => async (dispatch) => {
   try {
     const { data } = await api.createEmployee(formData);
     dispatch({ type: CREATE_EMPLOYEE, data });
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -37,10 +36,8 @@ export const createEmployee = (formData) => async (dispatch) => {
 
 export const updateEmployee = (formData) => async (dispatch) => {
   try {
-    console.log(formData);
     const { data } = await api.updateEmployee(formData);
     dispatch({ type: UPDATE_EMPLOYEE, data });
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -48,7 +45,6 @@ export const updateEmployee = (formData) => async (dispatch) => {
 
 export const searchEmployees = (searchValue) => async (dispatch) => {
   try {
-    console.log(searchValue);
     const { data } = await api.searchEmployees(searchValue);
     dispatch({ type: GET_EMPLOYEES, data });
   } catch (error) {

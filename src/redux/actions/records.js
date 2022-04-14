@@ -12,7 +12,6 @@ export const getRecord = (lbp) => async (dispatch) => {
 
 export const createRecord = (formData) => async (dispatch) => {
   try {
-    console.log(formData);
     const { data } = await api.createRecord(formData);
     dispatch({ type: CREATE_RECORD, data });
   } catch (error) {

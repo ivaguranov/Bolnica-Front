@@ -12,9 +12,11 @@ import {
   getPatients,
   searchPatients,
 } from "../../redux/actions/patient";
+import { useNavigate } from "react-router";
 
 const PatientPreviewNurses = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getPatients());
   }, []);
@@ -95,7 +97,10 @@ const PatientPreviewNurses = () => {
 
   const handleClick = (lbp) => {
     dispatch(deletePatient(lbp));
-    console.log("I have been clicked", lbp);
+  };
+
+  const handleEdit = (lbp) => {
+    navigate(`/nurse/edit-patient/${lbp}`);
   };
 
   function handleOnChange(event) {
@@ -137,8 +142,9 @@ const PatientPreviewNurses = () => {
         <div>
           <h1 className="myTitle">Pacijenti</h1>
         </div>
-        {patients && (
+        {patients.length > 0 && (
           <Table
+            handleEdit={handleEdit}
             headers={headers}
             tableContent={patients}
             handleClick={handleClick}

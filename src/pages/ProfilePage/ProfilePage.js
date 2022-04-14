@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { FaHome, FaUserNurse, FaPlusCircle, FaUser } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { updateEmployee, getEmployee } from "../../redux/actions/employee";
+import { updateEmployee } from "../../redux/actions/employee";
 import { ImPencil } from "react-icons/im";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
@@ -23,7 +23,6 @@ const initialState = {
   //   username: "",
   newPassword: "",
   oldPassword: "",
-  //   privilege: "",
 };
 
 function EditEmployeePage() {
@@ -85,13 +84,13 @@ function EditEmployeePage() {
       path: "/admin/register-employee",
       icon: <FaPlusCircle />,
       dividerAfter: true,
-      isActive: true,
     },
     {
       id: 3,
       text: "Profil",
       path: "/profile",
       icon: <FaUser />,
+      isActive: true,
     },
   ];
 
@@ -149,7 +148,6 @@ function EditEmployeePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ ...form, department: 1 });
     dispatch(
       updateEmployee({
         ...form,
@@ -328,7 +326,7 @@ function EditEmployeePage() {
             </select>
           </div>
           <br></br>
-          <button onClick={handleSubmit}>Izmeni profil</button>
+          {editable && <button onClick={handleSubmit}>Izmeni profil</button>}
         </form>
       )}
     </div>

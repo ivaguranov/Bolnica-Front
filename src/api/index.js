@@ -25,6 +25,8 @@ export const deleteDemo = (id) => API.delete(`/demos/${id}`);
 
 export const login = (formData) =>
   API.post("/bolnica-user-service/api/login", formData);
+export const resetPassword = (email) =>
+  API.post("/bolnica-user-service/api/forgot-password", email);
 
 // NURSE ROUTES
 
@@ -87,6 +89,8 @@ export const fetchPatient = (lbp) =>
   API.get(`/bolnica-management-service/api/fetch-patient/${lbp}`);
 export const createPatient = (formData) =>
   API.post(`/bolnica-management-service/api/create-patient`, formData);
+export const updatePatient = (formData, lbp) =>
+  API.put(`/bolnica-management-service/api/update-patient/${lbp}`, formData);
 export const deletePatient = (lbp) =>
   API.delete(`/bolnica-management-service/api/remove-patient/${lbp}`);
 
