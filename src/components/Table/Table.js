@@ -5,6 +5,7 @@ import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Table = (props) => {
   const { headers, tableContent, handleClick, tableType, handleEdit } = props;
+
   const listHeaders = headers.map((header) => {
     if (header.key === "lbp" || header.key === "lbz") return <></>;
     return (
@@ -37,7 +38,8 @@ const Table = (props) => {
   const listTable = info.map((entry) => (
     <tr key={entry}>
       {entry.map((element) => {
-        if (element[0] === "lbp" || element[0] === "lbz") return <></>;
+        if (element[0] === "lbp" || element[0] === "lbz")
+          return <td key={element}></td>;
         return (
           <td key={element} style={{ padding: "25px 0px" }}>
             {element[1]}
@@ -117,7 +119,12 @@ const Table = (props) => {
           <thead className="header">
             <tr>
               {listHeaders}
-              <th></th>
+              {(tableType === "patients" || tableType === "employees") && (
+                <>
+                  <th></th>
+                  <th></th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>{listTable.slice(trimStart, trimEnd)}</tbody>

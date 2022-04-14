@@ -12,6 +12,7 @@ import {
 } from "../../redux/actions/patients";
 import { useNavigate } from "react-router";
 import { getSidebarLinks } from "../../commons/sidebarLinks";
+import { getTableHeaders } from "../../commons/tableHeaders";
 
 const PatientPreviewNurses = () => {
   const dispatch = useDispatch();
@@ -31,33 +32,6 @@ const PatientPreviewNurses = () => {
     day: format(new Date(), "d"),
     date: format(new Date(), "d MMMM, yyyy"),
   };
-
-  const headers = [
-    {
-      key: "ime",
-      value: "Ime",
-    },
-    {
-      key: "prezime",
-      value: "Prezime",
-    },
-    {
-      key: "kontaktTelefon",
-      value: "Kontakt",
-    },
-    {
-      key: "email",
-      value: "Email",
-    },
-    {
-      key: "zanimanje",
-      value: "Zanimanje",
-    },
-    {
-      key: "lbp",
-      value: "LBP",
-    },
-  ];
 
   const handleClick = (lbp) => {
     dispatch(deletePatient(lbp));
@@ -109,7 +83,7 @@ const PatientPreviewNurses = () => {
         {patients.length > 0 && (
           <Table
             handleEdit={handleEdit}
-            headers={headers}
+            headers={getTableHeaders("patientPreview")}
             tableContent={patients}
             handleClick={handleClick}
             tableType="patients"

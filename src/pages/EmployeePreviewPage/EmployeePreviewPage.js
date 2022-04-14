@@ -14,6 +14,7 @@ import { BiSearchAlt } from "react-icons/bi";
 import { deletePatient } from "../../redux/actions/patients";
 import { useNavigate } from "react-router";
 import { getSidebarLinks } from "../../commons/sidebarLinks";
+import { getTableHeaders } from "../../commons/tableHeaders";
 
 const EmployeePreview = () => {
   const dispatch = useDispatch();
@@ -34,45 +35,6 @@ const EmployeePreview = () => {
     day: format(new Date(), "d"),
     date: format(new Date(), "d MMMM, yyyy"),
   };
-
-  const headers = [
-    {
-      key: "name",
-      value: "Ime",
-    },
-    {
-      key: "surname",
-      value: "Prezime",
-    },
-    // {
-    //   key: "dob",
-    //   value: "Datum rodjenja",
-    // },
-    {
-      key: "lbz",
-      value: "LBZ",
-    },
-    {
-      key: "contact",
-      value: "Kontakt",
-    },
-    {
-      key: "email",
-      value: "Email",
-    },
-    {
-      key: "title",
-      value: "Titula",
-    },
-    {
-      key: "profession",
-      value: "Zanimanje",
-    },
-    {
-      key: "department",
-      value: "Odeljenje",
-    },
-  ];
 
   const handleClick = (lbz) => {
     dispatch(deleteEmployee(lbz));
@@ -124,7 +86,7 @@ const EmployeePreview = () => {
         </div>
         {employees.length > 0 && (
           <Table
-            headers={headers}
+            headers={getTableHeaders("employeePreview")}
             tableContent={employees}
             handleClick={handleClick}
             handleEdit={handleEdit}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Table from "../Table/Table";
 import { Button } from "reactstrap";
+import { getTableHeaders } from "../../commons/tableHeaders";
 
 const MedicalRecord = ({ record, diseases, examinations }) => {
   const dob = new Date(record.pacijent.datumRodjenja);
@@ -9,48 +10,6 @@ const MedicalRecord = ({ record, diseases, examinations }) => {
 
   const alergies = ["polen", "macja dlaka", "mleko"];
   const vaccines = ["covid19", "tetanus"];
-
-  const headers = [
-    {
-      key: "datum",
-      value: "Datum",
-    },
-    {
-      key: "objektivniNalaz",
-      value: "Objektivni nalaz",
-    },
-  ];
-
-  const headers2 = [
-    {
-      key: "dijagnoza",
-      value: "Dijagnoza",
-    },
-    {
-      key: "pocetak",
-      value: "Pocetak",
-    },
-    {
-      key: "zavrsetak",
-      value: "Zavrsetak",
-    },
-    {
-      key: "rezultatLecenja",
-      value: "Rezultat lecenja",
-    },
-    {
-      key: "tekuceStanje",
-      value: "Tekuce stanje",
-    },
-    {
-      key: "validanOd",
-      value: "Validan od",
-    },
-    {
-      key: "validanDo",
-      value: "Validan do",
-    },
-  ];
 
   const handleClick = () => {
     console.log("Cao");
@@ -100,7 +59,7 @@ const MedicalRecord = ({ record, diseases, examinations }) => {
             </Button>
           </p>
           <Table
-            headers={headers}
+            headers={getTableHeaders("examinationHistory")}
             tableContent={examinations}
             handleClick={handleClick}
             tableType="examinations"
@@ -120,7 +79,7 @@ const MedicalRecord = ({ record, diseases, examinations }) => {
             </Button>
           </p>
           <Table
-            headers={headers2}
+            headers={getTableHeaders("diseaseHistory")}
             tableContent={diseases}
             handleClick={handleClick}
             tableType="diseases"
