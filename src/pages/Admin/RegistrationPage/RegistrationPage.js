@@ -35,7 +35,7 @@ function RegistrationPage() {
 
   //   const departments = useSelector((state) => state.departments);
 
-  //   console.log(departments);
+  
 
   const departmentsDemo = [
     {
@@ -215,7 +215,7 @@ function RegistrationPage() {
           >
             <option value="">Titula</option>
             <option value="Prof. dr. med.">Prof. dr. med.</option>
-            <option value="Dr med. spec.">Dr med. spec.</option>
+            <option value="Dr med.spec.">Dr med. spec.</option>
             <option value="Dr. sci. med">Dr sci. med.</option>
             <option value="Dipl. farm.">Dipl. farm.</option>
             <option value="Mag. farm.">Mag. farm.</option>

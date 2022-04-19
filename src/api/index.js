@@ -4,7 +4,7 @@ const API = axios.create({ baseURL: "http://localhost:9092/" });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("token")) {
-    req.headers.Authorization = `Bearer:${localStorage.getItem("token")}`;
+    req.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
     req.headers.common["Content-Type"] = "application/json;charset=UTF-8";
     req["headers"]["common"]["Accept"] = "application/json";
     // req["headers"]["common"]["Content-Type"] = "text/html";
@@ -47,14 +47,16 @@ export const fetchExaminations = (lbp) =>
       dijagnoza: "string",
     }
   );
-export const createExamination = (formData) => API.post("/demos", formData);
+export const createRecord = (formData) =>
+  API.post(
+    `/bolnica-management-service/api/create-examination-report`,
+    formData
+  );
 
 // RECORDS
 
 export const fetchRecord = (lbp) =>
   API.get(`/bolnica-management-service/api/fetch-zdravstveni-karton/${lbp}`);
-export const createRecord = (formData) =>
-  API.post(`/bolnica-management-service/api/create-pregled-report`, formData);
 
 // EMPLOYEES
 export const fetchEmployees = () =>

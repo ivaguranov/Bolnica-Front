@@ -1,7 +1,10 @@
 import React from "react";
 import SingleAppointmentNurse from "../SingleAppointmentNurse/SingleAppointmentNurse";
 
-const ScheduledAppointmentsNurse = ({ updateAppointmentStatus }) => {
+const ScheduledAppointmentsNurse = ({
+  updateAppointmentStatus,
+  appointments,
+}) => {
   const scheduledProps = [
     {
       id: 1,
@@ -52,15 +55,25 @@ const ScheduledAppointmentsNurse = ({ updateAppointmentStatus }) => {
   return (
     <div>
       <div className="title">Današnji pacijenti</div>
-      {scheduledProps.map((props) => {
+      {appointments.map((appointment) => {
+        return (
+          <SingleAppointmentNurse
+            updateAppointmentStatus={updateAppointmentStatus}
+            key={appointment.zakazaniPregledId}
+            appointment={appointment}
+          />
+        );
+      })}
+      {/* {scheduledProps.map((props) => {
         return (
           <SingleAppointmentNurse
             updateAppointmentStatus={updateAppointmentStatus}
             props={props}
             key={props.id}
+            appointments={appointments}
           />
         );
-      })}
+      })} */}
     </div>
   );
 };

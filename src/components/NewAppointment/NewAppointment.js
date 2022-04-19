@@ -106,13 +106,7 @@ const NewAppointment = (props) => {
         <button
           className="my-save-btn"
           onClick={() =>
-            createNewAppointment(
-              doctorId,
-              patientId,
-              date,
-              examinationType,
-              comment
-            )
+            createNewAppointment(patientId, date, examinationType, comment)
           }
         >
           Sačuvaj

@@ -17,6 +17,8 @@ const DoctorHomepage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const appointments = useSelector((state) => state.appointments);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -27,9 +29,6 @@ const DoctorHomepage = () => {
       dispatch(getPatients());
     } else navigate("/login");
   }, []);
-
-  const appointments = useSelector((state) => state.appointments);
-  const patients = useSelector((state) => state.patients);
 
   const headerProps = {
     avatarUrl: "nikolaSlika 1.jpg",
@@ -88,11 +87,8 @@ const DoctorHomepage = () => {
             number={generalStatsProps[2].number}
           />
         </div>
-        {appointments && patients.length > 0 && (
-          <ScheduledAppointments
-            appointments={appointments}
-            patients={patients}
-          />
+        {appointments.length > 0 && (
+          <ScheduledAppointments appointments={appointments} />
         )}
       </div>
     </>

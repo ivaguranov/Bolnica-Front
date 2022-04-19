@@ -49,6 +49,24 @@ const ScheduleAppointmentPage = () => {
     }
   }, [employees]);
 
+  useEffect(() => {
+    if (appointments.length > 0) {
+      setEvents(
+        appointments.map((appointment) => {
+          const date = new Date(appointment.datumIVremePregleda);
+          return {
+            id: 1,
+            startAt: date.toISOString(),
+            endAt: date.addHours(1).toISOString(),
+            summary: `Pacijent: ${appointment.pacijent.ime} ${appointment.pacijent.prezime} - ${appointment.statusPregleda}, Status prispeca: ${appointment.prispecePacijenta}`,
+            color: "#336cfb",
+            calendarID: "work",
+          };
+        })
+      );
+    }
+  }, [appointments]);
+
   // eslint-disable-next-line no-extend-native
   Date.prototype.addHours = function (h) {
     this.setTime(this.getTime() + h * 60 * 60 * 1000);
@@ -58,31 +76,24 @@ const ScheduleAppointmentPage = () => {
   const getDoctorAppointments = (lbz) => {
     const newDoctor = employees.find((doctor) => doctor.lbz === lbz);
     setSelectedDoctor(newDoctor);
-    // dispatch(getAppointments(lbz));
+    dispatch(getAppointments(lbz));
   };
 
-  const createNewAppointment = (
-    doctorId,
-    patientId,
-    date,
-    examinationType,
-    note
-  ) => {
+  const createNewAppointment = (patientId, date, examinationType, note) => {
     const newEvent = {
       id: events.length + 1,
       startAt: date.toISOString(),
       endAt: date.addHours(1).toISOString(),
-      summary: events.length + ". pregled",
+      summary: events.length + 1 + ". pregled",
       color: "#336cfb",
       calendarID: "work",
     };
-    console.log(examinationType);
     setNewAppointmentVisible(false);
     setEvents([...events, newEvent]);
     dispatch(
       createAppointment({
-        examinationEmployeeId: doctorId,
-        patient: patientId,
+        lbz: selectedDoctor.lbz,
+        lbp: patientId,
         dateAndTimeOfAppointment: date.toISOString(),
         note,
         // examinationType,
