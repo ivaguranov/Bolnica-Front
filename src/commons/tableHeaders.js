@@ -64,8 +64,12 @@ export const getTableHeaders = (contentType) => {
   } else if (contentType === "examinationHistory") {
     return [
       {
-        key: "datum",
+        key: "datumPregleda",
         value: "Datum",
+      },
+      {
+        key: "glavneTegobe",
+        value: "Glavne tegobe",
       },
       {
         key: "objektivniNalaz",

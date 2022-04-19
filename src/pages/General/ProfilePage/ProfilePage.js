@@ -11,7 +11,6 @@ const initialState = {
   name: "",
   surname: "",
   jmbg: "",
-  email: "",
   address: "",
   city: "",
   profession: "",
@@ -20,7 +19,6 @@ const initialState = {
   gender: "male",
   dob: "2000-03-03",
   department: "",
-  username: "",
   newPassword: "",
   oldPassword: "",
 };
@@ -42,6 +40,7 @@ function EditEmployeePage() {
 
   useEffect(() => {
     if (employee) {
+      console.log(employee);
       const dateOfBirth = new Date(employee.dob);
       var day = ("0" + dateOfBirth.getDate()).slice(-2);
       var month = ("0" + (dateOfBirth.getMonth() + 1)).slice(-2);
@@ -51,7 +50,6 @@ function EditEmployeePage() {
         name: employee.name,
         surname: employee.surname,
         jmbg: employee.jmbg,
-        email: employee.email,
         address: employee.address,
         city: employee.city,
         profession: employee.profession,
@@ -96,8 +94,9 @@ function EditEmployeePage() {
     },
   ];
 
-  const handleChange = (e) =>
+  const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const onChangeDateHandler = (e) => {
     const date = new Date(e.target.value);
@@ -125,13 +124,18 @@ function EditEmployeePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log({
+      ...form,
+      department: 1,
+      lbz: employee.LBZ,
+      gender: "MUSKI",
+    });
     dispatch(
       updateEmployee({
         ...form,
-        email: "test@gmail.com",
-        username: "novi_username",
         department: 1,
         lbz: employee.lbz,
+        gender: "MUSKI",
       })
     );
     navigate("/admin/employee-preview");
@@ -179,16 +183,6 @@ function EditEmployeePage() {
                 name="surname"
                 type="text"
                 value={form.surname}
-                disabled={!editable}
-              />
-            </div>
-            <div className="form-group-custom">
-              <input
-                type="email"
-                placeholder="Email"
-                onChange={handleChange}
-                name="email"
-                value={form.email}
                 disabled={!editable}
               />
             </div>
@@ -253,7 +247,7 @@ function EditEmployeePage() {
               >
                 <option value="">Titula</option>
                 <option value="Prof. dr. med.">Prof. dr. med.</option>
-                <option value="Dr med. spec.">Dr med. spec.</option>
+                <option value="Dr med.spec.">Dr med. spec.</option>
                 <option value="Dr. sci. med">Dr sci. med.</option>
                 <option value="Dipl. farm.">Dipl. farm.</option>
                 <option value="Mag. farm.">Mag. farm.</option>
@@ -325,24 +319,35 @@ function EditEmployeePage() {
               </button>
             </p>
             {passwordEditable && (
-              <div className="form-group-custom">
-                <input
-                  className="margin-right"
-                  placeholder="Ime"
-                  onChange={handleChange}
-                  name="name"
-                  type="password"
-                  value={form.oldPassword}
-                />
-                <input
-                  className="margin-left"
-                  placeholder="Prezime"
-                  onChange={handleChange}
-                  name="surname"
-                  type="password"
-                  value={form.newPassword}
-                />
-              </div>
+              <>
+                <div className="form-group-custom">
+                  <input
+                    placeholder="Stara lozinka"
+                    onChange={handleChange}
+                    name="name"
+                    type="password"
+                    value={form.oldPassword}
+                  />
+                </div>
+                <div className="form-group-custom">
+                  <input
+                    className="margin-right"
+                    placeholder="Nova lozinka"
+                    onChange={handleChange}
+                    name="name"
+                    type="password"
+                    value={form.newPassword}
+                  />
+                  <input
+                    className="margin-left"
+                    placeholder="Nova lozinka ponovo"
+                    onChange={handleChange}
+                    name="surname"
+                    type="password"
+                    value={form.confirmPassword}
+                  />
+                </div>
+              </>
             )}
           </form>
         </>

@@ -40,6 +40,14 @@ const Table = (props) => {
       {entry.map((element) => {
         if (element[0] === "lbp" || element[0] === "lbz")
           return <td key={element}></td>;
+        if (element[0] === "datumPregleda") {
+          return (
+            <td key={element} style={{ padding: "25px 0px" }}>
+              {new Date(element[1]).toLocaleDateString()}
+            </td>
+          );
+        }
+
         return (
           <td key={element} style={{ padding: "25px 0px" }}>
             {element[1]}

@@ -42,9 +42,11 @@ export const updateAppointment = (data) =>
 
 export const fetchExaminations = (lbp) =>
   API.post(
-    `/bolnica-management-service/api/fetch-istorija-bolesti/${lbp}?page=1&size=5`,
+    `/bolnica-management-service/api/fetch-examinations/${lbp}?page=1&size=5`,
     {
-      dijagnoza: "string",
+      from: null,
+      to: null,
+      on: null,
     }
   );
 export const createRecord = (formData) =>
