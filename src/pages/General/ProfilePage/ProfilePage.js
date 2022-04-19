@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Sidebar from "../../../components/Sidebar/Sidebar";
-import { updateEmployee } from "../../../redux/actions/employee";
+import { getEmployee, updateEmployee } from "../../../redux/actions/employee";
 import { ImPencil } from "react-icons/im";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { getSidebarLinks } from "../../../commons/sidebarLinks";
@@ -26,43 +26,52 @@ const initialState = {
 function EditEmployeePage() {
   const dispatch = useDispatch();
   const [employee, setEmployee] = useState();
+  const [user, setUser] = useState();
   const [editable, setEditable] = useState(false);
   const [passwordEditable, setPasswordEditable] = useState(false);
+  const [links, setLinks] = useState([]);
   const navigate = useNavigate();
   const [form, setForm] = useState(initialState);
+  const employees = useSelector((state) => state.employees);
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
     if (loggedUser) {
-      setEmployee(loggedUser);
+      setUser(loggedUser);
+      const roles = loggedUser.roles.split(",");
+      if (roles.includes("ROLE_ADMIN")) setLinks(getSidebarLinks("admin", 4));
+      else if (roles.includes("ROLE_DR_SPEC_POV"))
+        setLinks(getSidebarLinks("doctor", 4));
+      else setLinks(getSidebarLinks("nurse", 5));
+      dispatch(getEmployee(loggedUser.LBZ));
     } else navigate("/login");
   }, []);
 
   useEffect(() => {
-    if (employee) {
-      console.log(employee);
-      const dateOfBirth = new Date(employee.dob);
+    if (employees) {
+      setEmployee(employees);
+      const dateOfBirth = new Date(employees.dob);
       var day = ("0" + dateOfBirth.getDate()).slice(-2);
       var month = ("0" + (dateOfBirth.getMonth() + 1)).slice(-2);
       var today = dateOfBirth.getFullYear() + "-" + month + "-" + day;
 
       setForm({
-        name: employee.name,
-        surname: employee.surname,
-        jmbg: employee.jmbg,
-        address: employee.address,
-        city: employee.city,
-        profession: employee.profession,
-        title: employee.title,
-        contact: employee.contact,
-        gender: employee.gender,
+        name: employees.name,
+        surname: employees.surname,
+        jmbg: employees.jmbg,
+        address: employees.address,
+        city: employees.city,
+        profession: employees.profession,
+        title: employees.title,
+        contact: employees.contact,
+        gender: employees.gender,
         dob: today,
-        department: employee.department,
+        department: employees.department,
         newPassword: "",
         oldPassword: "",
       });
     }
-  }, [employee]);
+  }, [employees]);
 
   const departmentsDemo = [
     {
@@ -127,24 +136,27 @@ function EditEmployeePage() {
     console.log({
       ...form,
       department: 1,
-      lbz: employee.LBZ,
-      gender: "MUSKI",
+      lbz: employee.lbz,
+      gender: "male",
     });
     dispatch(
       updateEmployee({
         ...form,
         department: 1,
         lbz: employee.lbz,
-        gender: "MUSKI",
+        gender: "male",
       })
     );
-    navigate("/admin/employee-preview");
+    const roles = user.roles.split(",");
+    if (roles.includes("ROLE_ADMIN")) navigate("/admin");
+    else if (roles.includes("ROLE_DR_SPEC_POV")) navigate("/");
+    else navigate("/nurse");
   };
 
   return (
     <div style={{ marginLeft: "15%" }}>
       <div className="sidebar-link-container">
-        <Sidebar links={getSidebarLinks("admin", 4)} />
+        <Sidebar links={links} />
       </div>
       {employee && (
         <>
@@ -298,8 +310,6 @@ function EditEmployeePage() {
                 })}
               </select>
             </div>
-            <br></br>
-            {editable && <button onClick={handleSubmit}>Izmeni profil</button>}
           </form>
           <form onSubmit={handleSubmit} className="form-custom familyFix">
             <p className="form-section-heading">
@@ -324,7 +334,7 @@ function EditEmployeePage() {
                   <input
                     placeholder="Stara lozinka"
                     onChange={handleChange}
-                    name="name"
+                    name="oldPassword"
                     type="password"
                     value={form.oldPassword}
                   />
@@ -334,7 +344,7 @@ function EditEmployeePage() {
                     className="margin-right"
                     placeholder="Nova lozinka"
                     onChange={handleChange}
-                    name="name"
+                    name="newPassword"
                     type="password"
                     value={form.newPassword}
                   />
@@ -342,12 +352,16 @@ function EditEmployeePage() {
                     className="margin-left"
                     placeholder="Nova lozinka ponovo"
                     onChange={handleChange}
-                    name="surname"
+                    name="confirmPassword"
                     type="password"
                     value={form.confirmPassword}
                   />
                 </div>
               </>
+            )}
+            <br></br>
+            {(editable || passwordEditable) && (
+              <button onClick={handleSubmit}>Izmeni profil</button>
             )}
           </form>
         </>

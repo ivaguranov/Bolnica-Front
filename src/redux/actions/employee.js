@@ -1,6 +1,7 @@
 import {
   CREATE_EMPLOYEE,
   DELETE_EMPLOYEE,
+  GET_EMPLOYEE,
   GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
 } from "../actionTypes";
