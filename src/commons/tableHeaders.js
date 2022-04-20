@@ -52,10 +52,10 @@ export const getTableHeaders = (contentType) => {
         key: "email",
         value: "Email",
       },
-      {
-        key: "zanimanje",
-        value: "Zanimanje",
-      },
+      // {
+      //   key: "zanimanje",
+      //   value: "Zanimanje",
+      // },
       {
         key: "lbp",
         value: "LBP",
