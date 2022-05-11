@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./styles.css";
-import { ImBin, ImPencil } from "react-icons/im";
+import { ImBin, ImPencil, ImFileText2 } from "react-icons/im";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Table = (props) => {
@@ -11,6 +11,7 @@ const Table = (props) => {
     tableType,
     handleEdit,
     handleRowClick,
+    handlecreateLabReport,
   } = props;
 
   const listHeaders = headers.map((header) => {
@@ -52,6 +53,44 @@ const Table = (props) => {
               {new Date(element[1]).toLocaleDateString()}
             </td>
           );
+        }
+        /*         if (element[0] === "status") {
+          if (element[1] === "neobradjeno") {
+            return (
+              <td style={{ width: "5%" }}>
+                <button
+                  className="buttonIconBlue"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlecreateLabReport("lbz", entry);
+                  }}
+                >
+                  <ImFileText2 />
+                </button>
+              </td>
+            );
+          } else {
+            return <></>;
+          }
+        } */
+        if (element[0] === "kreiraj") {
+          if (entry[3][1] < new Date().getTime() - 2592000000) {
+            return (
+              <td style={{ width: "5%" }}>
+                <button
+                  className="buttonIconBlue"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlecreateLabReport("lbz", entry);
+                  }}
+                >
+                  <ImFileText2 />
+                </button>
+              </td>
+            );
+          } else {
+            return <></>;
+          }
         }
 
         return (
