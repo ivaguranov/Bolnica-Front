@@ -165,6 +165,33 @@ export const getTableHeaders = (contentType) => {
         value: "Kreiraj radni nalog",
       },
     ];
+  } else if (contentType === "labVisits") {
+    return [
+      {
+        key: "id",
+        value: "Id lab pregleda",
+      },
+      {
+        key: "lbpPacijenta",
+        value: "LBP",
+      },
+      {
+        key: "lbzTehnicara",
+        value: "LBZ",
+      },
+      {
+        key: "napomena",
+        value: "Napomena",
+      },
+      {
+        key: "datumPregleda",
+        value: "Datum",
+      },
+      {
+        key: "statusPregledaZakazaniPacijenti",
+        value: "Status pregleda",
+      },
+    ];
   }
   return [];
 };
