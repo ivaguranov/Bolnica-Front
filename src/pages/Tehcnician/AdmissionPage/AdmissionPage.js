@@ -48,7 +48,7 @@ const AdmissionPage = () => {
   }, []);
 
   const visits = useSelector((state) => state.visits);
-
+  
   const toggleClass1 = () => {
     if (!isClicked1) {
       setClicked2(!isClicked2);
