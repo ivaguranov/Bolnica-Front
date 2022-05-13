@@ -112,7 +112,7 @@ export const getSidebarLinks = (role, activeId) => {
         id: 2,
         text: "Prijem pacijenata",
         path: "/technican/patient-admission",
-        icon: <FaUser />,
+        icon: <FaUserInjured />,
         isActive: activeId === 2 ? true : false,
       },
       {

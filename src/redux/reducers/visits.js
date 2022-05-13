@@ -8,6 +8,8 @@ const labVisitReducer = (state = [], action) => {
       return state.map((labVisit) =>
         labVisit.lbz !== action.data.lbz ? labVisit : action.data
       );
+    case actionType.CREATE_LAB_VISIT:
+      return [...state, action.data];
     default:
       return state;
   }

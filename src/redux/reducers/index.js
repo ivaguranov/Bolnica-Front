@@ -12,6 +12,7 @@ import patients from "./patients";
 import referrals from "./referrals";
 import loggedUser from "./auth";
 import visits from "./visits";
+import numberOfAppointments from "./numberOfAppointments";
 
 export const reducers = combineReducers({
   demo,
@@ -26,4 +27,5 @@ export const reducers = combineReducers({
   referrals,
   labReports,
   visits,
+  numberOfAppointments,
 });

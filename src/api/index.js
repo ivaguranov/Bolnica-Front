@@ -125,7 +125,14 @@ export const fetchDiseases = (lbp, data) =>
     data
   );
 
-// LAB VISITS
+//LAB
+export const fetchNumberOfLabAppointments = (dateNum) =>
+  API.get(
+    `/bolnica-management-service/api/fetch-number-of-appointments/${dateNum}`
+  );
+
+//LAB VISITS
 export const searchLabVisits = (lbp, dateValue) =>
   API.post("/visits", lbp, dateValue);
-export const updateLabVisits = (id, status) => API.put(`/visits`, id, status);
+export const updateLabVisits = (id, status) => API.put("/visits", id, status);
+export const createVisit = (formData) => API.post("/visits", formData);
