@@ -63,7 +63,7 @@ const Table = (props) => {
             </td>
           );
         }
-/*
+
         if (element[0] === "statusPregleda") {
           let reserved = false;
           let canceled = false;
@@ -79,10 +79,30 @@ const Table = (props) => {
             <td style={{ width: "5%" }}>
               <div className="d-flex">
                 <button
-                  className={` ${
-                    reserved ? "searchZReserved" : "searchButton"
-                             
-                if (element[0] === "status") {
+                  className={` ${canceled ? "searchCanceled" : "searchButton"}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleButtonCanceled("lbz", entry);
+                  }}
+                >
+                  Otkazano
+                </button>
+
+                <button
+                  className={` ${finished ? "searchFinished" : "searchButton"}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleButtonFinished("lbz", entry);
+                  }}
+                >
+                  Završeno
+                </button>
+              </div>
+            </td>
+          );
+        }
+
+        if (element[0] === "status") {
           if (element[1] === "neobradjeno") {
             return (
               <td style={{ width: "5%" }}>
@@ -100,7 +120,7 @@ const Table = (props) => {
           } else {
             return <></>;
           }
-        } */
+        }
         if (element[0] === "kreiraj") {
           if (entry[3][1] < new Date().getTime() - 2592000000) {
             return (
@@ -170,30 +190,6 @@ const Table = (props) => {
             </td>
           );
         }
-
-                <button
-                  className={` ${canceled ? "searchCanceled" : "searchButton"}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleButtonCanceled("lbz", entry);
-                  }}
-                >
-                  Otkazano
-                </button>
-
-                <button
-                  className={` ${finished ? "searchFinished" : "searchButton"}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleButtonFinished("lbz", entry);
-                  }}
-                >
-                  Završeno
-                </button>
-              </div>
-            </td>
-          );
-        }
         return (
           <td key={element} style={{ padding: "25px 0px" }}>
             {element[1]}
@@ -238,7 +234,10 @@ const Table = (props) => {
           <td style={{ width: "5%" }}>
             <button
               className="buttonIcon"
-              onClick={() => handleButton("lbz", entry)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleButton("lbz", entry);
+              }}
             >
               <ImBin />
             </button>

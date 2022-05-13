@@ -182,6 +182,8 @@ export const getTableHeaders = (contentType) => {
       {
         key: "komentar",
         value: "Komentar",
+      },
+    ];
   } else if (contentType === "labVisits") {
     return [
       {

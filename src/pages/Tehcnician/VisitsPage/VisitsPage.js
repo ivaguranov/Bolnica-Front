@@ -164,13 +164,13 @@ const VisitsPage = () => {
       statusPregleda: "Otkazano",
     },
   ];
-  
+
   const demoUnrealizedLabReports = [
     {
       id: 1,
       ime: "Marko",
       prezime: "Markovic",
-      datum: "29.05.2020.",
+      datumRodjenja: "29.05.2020.",
       odeljenje: "ocno",
       spisakAnaliza: "spisakAnaliza",
       komentar: "komentar",
@@ -179,7 +179,7 @@ const VisitsPage = () => {
       id: 2,
       ime: "Marko",
       prezime: "Markovic",
-      datum: "29.05.2020.",
+      datumRodjenja: "29.05.2020.",
       odeljenje: "ocno",
       spisakAnaliza: "spisakAnaliza",
       komentar: "komentar",
@@ -188,7 +188,7 @@ const VisitsPage = () => {
       id: 3,
       ime: "Marko",
       prezime: "Markovic",
-      datum: "29.05.2020.",
+      datumRodjenja: "29.05.2020.",
       odeljenje: "ocno",
       spisakAnaliza: "spisakAnaliza",
       komentar: "komentar",
