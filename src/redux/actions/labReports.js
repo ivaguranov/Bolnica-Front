@@ -23,7 +23,6 @@ export const getLabReport = (id) => async (dispatch) => {
     console.log(error);
   }
 };
-
 export const searchLabReports = (searchInfo) => async (dispatch) => {
   try {
     const { data } = await api.searchLabReports({ searchInfo });
