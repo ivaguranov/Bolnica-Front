@@ -38,6 +38,7 @@ import IssuingResultsPage from "./pages/Tehcnician/IssuingResultsPage/IssuingRes
 import IssuingResultsDetailedPage from "./pages/Tehcnician/IssuingResultsDetailedPage/IssuingResultsDetailedPage";
 
 //RECEPCIONIST
+import RecepcionistHomepage from "./pages/Recepcionist/RecepcionistHomepage/RecepcionistHomepage";
 import RecepcionistAddPatientPage from "./pages/Recepcionist/RecepcionistAddPatientPage/RecepcionistAddPatientPage";
 
 const App = () => {
@@ -123,6 +124,8 @@ const App = () => {
           element={<IssuingResultsDetailedPage />}
         />
 
+        {/* RECEPTIONIST */}
+        <Route path="/recepcionist" exact element={<RecepcionistHomepage />} />
         {/* RECEPCIONIST ROUTS */}
         <Route
           path="/recepcionist/add-patient"
