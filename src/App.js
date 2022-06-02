@@ -40,6 +40,7 @@ import IssuingResultsDetailedPage from "./pages/Tehcnician/IssuingResultsDetaile
 //RECEPCIONIST
 import RecepcionistHomepage from "./pages/Recepcionist/RecepcionistHomepage/RecepcionistHomepage";
 import RecepcionistAddPatientPage from "./pages/Recepcionist/RecepcionistAddPatientPage/RecepcionistAddPatientPage";
+import RecepcionistScheduleAppPage from "./pages/Recepcionist/RecepcionistScheduleAppPage/RecepcionistScheduleAppPage";
 
 const App = () => {
   return (
@@ -124,13 +125,17 @@ const App = () => {
           element={<IssuingResultsDetailedPage />}
         />
 
-        {/* RECEPTIONIST */}
+        {/* RECEPCIONIST ROUTES */}
         <Route path="/recepcionist" exact element={<RecepcionistHomepage />} />
-        {/* RECEPCIONIST ROUTS */}
         <Route
           path="/recepcionist/add-patient"
           exact
           element={<RecepcionistAddPatientPage />}
+        />
+        <Route
+            path="/recepcionist/add-appointment"
+            exact
+            element={<RecepcionistScheduleAppPage />}
         />
       </Routes>
     </BrowserRouter>
