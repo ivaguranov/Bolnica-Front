@@ -3,6 +3,8 @@ const employeeReducer = (state = [], action) => {
   switch (action.type) {
     case actionType.GET_EMPLOYEES:
       return action.data;
+    case actionType.GET_EMPLOYEE:
+      return [action.data];
     case actionType.CREATE_EMPLOYEE:
       return [...state, action.data];
     case actionType.UPDATE_EMPLOYEE:

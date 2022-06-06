@@ -10,11 +10,11 @@ export const getExaminations = (lbp) => async (dispatch) => {
   }
 };
 
-export const createExamination = (formData) => async (dispatch) => {
-  try {
-    const { data } = await api.createExamination(formData);
-    dispatch({ type: CREATE_EXAMINATION, data });
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const createExamination = (formData) => async (dispatch) => {
+//   try {
+//     const { data } = await api.createExamination(formData);
+//     dispatch({ type: CREATE_EXAMINATION, data });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

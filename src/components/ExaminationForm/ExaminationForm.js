@@ -108,7 +108,7 @@ const ExaminationForm = ({ saveExamination, record }) => {
               onChange={handleChange}
               className="form-select-custom "
               aria-label="Default select example"
-              defaultValue="0"
+              defaultValue="A15.3"
               name="dijagnoza"
             >
               <option value="A15.3">A15.3 - Tuberkuloza pluća</option>
@@ -133,13 +133,13 @@ const ExaminationForm = ({ saveExamination, record }) => {
               onChange={handleChange}
               className="form-select-custom "
               aria-label="Default select example"
-              defaultValue="0"
+              defaultValue="U_TOKU"
               name="rezultatLecenja"
             >
-              <option value="1">U toku</option>
-              <option value="2">Oporavljen</option>
-              <option value="3">Stalne posledice</option>
-              <option value="4">Preminuo</option>
+              <option value="U_TOKU">U toku</option>
+              <option value="OPORAVLJEN">Oporavljen</option>
+              <option value="STALNE_POSLEDICE">Stalne posledice</option>
+              <option value="PREMINUO">Preminuo</option>
             </select>
           </div>
           <div className="form-group-custom">

@@ -1,6 +1,7 @@
 import {
   CREATE_EMPLOYEE,
   DELETE_EMPLOYEE,
+  GET_EMPLOYEE,
   GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
 } from "../actionTypes";
@@ -18,6 +19,15 @@ export const getEmployees = () => async (dispatch) => {
 export const getEmployee = (lbz) => async (dispatch) => {
   try {
     const { data } = await api.fetchEmployee(lbz);
+    dispatch({ type: GET_EMPLOYEES, data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getEmployeesDep = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchEmployeesDep(id);
     dispatch({ type: GET_EMPLOYEES, data });
   } catch (error) {
     console.log(error);

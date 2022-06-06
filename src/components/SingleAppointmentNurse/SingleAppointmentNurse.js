@@ -1,47 +1,52 @@
 import React from "react";
 import "./styles.css";
 import { format } from "date-fns";
-import { useDispatch } from "react-redux";
 
-const SingleAppointmentNurse = ({ props, updateAppointmentStatus }) => {
-  const { id, firstname, lastname, dob, gender, time } = props;
+const SingleAppointmentNurse = ({ appointment, updateAppointmentStatus }) => {
+  const { datumIVremePregleda, lbzLekara, pacijent, zakazaniPregledId } =
+    appointment;
 
-  let age = format(new Date(), "yyyy") - format(dob, "yyyy");
-  let appointTime = format(new Date(time), "HH:mm");
-
-  const dispatch = useDispatch();
+  let age = format(new Date(), "yyyy") - format(pacijent.datumRodjenja, "yyyy");
+  let appointTime = format(new Date(datumIVremePregleda), "HH:mm");
+  let appointDate = format(new Date(datumIVremePregleda), "dd:MM:yyyy");
 
   return (
-    <div key={`prop-${id}`} className="customClass">
+    <div className="customClass">
       <div className="d-flex flex-row align-items-center ">
         <div className="appTime">
-          <span>{appointTime}</span>
+          <span>
+            {appointTime} {appointDate}
+          </span>
         </div>
         <div className="customContainer">
           <div className="d-flex flex-row justify-content-around appointment">
             <span className="text-dark text1">
-              {firstname} {lastname}
+              {pacijent.ime} {pacijent.prezime}
             </span>
             <span className="text2">
-              {age} {gender}
+              Starost: {age}, Pol: {pacijent.pol}
             </span>
             <div className="d-flex">
               <button
                 type="button"
                 className="btn customButton1"
-                onClick={() => updateAppointmentStatus(id, "ZAKAZANO")}
+                onClick={() =>
+                  updateAppointmentStatus(zakazaniPregledId, "ZAKAZANO")
+                }
               >
                 Čeka
               </button>
               <button type="button" className="btn customButton2">
-                Trenutno
+                U toku
               </button>
               <button
                 type="button"
                 className="btn customButton3"
-                onClick={() => updateAppointmentStatus(id, "OTKAZANO")}
+                onClick={() =>
+                  updateAppointmentStatus(zakazaniPregledId, "OTKAZANO")
+                }
               >
-                Otkazano
+                Otkazi
               </button>
               <button type="button" className="btn customButton4">
                 Završeno

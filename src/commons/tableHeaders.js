@@ -52,10 +52,10 @@ export const getTableHeaders = (contentType) => {
 				key: "email",
 				value: "Email",
 			},
-			{
-				key: "zanimanje",
-				value: "Zanimanje",
-			},
+			// {
+			//   key: "zanimanje",
+			//   value: "Zanimanje",
+			// },
 			{
 				key: "lbp",
 				value: "LBP",
@@ -64,8 +64,12 @@ export const getTableHeaders = (contentType) => {
 	} else if (contentType === "examinationHistory") {
 		return [
 			{
-				key: "datum",
+				key: "datumPregleda",
 				value: "Datum",
+			},
+			{
+				key: "glavneTegobe",
+				value: "Glavne tegobe",
 			},
 			{
 				key: "objektivniNalaz",
@@ -76,7 +80,7 @@ export const getTableHeaders = (contentType) => {
 		return [
 			{
 				key: "dijagnoza",
-				value: "Dijagnoza",
+				value: "Dijagndoza",
 			},
 			{
 				key: "pocetak",
@@ -101,6 +105,149 @@ export const getTableHeaders = (contentType) => {
 			{
 				key: "validanDo",
 				value: "Validan do",
+			},
+		];
+	} else if (contentType === "labReportPreview") {
+		return [
+			{
+				key: "id",
+				value: "ID izvestaja",
+			},
+			{
+				key: "lbpPacijenta",
+				value: "LBP",
+			},
+			{
+				key: "ime",
+				value: "Ime",
+			},
+			{
+				key: "prezime",
+				value: "Prezime",
+			},
+		];
+	} else if (contentType === "scheduledVisits") {
+		return [
+			{
+				key: "id",
+				value: "Id",
+			},
+			{
+				key: "lbpPacijenta",
+				value: "LBP",
+			},
+			{
+				key: "lbzTehnicara",
+				value: "LBZ",
+			},
+			{
+				key: "napomena",
+				value: "Napomena",
+			},
+			{
+				key: "datumPregleda",
+				value: "Datum pregleda",
+			},
+			{
+				key: "statusPregleda",
+				value: "Status pregleda",
+			},
+		];
+	} else if (contentType === "unrealizedLabReferrals") {
+		return [
+			{
+				key: "id",
+				value: "ID izvestaja",
+			},
+			{
+				key: "ime",
+				value: "Ime",
+			},
+			{
+				key: "prezime",
+				value: "Prezime",
+			},
+			{
+				key: "datumRodjenja",
+				value: "Datum",
+			},
+			{
+				key: "odeljenje",
+				value: "Odeljenje",
+			},
+			{
+				key: "spisakAnaliza",
+				value: "spisakAnaliza",
+			},
+			{
+				key: "komentar",
+				value: "Komentar",
+			},
+		];
+	} else if (contentType === "labVisits") {
+		return [
+			{
+				key: "id",
+				value: "Id lab pregleda",
+			},
+			{
+				key: "lbpPacijenta",
+				value: "LBP",
+			},
+			{
+				key: "lbzTehnicara",
+				value: "LBZ",
+			},
+			{
+				key: "napomena",
+				value: "Napomena",
+			},
+			{
+				key: "datumPregleda",
+				value: "Datum",
+			},
+			{
+				key: "statusPregledaZakazaniPacijenti",
+				value: "Status pregleda",
+			},
+		];
+	} else if (contentType === "detailedResultPreview") {
+		return [
+			{
+				key: "analysisId",
+				value: "ID naloga",
+			},
+			{
+				key: "analysisName",
+				value: "Naziv analize",
+			},
+			{
+				key: "parameterId",
+				value: "ID parametra",
+			},
+			{
+				key: "parameterName",
+				value: "Naziv parametra",
+			},
+			{
+				key: "unit",
+				value: "Jedinica",
+			},
+			{
+				key: "lowerThreshold",
+				value: "Donja granica",
+			},
+			{
+				key: "upperThreshold",
+				value: "Gornja granica",
+			},
+			{
+				key: "doctorName",
+				value: "Ime lekara",
+			},
+			{
+				key: "doctorSurname",
+				value: "Prezime lekara",
 			},
 		];
 	}

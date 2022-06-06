@@ -54,7 +54,6 @@ function RegistrationPatientPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     dispatch(createPatient({ ...form, pol: "MUSKI" }));
     navigate("/nurse/patient-preview");
   };

@@ -49,14 +49,16 @@ const MedicalRecord = ({ record, diseases, examinations }) => {
         <>
           <p className="form-section-heading">
             Istorija lekarskih pregleda{" "}
-            <Button
-              color="primary"
-              outline={!isExamination}
-              onClick={swapTabs}
-              style={{ marginLeft: "30px" }}
-            >
-              Istorija bolesti
-            </Button>
+            {diseases.length > 0 && (
+              <Button
+                color="primary"
+                outline={!isExamination}
+                onClick={swapTabs}
+                style={{ marginLeft: "30px" }}
+              >
+                Istorija bolesti
+              </Button>
+            )}
           </p>
           <Table
             headers={getTableHeaders("examinationHistory")}
@@ -69,14 +71,16 @@ const MedicalRecord = ({ record, diseases, examinations }) => {
         <>
           <p className="form-section-heading">
             Istorija bolesti{" "}
-            <Button
-              color="primary"
-              outline={isExamination}
-              onClick={swapTabs}
-              style={{ marginLeft: "30px" }}
-            >
-              Istorija pregleda
-            </Button>
+            {examinations.length > 0 && (
+              <Button
+                color="primary"
+                outline={isExamination}
+                onClick={swapTabs}
+                style={{ marginLeft: "30px" }}
+              >
+                Istorija pregleda
+              </Button>
+            )}
           </p>
           <Table
             headers={getTableHeaders("diseaseHistory")}

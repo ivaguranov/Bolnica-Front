@@ -20,6 +20,9 @@ const PatientExamination = () => {
   const [isExamination, setIsExamination] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const examinations = useSelector((state) => state.examinations);
+  const record = useSelector((state) => state.records);
+  const diseases = useSelector((state) => state.diseases);
 
   useEffect(() => {
     const doctorLocal = JSON.parse(localStorage.getItem("loggedUser"));
@@ -34,21 +37,16 @@ const PatientExamination = () => {
     );
     dispatch(getExaminations(pathParts[pathParts.length - 1]));
   }, []);
-
-  const examinations = useSelector((state) => state.examinations);
-  const record = useSelector((state) => state.records);
-  const diseases = useSelector((state) => state.diseases);
-
   const saveExamination = (formData) => {
     dispatch(
       createRecord({
         ...formData,
         lbp,
-        zaposleniId: doctor.LBZ,
+        lbz: doctor.LBZ,
         sadasnjaBolest: null,
       })
     );
-    // navigate("/");
+    dispatch(getExaminations(lbp));
     swapTabs();
   };
 

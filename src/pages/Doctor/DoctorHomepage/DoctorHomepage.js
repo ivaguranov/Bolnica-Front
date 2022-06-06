@@ -17,8 +17,10 @@ const DoctorHomepage = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		const token = localStorage.getItem("token");
+  const appointments = useSelector((state) => state.appointments);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
 		if (token) {
 			const doctor = JSON.parse(localStorage.getItem("loggedUser"));
@@ -28,15 +30,12 @@ const DoctorHomepage = () => {
 		} else navigate("/login");
 	}, []);
 
-	const appointments = useSelector((state) => state.appointments);
-	const patients = useSelector((state) => state.patients);
-
-	const headerProps = {
-		avatarUrl: "nikolaSlika 1.jpg",
-		welcomeMsg: "Dobro jutro",
-		userName: "Dr. Paun",
-		userTitle: "Kardiolog",
-	};
+  const headerProps = {
+    avatarUrl: "nikolaSlika 1.jpg",
+    welcomeMsg: "Dobro jutro",
+    userName: "Dr. Paun",
+    userTitle: "Kardiolog",
+  };
 
 	const generalStatsProps = [
 		{
@@ -71,32 +70,29 @@ const DoctorHomepage = () => {
 					date={format(new Date(), "d MMMM, yyyy")}
 				/>
 
-				<div className="components">
-					<GeneralStats
-						image={generalStatsProps[0].image}
-						text={generalStatsProps[0].text}
-						number={generalStatsProps[0].number}
-					/>
-					<GeneralStats
-						image={generalStatsProps[1].image}
-						text={generalStatsProps[1].text}
-						number={generalStatsProps[1].number}
-					/>
-					<GeneralStats
-						image={generalStatsProps[2].image}
-						text={generalStatsProps[2].text}
-						number={generalStatsProps[2].number}
-					/>
-				</div>
-				{appointments && patients.length > 0 && (
-					<ScheduledAppointments
-						appointments={appointments}
-						patients={patients}
-					/>
-				)}
-			</div>
-		</>
-	);
+        <div className="components">
+          <GeneralStats
+            image={generalStatsProps[0].image}
+            text={generalStatsProps[0].text}
+            number={generalStatsProps[0].number}
+          />
+          <GeneralStats
+            image={generalStatsProps[1].image}
+            text={generalStatsProps[1].text}
+            number={generalStatsProps[1].number}
+          />
+          <GeneralStats
+            image={generalStatsProps[2].image}
+            text={generalStatsProps[2].text}
+            number={generalStatsProps[2].number}
+          />
+        </div>
+        {appointments.length > 0 && (
+          <ScheduledAppointments appointments={appointments} />
+        )}
+      </div>
+    </>
+  );
 };
 
 export default DoctorHomepage;

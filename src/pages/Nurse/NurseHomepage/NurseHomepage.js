@@ -14,6 +14,7 @@ const NurseHomepage = () => {
   const [selectedDoctor, setSelectedDoctor] = useState({});
   const employees = useSelector((state) => state.employees);
   const patients = useSelector((state) => state.patients);
+  const appointments = useSelector((state) => state.appointments);
 
   useEffect(() => {
     dispatch(getEmployees());
@@ -22,6 +23,8 @@ const NurseHomepage = () => {
 
   useEffect(() => {
     setSelectedDoctor(employees[0]);
+
+    if (employees[0]) dispatch(getAppointments(employees[0].lbz));
   }, [employees]);
 
   const headerProps = {
@@ -32,7 +35,7 @@ const NurseHomepage = () => {
   const getDoctorAppointments = (lbz) => {
     const newDoctor = employees.find((doctor) => doctor.lbz === lbz);
     setSelectedDoctor(newDoctor);
-    // dispatch(getAppointments(lbz));
+    dispatch(getAppointments(lbz));
   };
 
   const updateAppointmentStatus = (appointmentId, appointmentStatus) => {
@@ -56,7 +59,7 @@ const NurseHomepage = () => {
         )}
         {patients && (
           <ScheduledAppointmentsNurse
-            patients={patients}
+            appointments={appointments}
             updateAppointmentStatus={updateAppointmentStatus}
           />
         )}

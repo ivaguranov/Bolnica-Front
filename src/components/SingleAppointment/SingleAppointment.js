@@ -4,50 +4,59 @@ import { updateAppointment } from "../../redux/actions/appointments";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-const SingleAppointment = ({ patient }) => {
-  const { lbp, ime, prezime, datumRodjenja, pol } = patient;
-  const time = 50656565;
-  const appointmentStatus = "Ceka";
-  let age = format(new Date(), "yyyy") - format(datumRodjenja, "yyyy");
-  let appointTime = format(new Date(time), "HH:mm");
-
+const SingleAppointment = ({ appointment }) => {
   const dispatch = useDispatch();
+  const { datumIVremePregleda, pacijent, zakazaniPregledId } = appointment;
+
+  let age = format(new Date(), "yyyy") - format(pacijent.datumRodjenja, "yyyy");
+  let appointTime = format(new Date(datumIVremePregleda), "HH:mm");
+  let appointDate = format(new Date(datumIVremePregleda), "dd:MM:yyyy");
+
   const navigate = useNavigate();
 
   function updateAppointmentStatus(lbp, data) {
-    // dispatch(updateAppointment(lbp, data));
+    dispatch(
+      updateAppointment({
+        appointmentId: zakazaniPregledId,
+        appointmentStatus: data,
+      })
+    );
     navigate(`examination/${lbp}`);
   }
+
   return (
     <div
-      key={`prop-${lbp}`}
-      className={` ${appointmentStatus === "Trenutno" ? "isCurrently" : null}`}
-      onClick={() => updateAppointmentStatus(lbp, "Trenutno")}
+      key={zakazaniPregledId}
+      className={` ${
+        appointment.statusPregleda === "U_TOKU" ? "isCurrently" : null
+      }`}
+      onClick={() => updateAppointmentStatus(pacijent.lbp, "U_TOKU")}
     >
       <div className="d-flex flex-row align-items-center ">
         <div className="appTime">
-          <span>{appointTime}</span>
+          {appointTime} {appointDate}
         </div>
         <div className="customContainer">
           <div className="d-flex flex-row justify-content-around appointment">
             <span className="text-dark text1">
-              {ime} {prezime}
+              {pacijent.ime} {pacijent.prezime}
             </span>
             <span className="text2">
-              {age} {pol}
+              Starost: {age}, Pol: {pacijent.pol}
             </span>
             <div
               className={`badge flex-row text-white appointmentStatus ${
-                appointmentStatus === "Zakazano" || appointmentStatus === "Ceka"
+                appointment.statusPregleda === "ZAKAZANO" ||
+                appointment.statusPregleda === "CEKA"
                   ? "isAppointed"
-                  : appointmentStatus === "Otkazano"
+                  : appointment.statusPregleda === "OTKAZANO"
                   ? "isCanceled"
-                  : appointmentStatus === "Zavrseno"
+                  : appointment.statusPregleda === "ZAKAZANO"
                   ? "isFinished"
                   : null
               }`}
             >
-              {appointmentStatus}
+              {appointment.statusPregleda}
             </div>
           </div>
         </div>
