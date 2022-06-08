@@ -26,6 +26,9 @@ import PatientPreviewNurses from "./pages/Nurse/PatientPreviewPageNurses/Patient
 import RegistrationPatientPage from "./pages/Nurse/RegistrationPatientPage/RegistrationPatientPage";
 import ScheduleAppointmentPage from "./pages/Nurse/ScheduleAppointmentPage/ScheduleAppointmentPage";
 
+// NURSE INFIRMARY
+import NurseInfirmaryPatientAdmission from "./pages/Nurse/NurseInfirmaryPatientAdmission/NurseInfirmaryPatientAdmission";
+
 // BIOCHEMIST
 import BiochemistHomepage from "./pages/Biochemist/BiochemistHomepage/BiochemistHomepage";
 import DetailedResultPage from "./pages/Biochemist/DetailedResultPage/DetailedResultPage";
@@ -78,6 +81,12 @@ const App = () => {
           path="/nurse/edit-patient/:lbp"
           exact
           element={<EditPatientPage />}
+        />
+        {/* NURSE INFIRMARY ROUTES */}
+        <Route
+          path="/nurse/infirmary/admission-of-patient"
+          exact
+          element={<NurseInfirmaryPatientAdmission />}
         />
         {/* ADMIN ROUTES */}
         <Route path="/admin" exact element={<AdminHomepage />} />
@@ -133,9 +142,9 @@ const App = () => {
           element={<RecepcionistAddPatientPage />}
         />
         <Route
-            path="/recepcionist/add-appointment"
-            exact
-            element={<RecepcionistScheduleAppPage />}
+          path="/recepcionist/add-appointment"
+          exact
+          element={<RecepcionistScheduleAppPage />}
         />
       </Routes>
     </BrowserRouter>
