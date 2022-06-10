@@ -37,6 +37,7 @@
 }
 
 p {
+  margin-left: 20px;
   padding-left: 150px;
   font-family: "Roboto";
   font-style: normal;
@@ -47,4 +48,8 @@ p {
 
 hr {
   width: 100%;
+}
+
+.dropdown {
+  margin-left: 20px;
 }

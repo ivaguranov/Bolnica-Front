@@ -150,6 +150,8 @@ export const searchPatientsAdmissions = (lbp, dateValue) =>
   API.post("/patientsAdmissions", lbp, dateValue);
 export const updatePatientAdmission = (id, status) =>
   API.put("/patientsAdmissions", id, status);
+export const createPatientAdmission = (id, status) =>
+  API.put("/patientsAdmissions", id, status);
 
 //HOSPITAL ROOMS
-export const searchHospitalrooms = (pbo) => API.post("/hospitalRooms", pbo);
+export const searchHospitalRooms = (pbo) => API.post("/hospitalRooms", pbo);

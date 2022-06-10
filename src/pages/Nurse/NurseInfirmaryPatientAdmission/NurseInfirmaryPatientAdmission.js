@@ -10,10 +10,13 @@ import { useEffect } from "react";
 import {
   searchPatientsAdmissions,
   updatePatientAdmission,
+  createPatientAdmission,
 } from "../../../redux/actions/patientsAdmissions";
+import { searchHospitalRooms } from "../../../redux/actions/hospitalRooms";
+import { getEmployeesDep } from "../../../redux/actions/employee";
 import CustomModal from "../../../components/CustomModal/CustomModal";
 import { searchReferrals } from "../../../redux/actions/referrals";
-import { searchHospitalrooms } from "../../../api";
+import { Dropdown } from "react-bootstrap";
 
 const initialStateFormLbp2 = {
   lbpForm2: "",
@@ -30,7 +33,9 @@ const NurseInfirmaryPatientAdmission = () => {
   let stepTwoTable;
   let stepThreeDropdown;
   let stepFourInput;
+
   let pbo;
+  let lbp;
 
   const [disable, setDisable] = useState(true);
   const dispatch = useDispatch();
@@ -42,7 +47,14 @@ const NurseInfirmaryPatientAdmission = () => {
   const [referralId, setReferralId] = useState();
   const [referralDiagnosis, setReferralDiagnosis] = useState();
   const [hospitalRoomId, setHospitalRoomId] = useState();
-  const [napomena, setNapomena] = useState();
+  const [doctorId, setDoctorId] = useState("");
+  const [note, setNote] = useState();
+  const [selectedDoctor, setSelectedDoctor] = useState({});
+
+  const employees = useSelector((state) => state.employees);
+  const patientsAdmissions = useSelector((state) => state.patientsAdmissions);
+  const referrals = useSelector((state) => state.referrals);
+  const rooms = useSelector((state) => state.rooms);
 
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
@@ -51,7 +63,8 @@ const NurseInfirmaryPatientAdmission = () => {
 
   useEffect(() => {
     dispatch(searchPatientsAdmissions(dateValue));
-    dispatch(searchHospitalrooms(pbo));
+    dispatch(searchHospitalRooms(pbo));
+    dispatch(getEmployeesDep(pbo));
   }, []);
 
   const [isClicked1, setClicked1] = useState(true);
@@ -63,6 +76,7 @@ const NurseInfirmaryPatientAdmission = () => {
       setClicked1(!isClicked1);
     }
     setValueLbp1("");
+    setDisable(true);
   };
 
   const toggleClass2 = () => {
@@ -71,12 +85,10 @@ const NurseInfirmaryPatientAdmission = () => {
       setClicked2(!isClicked2);
       setClicked1(!isClicked1);
     }
+    setDisable(true);
   };
 
-  const referrals = useSelector((state) => state.referrals);
-  const rooms = useSelector((state) => state.rooms);
-
-  const handleChangeLbp = (e) => {
+  const handleChangeLbp1 = (e) => {
     setFormLbp1({ ...formLbp1, [e.target.name]: e.target.value });
     setValueLbp1(e.target.value);
     setDisable(e.target.value === "");
@@ -88,6 +100,7 @@ const NurseInfirmaryPatientAdmission = () => {
     setClicked2(true);
     setClicked1(false);
     setValueLbp2(entry[1][1]);
+    setDisable(false);
   };
 
   const handleCancelAdmission = (key, entry) => {
@@ -96,15 +109,29 @@ const NurseInfirmaryPatientAdmission = () => {
 
   const handleRowClick = (entry) => {};
 
-  const handleSubmit = (e) => {
+  const handleSubmitLbp2 = (e) => {
     e.preventDefault();
     dispatch(searchReferrals({ ...formLbp2 }, "Stacionar", "Nerealizovan"));
   };
 
-  const handleChange = (e) => {
+  const handleChangeLbp2 = (e) => {
     setFormLbp2({ ...formLbp2, [e.target.name]: e.target.value });
     setValueLbp2(e.target.value);
     setDisable(e.target.value === "");
+  };
+
+  const handleSubmitAdmission = (e) => {
+    e.preventDefault();
+    dispatch(
+      createPatientAdmission(
+        lbp,
+        referralId,
+        referralDiagnosis,
+        hospitalRoomId,
+        doctorId,
+        note
+      )
+    );
   };
 
   const handleChooseReferral = (key, entry) => {
@@ -120,8 +147,16 @@ const NurseInfirmaryPatientAdmission = () => {
     setStepThree(true);
   };
 
-  const handleChangeNapomena = (e) => {
-    setNapomena(e.target.value);
+  const handleChooseDoctor = (key, entry) => {
+    setStepThree(false);
+    const newDoctor = employees.find((doctor) => doctor.lbz === key);
+    setSelectedDoctor(newDoctor);
+    setDoctorId(key);
+    setStepFour(true);
+  };
+
+  const handleChangeNote = (e) => {
+    setNote(e.target.value);
   };
 
   const demoPatientsAdmissions = [
@@ -129,7 +164,7 @@ const NurseInfirmaryPatientAdmission = () => {
       id: 1,
       lbpNumber: 1234,
       departmentId: 321,
-      datum: new Date("December 30, 2019 17:30:00").getTime(),
+      datumVreme: new Date("December 30, 2019 17:30:00").getTime(),
       pacijent: "Milan Milanovic",
       statusPrijemZakazaniPacijent: "Zakazan",
       komentarStacionar: "komentar",
@@ -138,7 +173,7 @@ const NurseInfirmaryPatientAdmission = () => {
       id: 2,
       lbpNumber: 12345,
       departmentId: 3210,
-      datum: new Date("December 30, 2021 17:30:00").getTime(),
+      datumVreme: new Date("December 30, 2021 17:30:00").getTime(),
       pacijent: "Petar Petrovic",
       statusPrijemZakazaniPacijent: "stat",
       komentarStacionar: "komentar",
@@ -149,7 +184,7 @@ const NurseInfirmaryPatientAdmission = () => {
     {
       id: 1,
       lekar: "Ivan Ivanovic",
-      datum: new Date("May 25, 2022 17:30:00").getTime(),
+      datumVreme: new Date("May 25, 2022 17:30:00").getTime(),
       odeljenje: "odeljenje",
       dijagnoza: "dijagnoza",
       odabir: "odabir",
@@ -157,7 +192,7 @@ const NurseInfirmaryPatientAdmission = () => {
     {
       id: 2,
       lekar: "Ivan Ivanovic",
-      datum: new Date("May 26, 2022 17:30:00").getTime(),
+      datumVreme: new Date("May 26, 2022 17:30:00").getTime(),
       odeljenje: "XX",
       dijagnoza: "dijagnoza",
       odabir: "odabir",
@@ -165,7 +200,7 @@ const NurseInfirmaryPatientAdmission = () => {
     {
       id: 3,
       lekar: "Ivan Ivanovic",
-      datum: new Date("December 30, 2018 17:30:00").getTime(),
+      datumVreme: new Date("December 30, 2018 17:30:00").getTime(),
       odeljenje: "odeljenje",
       dijagnoza: "dijagnoza",
       odabir: "odabir",
@@ -196,21 +231,20 @@ const NurseInfirmaryPatientAdmission = () => {
   if (stepOne) {
     stepOneTable = (
       <div>
-        <form onSubmit={handleSubmit} className="form-custom familyFix">
+        <form onSubmit={handleSubmitLbp2} className="form-custom familyFix">
           <br></br>
           <div className="form-group-custom">
             <input
               className="margin-right"
               placeholder="LBP"
-              onChange={handleChange}
-              name="lbp"
+              onChange={handleChangeLbp2}
+              name="lbp2"
               type="text"
               value={valueLbp2}
             />
             <button
-              disabled={!valueLbp2}
-              /*               disabled={disable}
-               */ onClick={handleSubmit}
+              disabled={disable}
+              onClick={handleSubmitLbp2}
               className={` ${disable ? "disabled" : ""}`}
               type="button"
             >
@@ -254,7 +288,7 @@ const NurseInfirmaryPatientAdmission = () => {
     );
   }
 
-  if (stepTwo) {
+  if (!stepOne && stepTwo) {
     stepTwoTable = (
       <div>
         <Table
@@ -267,7 +301,7 @@ const NurseInfirmaryPatientAdmission = () => {
         />
       </div>
     );
-  } else if (true) {
+  } else if (!stepOne && !stepTwo) {
     stepTwoTable = (
       <div>
         <p>Izabrali ste bolnicku sobu, ID sobe: {hospitalRoomId}.</p>
@@ -276,28 +310,56 @@ const NurseInfirmaryPatientAdmission = () => {
     );
   }
 
-  if (stepThree) {
-    stepThreeDropdown = <div></div>;
-  } else {
-    stepThreeDropdown = <div>Izabrali ste doktora: {}.</div>;
+  if (!stepOne && !stepTwo && stepThree) {
+    stepThreeDropdown = (
+      <div>
+        <Dropdown className="dropdown">
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Dr. {selectedDoctor.name}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            {employees.map((doctor) => {
+              if (doctor.lbz !== selectedDoctor.lbz)
+                return (
+                  <Dropdown.Item
+                    key={doctor.lbz}
+                    onClick={() => handleChooseDoctor(doctor.lbz)}
+                  >
+                    Dr. {doctor.name}
+                  </Dropdown.Item>
+                );
+            })}
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
+    );
+
+    /*   if (!stepOne && !stepTwo && stepThree) {*/
+  } else if (!stepOne && !stepTwo && !stepThree) {
+    stepThreeDropdown = (
+      <div>
+        <p>Izabrali ste doktora: {doctorId}.</p>
+        <hr></hr>
+      </div>
+    );
   }
 
-  if (stepFour) {
+  /*   if (true) { */
+  if (!stepOne && !stepTwo && !stepThree && stepFour) {
     stepFourInput = (
-      <div>
+      <div className="form-custom familyFix form-group-custom">
         <input
           className="margin-right"
           placeholder="Napomena"
-          onChange={handleChangeNapomena}
-          name="napomena"
+          onChange={handleChangeNote}
+          name="note"
           type="text"
-          value={napomena}
+          value={note}
         />
         <button
-          disabled={!valueLbp2}
-          /*               disabled={disable}
-           */ onClick={handleSubmit}
-          className={` ${disable ? "disabled" : ""}`}
+          disabled={doctorId === ""}
+          onClick={handleSubmitAdmission}
           type="button"
         >
           Prijem pacijenta
@@ -315,8 +377,8 @@ const NurseInfirmaryPatientAdmission = () => {
             <input
               className="margin-right"
               placeholder="LBP"
-              onChange={handleChangeLbp}
-              name="lbpForm"
+              onChange={handleChangeLbp1}
+              name="lbp1"
               type="text"
               value={valueLbp1}
             />

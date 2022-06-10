@@ -71,6 +71,15 @@ const Table = (props) => {
             </td>
           );
         }
+        if (element[0] === "datumVreme") {
+          return (
+            <td key={element} style={{ padding: "25px 0px" }}>
+              {new Date(element[1]).toLocaleDateString() +
+                " " +
+                new Date(element[1]).toLocaleTimeString()}
+            </td>
+          );
+        }
 
         if (element[0] === "statusPregleda") {
           let reserved = false;

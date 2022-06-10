@@ -199,7 +199,7 @@ export const getTableHeaders = (contentType) => {
         value: "Ime i prezime lekara",
       },
       {
-        key: "datum",
+        key: "datumVreme",
         value: "Datum i vreme kreiranja uputa",
       },
       {
@@ -296,7 +296,7 @@ export const getTableHeaders = (contentType) => {
         value: "ID odeljenja",
       },
       {
-        key: "datum",
+        key: "datumVreme",
         value: "Datum i vreme prijema",
       },
       {

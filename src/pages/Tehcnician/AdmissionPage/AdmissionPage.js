@@ -55,6 +55,7 @@ const AdmissionPage = () => {
       setClicked1(!isClicked1);
     }
     setValueLbp1("");
+    setDisable(true);
   };
 
   const toggleClass2 = () => {
@@ -63,6 +64,7 @@ const AdmissionPage = () => {
       setClicked2(!isClicked2);
       setClicked1(!isClicked1);
     }
+    setDisable(true);
   };
 
   const handleSubmit = (e) => {
@@ -81,6 +83,7 @@ const AdmissionPage = () => {
     setDisable(e.target.value === "");
     dispatch(searchLabVisits({ ...formLbp1 }, dateValue));
     setValueLbp1(e.target.value);
+    setValueLbp2("");
   };
 
   const handlecreateLabReport = (key, entry) => {
@@ -215,9 +218,8 @@ const AdmissionPage = () => {
               value={valueLbp2}
             />
             <button
-              disabled={!valueLbp2}
-              /*               disabled={disable}
-               */ onClick={handleSubmit}
+              disabled={disable}
+              onClick={handleSubmit}
               className={` ${disable ? "disabled" : ""}`}
               type="button"
             >
